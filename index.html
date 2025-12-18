@@ -3,78 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Pau | Portafolio Mágico</title>
+    <title>Ana Pau | Portafolio Cósmico</title>
     <style>
-        /* Estilos para la vibra mágica */
+        :root {
+            --azul-oscuro: #2d4a77;
+            --verde-oceano: #53868d;
+            --negro-espacial: #1e1b18;
+            --crema-suave: #f2e1d1;
+            --rosa-viejo: #bc6c70;
+        }
+
         body {
-            background-color: #1a1a2e; /* Azul espacial profundo */
-            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px);
-            background-size: 550px 550px; /* Esto crea estrellas de fondo */
-            color: #fff;
-            font-family: 'Comic Sans MS', 'cursive', sans-serif; /* Fuente tierna */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: var(--negro-espacial);
+            background-image: radial-gradient(circle, var(--crema-suave) 1px, transparent 1px);
+            background-size: 50px 50px;
+            color: var(--crema-suave);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
         }
 
-        .contenedor {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco traslúcido */
-            color: #4a4e69;
-            border-radius: 50px; /* Bordes muy redondeados */
+        .tarjeta-principal {
+            background-color: var(--azul-oscuro);
+            border: 2px solid var(--verde-oceano);
+            border-radius: 30px;
             padding: 40px;
-            max-width: 800px;
+            max-width: 600px;
             text-align: center;
-            border: 8px solid #ffcbef; /* Borde rosa pastel */
-            box-shadow: 0 0 20px #b8c0ff;
-            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         h1 {
-            color: #9d8189;
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 10px 0;
         }
 
-        .estrella {
-            color: #ffd166;
-            font-size: 2rem;
+        .linea-magica {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--rosa-viejo), transparent);
+            margin: 30px 0;
         }
 
-        .boton-magico {
-            background-color: #b8c0ff;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
+        /* Contenedor de Planetas */
+        .sistema-solar {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
             margin-top: 20px;
         }
 
-        .boton-magico:hover {
-            transform: scale(1.1);
-            background-color: #ffcbef;
+        .planeta {
+            flex: 1;
+            text-decoration: none;
+            color: var(--crema-suave);
+            transition: transform 0.3s ease;
         }
+
+        .planeta:hover {
+            transform: translateY(-10px);
+        }
+
+        .circulo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            border: 3px solid var(--crema-suave);
+            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+        }
+
+        /* Colores de los planetas usando tu paleta */
+        .p1 { background-color: var(--verde-oceano); }
+        .p2 { background-color: var(--rosa-viejo); }
+        .p3 { background-color: var(--crema-suave); color: var(--negro-espacial); }
+
+        .planeta span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="contenedor">
-        <div class="estrella">✨ 🌙 ✨</div>
-        <h1>Hola, soy Ana Pau</h1>
-        <p>Bienvenido a mi rincón cósmico y mágico.</p>
+    <div class="tarjeta-principal">
+        <div style="font-size: 40px;">✨</div>
+        <h1>Ana Pau</h1>
+        <p style="color: var(--verde-oceano);">Exploradora de mundos mágicos</p>
         
-        <div style="border: 3px dashed #ffcbef; padding: 20px; border-radius: 20px; margin: 20px 0;">
-            <h3>Mis Proyectos</h3>
-            <p>Aquí pronto verás mis nubes y planetas... 🪐</p>
+        <div class="linea-magica"></div>
+        
+        <div class="sistema-solar">
+            <a href="#" class="planeta">
+                <div class="circulo p1">🎨</div>
+                <span>Diseño</span>
+            </a>
+            <a href="#" class="planeta">
+                <div class="circulo p2">🌸</div>
+                <span>Sobre mí</span>
+            </a>
+            <a href="#" class="planeta">
+                <div class="circulo p3">🚀</div>
+                <span>Contacto</span>
+            </a>
         </div>
 
-        <a href="mailto:tu-correo@ejemplo.com" class="boton-magico">¡Dime Hola!</a>
+        <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.7;">
+            © 2024 • Hecho con magia espacial
+        </p>
     </div>
 
 </body>
