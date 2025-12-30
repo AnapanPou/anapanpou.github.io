@@ -7,22 +7,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         :root {
-            --azul-universo: #1e3a5f;
-            --verde-nebulosa: #2d5a5e; /* Tono verdoso que combina con tu paleta */
+            /* PALETA CORREGIDA: Sin negros, más azul y verde */
+            --azul-vibrante: #234a7d;
+            --verde-profundo: #1b4d4a; 
             --verde-oceano: #53868d;
-            --negro-espacial: #05080a;
             --crema-suave: #f2e1d1;
             --rosa-viejo: #bc6c70;
+            --fondo-tarjeta: rgba(15, 32, 50, 0.85);
         }
 
         @keyframes flotar {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes titilar {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.3); }
         }
 
         body {
@@ -32,9 +33,9 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            /* FONDO ACTUALIZADO: Degradado de Azul a Verde profundo */
-            background: radial-gradient(circle at top, var(--azul-universo) 0%, var(--verde-nebulosa) 45%, var(--negro-espacial) 100%);
+            font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más gruesa por defecto */
+            /* FONDO: DE AZUL A VERDE (SIN NEGRO) */
+            background: linear-gradient(135deg, var(--azul-vibrante) 0%, var(--verde-profundo) 100%);
             background-attachment: fixed;
             overflow-x: hidden;
             position: relative;
@@ -51,50 +52,50 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px white;
             animation: titilar var(--t) infinite ease-in-out;
         }
 
         .tarjeta-principal {
-            background-color: rgba(13, 25, 41, 0.82);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(242, 225, 209, 0.15);
-            border-radius: 40px;
+            background-color: var(--fondo-tarjeta);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(242, 225, 209, 0.2);
+            border-radius: 50px;
             padding: 60px 40px;
-            max-width: 580px;
+            max-width: 600px;
             text-align: center;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-            animation: flotar 8s ease-in-out infinite;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            animation: flotar 6s ease-in-out infinite;
         }
 
-        /* NOMBRE: Más grande y grueso */
+        /* ANA PAU: Súper grande y extra negrita */
         h1 {
             color: var(--crema-suave);
-            font-weight: 800; /* Más grueso */
-            font-size: 3.5rem; /* Más grande */
-            letter-spacing: 8px;
+            font-weight: 900; 
+            font-size: 4.5rem; 
+            letter-spacing: -2px; /* Estilo moderno pegadito */
             margin: 0;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 0.9;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* SUBTÍTULO: Color Crema Suave */
+        /* SUBTÍTULO: Forzado a Crema Suave */
         .subtitulo {
-            color: var(--crema-suave);
-            font-size: 0.95rem;
-            letter-spacing: 1.2px;
-            margin: 20px 0 40px;
-            line-height: 1.6;
-            font-weight: 400;
-            max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
+            color: var(--crema-suave) !important;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin: 25px 0 45px;
+            line-height: 1.4;
+            font-weight: 600;
+            opacity: 1 !important;
         }
 
         .linea-gradiente {
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--verde-oceano), var(--rosa-viejo), transparent);
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--crema-suave), transparent);
             margin: 30px 0;
         }
 
@@ -113,36 +114,37 @@
         }
 
         .circulo-icono {
-            width: 65px;
-            height: 65px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 auto 12px;
-            border: 1px solid rgba(242, 225, 209, 0.3);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(242, 225, 209, 0.1);
+            border: 2px solid var(--crema-suave);
+            transition: 0.4s;
         }
 
         .planeta-link:hover .circulo-icono {
-            transform: scale(1.15) rotate(5deg);
-            background: rgba(242, 225, 209, 0.1);
-            box-shadow: 0 0 20px rgba(83, 134, 141, 0.3);
+            transform: scale(1.2);
+            background: var(--crema-suave);
+            color: var(--azul-vibrante);
         }
 
         .planeta-link span {
-            font-size: 9px;
-            letter-spacing: 1.5px;
-            font-weight: bold;
-            display: block;
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            font-family: sans-serif;
         }
 
         .seccion-titulo {
-            font-size: 0.75rem;
-            letter-spacing: 5px;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
             color: var(--verde-oceano);
-            margin: 45px 0 20px;
-            font-weight: bold;
+            margin: 40px 0 20px;
+            font-weight: 900;
             text-transform: uppercase;
         }
 
@@ -153,28 +155,27 @@
         }
 
         .card-proyecto {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            padding: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .card-proyecto:hover {
-            background: rgba(83, 134, 141, 0.15);
-            border-color: var(--verde-oceano);
-            transform: translateY(-5px);
+            background: var(--verde-oceano);
+            transform: scale(1.05);
         }
 
         .card-proyecto span {
             font-size: 10px;
-            letter-spacing: 1px;
             color: var(--crema-suave);
             font-weight: bold;
+            font-family: sans-serif;
         }
 
         .tag-container {
@@ -182,41 +183,38 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .tag {
-            border: 1px solid rgba(188, 108, 112, 0.4);
-            padding: 6px 14px;
+            background: rgba(188, 108, 112, 0.2);
+            border: 1px solid var(--rosa-viejo);
+            padding: 8px 15px;
             border-radius: 20px;
-            font-size: 9px;
+            font-size: 10px;
             color: var(--crema-suave);
-            letter-spacing: 1px;
-            background: rgba(188, 108, 112, 0.05);
+            font-weight: bold;
         }
 
         .material-symbols-outlined {
-            font-size: 30px;
+            font-size: 35px;
         }
 
         @media (max-width: 500px) {
+            h1 { font-size: 3rem; }
             .galeria-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2.5rem; }
-            .tarjeta-principal { padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="universo">
-        <div class="estrella" style="top:5%; left:10%; width:2px; height:2px; --t:3s;"></div>
-        <div class="estrella" style="top:20%; left:80%; width:3px; height:3px; --t:5s;"></div>
-        <div class="estrella" style="top:40%; left:5%; width:1px; height:1px; --t:2.5s;"></div>
-        <div class="estrella" style="top:60%; left:90%; width:2px; height:2px; --t:4s;"></div>
-        <div class="estrella" style="top:80%; left:20%; width:3px; height:3px; --t:6s;"></div>
-        <div class="estrella" style="top:15%; left:40%; width:2px; height:2px; --t:3.8s;"></div>
-        <div class="estrella" style="top:70%; left:50%; width:1.5px; height:1.5px; --t:4.5s;"></div>
-        <div class="estrella" style="top:30%; left:60%; width:2px; height:2px; --t:5.2s;"></div>
+        <div class="estrella" style="top:10%; left:10%; width:3px; height:3px; --t:2s;"></div>
+        <div class="estrella" style="top:30%; left:85%; width:4px; height:4px; --t:4s;"></div>
+        <div class="estrella" style="top:50%; left:5%; width:2px; height:2px; --t:3s;"></div>
+        <div class="estrella" style="top:70%; left:90%; width:3px; height:3px; --t:5s;"></div>
+        <div class="estrella" style="top:20%; left:40%; width:2px; height:2px; --t:2.5s;"></div>
+        <div class="estrella" style="top:80%; left:50%; width:4px; height:4px; --t:4.5s;"></div>
     </div>
 
     <div class="tarjeta-principal">
@@ -227,61 +225,52 @@
 
         <div class="sistema-solar">
             <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" target="_blank" class="planeta-link">
-                <div class="circulo-icono" style="background: var(--verde-oceano);">
+                <div class="circulo-icono">
                     <span class="material-symbols-outlined">precision_manufacturing</span>
                 </div>
-                <span>PERFIL INDUSTRIAL</span>
+                <span>INDUSTRIAL</span>
             </a>
             <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" target="_blank" class="planeta-link">
-                <div class="circulo-icono" style="background: var(--rosa-viejo);">
+                <div class="circulo-icono">
                     <span class="material-symbols-outlined">devices</span>
                 </div>
-                <span>PERFIL UX/UI</span>
+                <span>UX / UI</span>
             </a>
             <a href="mailto:anapau951@gmail.com" class="planeta-link">
-                <div class="circulo-icono" style="background: var(--azul-universo);">
+                <div class="circulo-icono">
                     <span class="material-symbols-outlined">alternate_email</span>
                 </div>
-                <span>CONTACTO</span>
+                <span>EMAIL</span>
             </a>
         </div>
 
-        <div class="seccion-titulo">GALERÍA DE ESTRELLAS</div>
+        <div class="seccion-titulo">MIS ESTRELLAS</div>
+        
         <div class="galeria-grid">
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--verde-oceano)">chair</span>
-                <span>SISTEMAS DE MOBILIARIO</span>
+                <span>MOBILIARIO</span>
             </div>
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--rosa-viejo)">view_in_ar</span>
-                <span>DIMENSIONES 3D</span>
+                <span>MODELADO 3D</span>
             </div>
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--verde-oceano)">ads_click</span>
-                <span>ECOSISTEMAS UX/UI</span>
+                <span>UX/UI APPS</span>
             </div>
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--rosa-viejo)">Auto_Stories</span>
-                <span>BITÁCORA CREATIVA</span>
-            </div>
-            <div class="card-proyecto" style="grid-column: span 2;">
-                <span class="material-symbols-outlined" style="color:var(--crema-suave)">brush</span>
-                <span>ARTE & MATERIALIDAD</span>
+                <span>PROYECTOS</span>
             </div>
         </div>
 
-        <div class="seccion-titulo">HABILIDADES ESTELARES</div>
         <div class="tag-container">
             <div class="tag">FIGMA</div>
             <div class="tag">SOLIDWORKS</div>
             <div class="tag">BLENDER</div>
-            <div class="tag">UX RESEARCH</div>
-            <div class="tag">MANUFACTURA CNC</div>
+            <div class="tag">MANUFACTURA</div>
         </div>
-
-        <p style="margin-top: 50px; font-size: 10px; color: var(--crema-suave); opacity: 0.5; letter-spacing: 2px;">
-            © 2025 • DISEÑADO BAJO EL CIELO ESTRELLADO
-        </p>
     </div>
 
 </body>
