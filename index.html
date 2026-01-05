@@ -3,40 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Pau | Industrial & UX Designer</title>
+    <title>Ana Pau | Portafolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* 1. VARIABLES DE COLOR (Basadas en tus imágenes) */
+        /* 1. VARIABLES Y BASE */
         :root {
-            /* Fondo Principal (Tonos oscuros de la paleta) */
             --bg-deep: #190426;
             --bg-gradient: linear-gradient(180deg, #190426 0%, #281040 50%, #4B2273 100%);
-            
-            /* Texto Crema Suave */
             --text-cream: #FAF9F6; 
-            --accent-warm: #F2AC57; /* Naranja/Crema de la paleta */
-            
-            /* Colores para Planetas (Variaciones de la misma paleta) */
-            --p-orange: #F2AC57;
-            --p-coral: #D96D55;
-            --p-purple: #6A5B9C;
-            --p-dark-purple: #4B2273;
+            --accent-warm: #F2AC57;
+            --accent-coral: #D96D55;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        /* 2. CONFIGURACIÓN DE PÁGINA (SCROLL HABILITADO) */
         * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            padding: 0;
             background: var(--bg-gradient);
             color: var(--text-cream);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            min-height: 200vh; /* Obliga a que haya scroll */
+            overflow-x: hidden;
+            min-height: 250vh; /* Permite scroll largo */
         }
 
-        /* 3. FONDO DE ESTRELLAS CÁLIDAS Y VARIADAS */
+        /* 2. ESTRELLAS CON TINTINEO (TWINKLE) */
         .stars-container {
             position: fixed;
             top: 0;
@@ -44,177 +35,209 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Estrellas de diferentes tamaños y tonos cálidos */
-            background-image: 
-                radial-gradient(1px 1px at 25% 10%, var(--accent-warm), transparent),
-                radial-gradient(3px 3px at 50% 40%, #D96D55, transparent),
-                radial-gradient(1.5px 1.5px at 15% 75%, var(--accent-warm), transparent),
-                radial-gradient(4px 4px at 85% 20%, #F2AC57, transparent),
-                radial-gradient(2px 2px at 70% 60%, var(--accent-warm), transparent);
-            background-size: 400px 400px;
-            opacity: 0.6;
         }
 
-        /* 4. HEADER - NOMBRE LIGERO */
+        .star {
+            position: absolute;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* 3. HEADER Y DESCRIPCIÓN */
         header {
-            height: 60vh;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 0 15%;
         }
 
         .brand-name {
-            font-weight: 300; /* Ana Pau menos grueso */
-            font-size: clamp(3rem, 8vw, 5rem);
-            letter-spacing: 8px;
+            font-weight: 300;
+            font-size: clamp(3rem, 10vw, 6rem);
+            letter-spacing: 10px;
             text-transform: uppercase;
-            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .profile-description {
+            font-weight: 300;
+            font-size: 1.2rem;
+            max-width: 700px;
+            line-height: 1.8;
+            opacity: 0.9;
             color: var(--text-cream);
         }
 
-        .subtitle {
-            font-weight: 300;
-            letter-spacing: 3px;
-            opacity: 0.8;
-            margin-top: 10px;
+        /* 4. SECCIÓN DE BOTONES CV (INTERACTIVA) */
+        .cv-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 0;
+            flex-wrap: wrap;
         }
 
-        /* 5. SISTEMA DE PLANETAS (TAMAÑOS VARIADOS Y COLORES DE FONDO) */
-        .nebula-section {
+        .cv-button {
+            padding: 20px 40px;
+            background: var(--glass);
+            border: 1px solid var(--accent-warm);
+            color: var(--text-cream);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cv-button:hover {
+            background: var(--accent-warm);
+            color: var(--bg-deep);
+            box-shadow: 0 0 30px var(--accent-warm);
+            transform: translateY(-5px);
+        }
+
+        /* 5. PLANETAS VARIADOS */
+        .nebula-content {
             position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
+            height: 80vh;
+            margin-top: 100px;
         }
 
         .planet {
             position: absolute;
             border-radius: 50%;
-            transition: transform 0.5s ease;
-            filter: blur(1px);
+            animation: float 10s infinite ease-in-out;
         }
 
-        /* Variación de colores basada en la misma paleta del fondo pero más intensos */
-        .p-1 { 
-            width: 300px; height: 300px; 
+        .p-main { 
+            width: 350px; height: 350px; 
             background: linear-gradient(45deg, #4B2273, #D96D55);
-            top: 10%; left: -50px;
-            box-shadow: 0 0 60px rgba(217, 109, 85, 0.3);
+            left: 10%; top: 0;
+            box-shadow: 0 0 80px rgba(217, 109, 85, 0.2);
         }
 
-        .p-2 { 
-            width: 120px; height: 120px; 
+        .p-secondary { 
+            width: 150px; height: 150px; 
             background: linear-gradient(135deg, #6A5B9C, #F2AC57);
-            top: 60%; right: 10%;
-            box-shadow: 0 0 40px rgba(242, 172, 87, 0.4);
+            right: 15%; bottom: 0;
+            box-shadow: 0 0 50px rgba(242, 172, 87, 0.3);
         }
 
-        .p-3 { 
-            width: 60px; height: 60px; 
-            background: #281040;
-            border: 1px solid var(--accent-warm);
-            bottom: 20%; left: 20%;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(5deg); }
         }
 
-        .p-4 { 
-            width: 450px; height: 450px; 
-            background: radial-gradient(circle, #190426 0%, #4B2273 100%);
-            top: 40%; left: 60%;
-            opacity: 0.5;
-            z-index: -1;
-        }
-
-        /* 6. GALERÍA DE SÍMBOLOS (TRAZO FINO Y AGRANDADOS) */
-        .gallery-container {
-            padding: 100px 10%;
+        /* 6. GALERÍA DE SÍMBOLOS */
+        .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            background: rgba(25, 4, 38, 0.5); /* Sutil separación */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 100px 10%;
         }
 
-        .symbol-item {
+        .symbol-card {
             text-align: center;
             padding: 40px;
-            border-bottom: 1px solid rgba(242, 172, 87, 0.2);
+            border: 1px solid rgba(242, 172, 87, 0.1);
+            transition: 0.3s;
         }
 
-        .icon-box {
-            width: 100px; /* Agrandados */
-            height: 100px;
+        .symbol-card:hover {
+            border-color: var(--accent-warm);
+        }
+
+        .icon-outline {
+            width: 80px;
+            height: 80px;
             margin: 0 auto 20px;
-            border: 1px solid var(--accent-warm); /* Trazo fino */
+            border: 1px solid var(--accent-warm);
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: rotate(45deg); /* Toque especial */
-        }
-
-        .icon-inner {
-            transform: rotate(-45deg);
             font-weight: 300;
-            font-size: 0.8rem;
-            color: var(--accent-warm);
-        }
-
-        .gallery-title {
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.2rem;
-        }
-
-        /* 7. ANIMACIONES */
-        .planet { animation: float 8s infinite ease-in-out; }
-        .p-2 { animation-duration: 12s; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(15px, -30px); }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="stars-container"></div>
+    <div class="stars-container" id="starField"></div>
 
     <header>
         <h1 class="brand-name">Ana Pau</h1>
-        <p class="subtitle">Industrial & UX Designer</p>
+        <p class="profile-description">
+            Diseñadora que conecta el mundo físico con el digital. Especializada en crear soluciones 
+            funcionales y estéticas que transforman la interacción del usuario en una experiencia única, 
+            desde el modelado industrial hasta interfaces digitales intuitivas.
+        </p>
+
+        <div class="cv-section">
+            <a href="#" class="cv-button">CV Industrial</a>
+            <a href="#" class="cv-button">CV UX Designer</a>
+        </div>
     </header>
 
-    <section class="nebula-section">
-        <div class="planet p-1"></div>
-        <div class="planet p-2"></div>
-        <div class="planet p-3"></div>
-        <div class="planet p-4"></div>
+    <section class="nebula-content">
+        <div class="planet p-main"></div>
+        <div class="planet p-secondary" style="animation-delay: -2s;"></div>
     </section>
 
-    <section class="gallery-container">
-        <div class="symbol-item">
-            <div class="icon-box"><div class="icon-inner">ID</div></div>
-            <h3 class="gallery-title">Industrial Design</h3>
+    <section class="gallery-grid">
+        <div class="symbol-card">
+            <div class="icon-outline">ID</div>
+            <p style="font-weight: 300; letter-spacing: 2px;">PRODUCT DESIGN</p>
         </div>
-        <div class="symbol-item">
-            <div class="icon-box"><div class="icon-inner">UX</div></div>
-            <h3 class="gallery-title">User Experience</h3>
+        <div class="symbol-card">
+            <div class="icon-outline">UX</div>
+            <p style="font-weight: 300; letter-spacing: 2px;">USER EXPERIENCE</p>
         </div>
-        <div class="symbol-item">
-            <div class="icon-box"><div class="icon-inner">3D</div></div>
-            <h3 class="gallery-title">3D Modeling</h3>
-        </div>
-        <div class="symbol-item">
-            <div class="icon-box"><div class="icon-inner">MA</div></div>
-            <h3 class="gallery-title">Manufacturing</h3>
+        <div class="symbol-card">
+            <div class="icon-outline">3D</div>
+            <p style="font-weight: 300; letter-spacing: 2px;">MANUFACTURING</p>
         </div>
     </section>
 
-    <footer style="padding: 100px; text-align: center; opacity: 0.5; font-weight: 300;">
-        <p>Desplázate para explorar el universo de proyectos.</p>
+    <footer style="padding: 100px; text-align: center; opacity: 0.4; font-weight: 300;">
+        <p>Explora más abajo · 2024</p>
     </footer>
 
+    <script>
+        // Generador de estrellas para que varíen de tamaño y tintineo
+        const starField = document.getElementById('starField');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Tamaños variados de 1px a 4px
+            const size = Math.random() * 4 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            
+            // Posiciones aleatorias
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            
+            // Tiempos de tintineo variados
+            star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
+            star.style.animationDelay = Math.random() * 5 + 's';
+            
+            starField.appendChild(star);
+        }
+    </script>
 </body>
 </html>
