@@ -7,23 +7,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         :root {
-            /* PALETA CORREGIDA: Sin negros, más azul y verde */
-            --azul-vibrante: #234a7d;
-            --verde-profundo: #1b4d4a; 
+            --azul-vibrante: #1e3a5f;
+            --verde-profundo: #2d5a5e; 
             --verde-oceano: #53868d;
             --crema-suave: #f2e1d1;
             --rosa-viejo: #bc6c70;
-            --fondo-tarjeta: rgba(15, 32, 50, 0.85);
+            --fondo-tarjeta: rgba(13, 25, 41, 0.85);
         }
 
         @keyframes flotar {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
         }
 
         @keyframes titilar {
-            0%, 100% { opacity: 0.4; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         body {
@@ -33,7 +32,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-family: 'Arial Black', Gadget, sans-serif; /* Fuente más gruesa por defecto */
+            font-family: 'Segoe UI', Roboto, sans-serif;
             /* FONDO: DE AZUL A VERDE (SIN NEGRO) */
             background: linear-gradient(135deg, var(--azul-vibrante) 0%, var(--verde-profundo) 100%);
             background-attachment: fixed;
@@ -52,58 +51,69 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 10px white;
+            box-shadow: 0 0 8px white;
             animation: titilar var(--t) infinite ease-in-out;
         }
 
         .tarjeta-principal {
             background-color: var(--fondo-tarjeta);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(242, 225, 209, 0.2);
-            border-radius: 50px;
-            padding: 60px 40px;
-            max-width: 600px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(242, 225, 209, 0.2);
+            border-radius: 40px;
+            padding: 50px 40px;
+            max-width: 620px;
             text-align: center;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
-            animation: flotar 6s ease-in-out infinite;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+            animation: flotar 8s ease-in-out infinite;
         }
 
-        /* ANA PAU: Súper grande y extra negrita */
+        /* NOMBRE: Grande y muy grueso */
         h1 {
             color: var(--crema-suave);
             font-weight: 900; 
-            font-size: 4.5rem; 
-            letter-spacing: -2px; /* Estilo moderno pegadito */
+            font-size: 4rem; 
+            letter-spacing: 5px;
             margin: 0;
             text-transform: uppercase;
-            line-height: 0.9;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            line-height: 1;
         }
 
-        /* SUBTÍTULO: Forzado a Crema Suave */
+        /* SUBTÍTULO: Color Crema Suave */
         .subtitulo {
             color: var(--crema-suave) !important;
-            font-family: 'Segoe UI', sans-serif;
             font-size: 1.1rem;
-            letter-spacing: 1px;
-            margin: 25px 0 45px;
-            line-height: 1.4;
+            letter-spacing: 1.5px;
+            margin: 15px 0 20px;
             font-weight: 600;
-            opacity: 1 !important;
+            text-transform: uppercase;
+        }
+
+        /* NUEVA DESCRIPCIÓN PROFESIONAL */
+        .descripcion-perfil {
+            color: var(--crema-suave);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-align: center;
+            max-width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
         }
 
         .linea-gradiente {
-            height: 2px;
+            height: 1px;
             background: linear-gradient(to right, transparent, var(--crema-suave), transparent);
-            margin: 30px 0;
+            margin: 25px 0;
         }
 
         .sistema-solar {
             display: flex;
             justify-content: space-around;
             gap: 15px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .planeta-link {
@@ -114,37 +124,36 @@
         }
 
         .circulo-icono {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
+            border: 1px solid var(--crema-suave);
             background: rgba(242, 225, 209, 0.1);
-            border: 2px solid var(--crema-suave);
             transition: 0.4s;
         }
 
         .planeta-link:hover .circulo-icono {
-            transform: scale(1.2);
+            transform: scale(1.1);
             background: var(--crema-suave);
             color: var(--azul-vibrante);
         }
 
         .planeta-link span {
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 1px;
-            font-weight: 800;
-            font-family: sans-serif;
+            font-weight: bold;
         }
 
         .seccion-titulo {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 4px;
             color: var(--verde-oceano);
             margin: 40px 0 20px;
-            font-weight: 900;
+            font-weight: bold;
             text-transform: uppercase;
         }
 
@@ -155,9 +164,9 @@
         }
 
         .card-proyecto {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
             display: flex;
@@ -167,15 +176,14 @@
         }
 
         .card-proyecto:hover {
-            background: var(--verde-oceano);
-            transform: scale(1.05);
+            background: rgba(83, 134, 141, 0.2);
+            border-color: var(--verde-oceano);
         }
 
         .card-proyecto span {
             font-size: 10px;
             color: var(--crema-suave);
             font-weight: bold;
-            font-family: sans-serif;
         }
 
         .tag-container {
@@ -187,21 +195,20 @@
         }
 
         .tag {
-            background: rgba(188, 108, 112, 0.2);
             border: 1px solid var(--rosa-viejo);
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--crema-suave);
-            font-weight: bold;
+            background: rgba(188, 108, 112, 0.1);
         }
 
         .material-symbols-outlined {
-            font-size: 35px;
+            font-size: 30px;
         }
 
         @media (max-width: 500px) {
-            h1 { font-size: 3rem; }
+            h1 { font-size: 2.8rem; }
             .galeria-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -209,17 +216,20 @@
 <body>
 
     <div class="universo">
-        <div class="estrella" style="top:10%; left:10%; width:3px; height:3px; --t:2s;"></div>
-        <div class="estrella" style="top:30%; left:85%; width:4px; height:4px; --t:4s;"></div>
-        <div class="estrella" style="top:50%; left:5%; width:2px; height:2px; --t:3s;"></div>
-        <div class="estrella" style="top:70%; left:90%; width:3px; height:3px; --t:5s;"></div>
-        <div class="estrella" style="top:20%; left:40%; width:2px; height:2px; --t:2.5s;"></div>
-        <div class="estrella" style="top:80%; left:50%; width:4px; height:4px; --t:4.5s;"></div>
+        <div class="estrella" style="top:5%; left:15%; width:2px; height:2px; --t:3s;"></div>
+        <div class="estrella" style="top:25%; left:80%; width:3px; height:3px; --t:5s;"></div>
+        <div class="estrella" style="top:45%; left:10%; width:1px; height:1px; --t:2.5s;"></div>
+        <div class="estrella" style="top:70%; left:90%; width:2px; height:2px; --t:4s;"></div>
+        <div class="estrella" style="top:15%; left:45%; width:2px; height:2px; --t:3.5s;"></div>
     </div>
 
     <div class="tarjeta-principal">
         <h1>Ana Pau</h1>
-        <p class="subtitulo">Diseñadora Industrial & UX | Creando experiencias intuitivas y funcionales en productos digitales y físicos.</p>
+        <p class="subtitulo">Diseñadora Industrial & UX</p>
+        
+        <p class="descripcion-perfil">
+            Como diseñadora con experiencia en productos físicos y digitales, me dedico a crear soluciones que combinan lo mejor de ambos mundos. Me especializo en entender qué necesitan los usuarios para diseñar herramientas y objetos que sean verdaderamente útiles y sencillos de manejar. He liderado proyectos desde el dibujo inicial hasta la fabricación final, trabajando de cerca con ingenieros y clientes para asegurar que cada detalle sea funcional. Mi experiencia abarca desde el diseño de mobiliario y piezas cerámicas hasta interfaces digitales, siempre con el objetivo de entregar calidad y una excelente experiencia a quien los utiliza.
+        </p>
 
         <div class="linea-gradiente"></div>
 
@@ -240,12 +250,11 @@
                 <div class="circulo-icono">
                     <span class="material-symbols-outlined">alternate_email</span>
                 </div>
-                <span>EMAIL</span>
+                <span>CONTACTO</span>
             </a>
         </div>
 
-        <div class="seccion-titulo">MIS ESTRELLAS</div>
-        
+        <div class="seccion-titulo">GALERÍA DE ESTRELLAS</div>
         <div class="galeria-grid">
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--verde-oceano)">chair</span>
@@ -261,7 +270,7 @@
             </div>
             <div class="card-proyecto">
                 <span class="material-symbols-outlined" style="color:var(--rosa-viejo)">Auto_Stories</span>
-                <span>PROYECTOS</span>
+                <span>BITÁCORA</span>
             </div>
         </div>
 
