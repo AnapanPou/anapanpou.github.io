@@ -14,9 +14,10 @@
             --accent-amber: #F2AC57;
             --accent-coral: #D96D55;
             --text-cream: #FAF9F6;
+            --overlay-glass: rgba(255, 255, 255, 0.08);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -48,6 +49,7 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
+        /* HEADER */
         header {
             min-height: 100vh;
             display: flex;
@@ -64,6 +66,7 @@
             letter-spacing: 5px;
             margin: 0;
             text-transform: uppercase;
+            line-height: 0.9;
         }
 
         .subtitulo {
@@ -80,13 +83,14 @@
             font-size: 1.1rem;
             max-width: 800px;
             line-height: 1.8;
-            margin-bottom: 40px;
+            margin: 20px auto;
+            opacity: 0.9;
         }
 
-        /* PLANETAS - RESTAURADOS A TU PALETA ORIGINAL */
+        /* SECCIÓN PLANETAS (ESTILO ORIGINAL RESTAURADO) */
         .planets-container {
             position: relative;
-            height: 90vh;
+            height: 100vh;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -102,35 +106,35 @@
             align-items: center;
             text-decoration: none;
             color: var(--text-cream);
-            transition: 0.4s;
+            transition: 0.5s;
             text-align: center;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
             animation: float 10s infinite ease-in-out;
         }
 
         .planet-link:hover {
-            transform: scale(1.05);
-            border-color: var(--text-cream);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 50px rgba(242, 172, 87, 0.4);
         }
 
         .p-industrial {
-            width: 300px; height: 300px;
-            background: radial-gradient(circle at 30% 30%, var(--bg-purple), #2a0b45);
-            left: 10%; top: 5%;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle at 30% 30%, var(--bg-purple), var(--bg-deep));
+            left: 10%; top: 10%;
         }
 
         .p-ux {
-            width: 260px; height: 260px;
-            background: radial-gradient(circle at 30% 30%, var(--bg-blue), #1a2a5a);
-            right: 12%; top: 15%;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle at 30% 30%, var(--bg-blue), var(--bg-deep));
+            right: 15%; top: 20%;
             animation-delay: -2s;
         }
 
         .p-artesanal {
-            width: 210px; height: 210px;
-            background: radial-gradient(circle at 30% 30%, var(--accent-coral), #a64d3b);
-            bottom: 5%; left: 38%;
+            width: 220px; height: 220px;
+            background: radial-gradient(circle at 30% 30%, var(--accent-coral), var(--bg-deep));
+            bottom: 10%; left: 40%;
             animation-delay: -4s;
         }
 
@@ -143,90 +147,107 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
         }
 
-        /* HABILIDADES */
+        /* HABILIDADES ESTELARES */
         .skills-section {
-            padding: 80px 10%;
+            padding: 100px 10%;
             text-align: center;
         }
 
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .skill-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(242, 172, 87, 0.3);
-            padding: 30px;
+            background: var(--overlay-glass);
+            border: 1px solid rgba(242, 172, 87, 0.2);
+            padding: 40px 20px;
             border-radius: 20px;
+            transition: 0.3s;
         }
 
-        /* SECCIÓN CONTACTO Y CV AL FINAL */
-        footer {
-            background: var(--bg-deep);
-            padding: 80px 10%;
+        .skill-card:hover {
+            border-color: var(--accent-coral);
+            background: rgba(217, 109, 85, 0.1);
+        }
+
+        .skill-card .icon {
+            font-size: 45px;
+            color: var(--accent-amber);
+            margin-bottom: 15px;
+        }
+
+        /* RECURSOS Y CONTACTO (HASTA ABAJO) */
+        .footer-contact {
+            background: rgba(13, 2, 20, 0.9);
+            padding: 80px 10% 40px;
             text-align: center;
-            border-top: 2px solid var(--accent-amber);
+            border-top: 1px solid var(--accent-amber);
         }
 
-        .cv-container {
-            margin-bottom: 50px;
+        .cv-grid {
             display: flex;
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 50px;
         }
 
         .cv-button {
             padding: 15px 30px;
+            background: var(--overlay-glass);
             border: 2px solid var(--accent-amber);
             color: var(--text-cream);
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
             text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: 2px;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: 0.4s;
         }
 
         .cv-button:hover {
             background: var(--accent-amber);
             color: var(--bg-deep);
+            box-shadow: 0 0 30px var(--accent-amber);
+            transform: translateY(-5px);
         }
 
-        .contacto-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        .contacto-item {
+        .social-links {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 30px;
         }
 
-        .contacto-item i {
-            font-size: 2rem;
-            color: var(--accent-amber);
-        }
-
-        .contacto-item a {
+        .social-links a {
             color: var(--text-cream);
+            font-size: 2.2rem;
+            transition: 0.3s;
             text-decoration: none;
-            font-weight: 500;
         }
 
-        .contacto-item a:hover {
+        .social-links a:hover {
             color: var(--accent-amber);
+            transform: scale(1.2);
+        }
+
+        .direct-info {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 2;
+        }
+
+        .direct-info a {
+            color: var(--accent-amber);
+            text-decoration: none;
+            font-weight: 600;
         }
 
     </style>
@@ -259,59 +280,53 @@
     </section>
 
     <section class="skills-section">
-        <h2 style="letter-spacing: 5px; color: var(--accent-amber);">HABILIDADES ESTELARES</h2>
+        <h2 style="letter-spacing: 10px; text-transform: uppercase; color: var(--accent-amber);">Habilidades Estelares</h2>
         <div class="skills-grid">
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--accent-amber);">draw</span>
+                <span class="material-symbols-outlined icon">draw</span>
                 <h3>SolidWorks & 3D</h3>
-                <p>Modelado técnico y renderizado profesional.</p>
+                <p>Modelado técnico y renderizado de producto.</p>
             </div>
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--accent-amber);">ads_click</span>
-                <h3>Figma & UX</h3>
-                <p>Prototipado interactivo y flujos de usuario.</p>
+                <span class="material-symbols-outlined icon">ads_click</span>
+                <h3>Figma & Prototipado</h3>
+                <p>Interfaces digitales y flujos de usuario.</p>
             </div>
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--accent-amber);">category</span>
+                <span class="material-symbols-outlined icon">category</span>
                 <h3>Manufactura</h3>
-                <p>Supervisión de procesos y materiales finales.</p>
+                <p>Gestión de procesos desde el dibujo a la fábrica.</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <h2 style="letter-spacing: 3px; margin-bottom: 40px;">CONTACTO Y CV</h2>
+    <footer class="footer-contact">
+        <h2 style="margin-bottom: 40px; letter-spacing: 3px; text-transform: uppercase;">Recursos y Contacto</h2>
         
-        <div class="cv-container">
+        <div class="cv-grid">
             <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" target="_blank" class="cv-button">CV Industrial</a>
             <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" target="_blank" class="cv-button">CV UX Designer</a>
         </div>
 
-        <div class="contacto-info">
-            <div class="contacto-item">
-                <i class="fab fa-linkedin"></i>
-                <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank">LinkedIn</a>
-            </div>
-            <div class="contacto-item">
-                <i class="fab fa-behance"></i>
-                <a href="https://www.behance.net/anapaulapm" target="_blank">Behance</a>
-            </div>
-            <div class="contacto-item">
-                <i class="fab fa-whatsapp"></i>
-                <a href="https://wa.me/527228520937" target="_blank">+52 722 852 0937</a>
-            </div>
-            <div class="contacto-item">
-                <i class="fas fa-envelope"></i>
-                <a href="mailto:anapau951@gmail.com">anapau951@gmail.com</a>
-            </div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.behance.net/anapaulapm" target="_blank" title="Behance"><i class="fab fa-behance"></i></a>
+            <a href="https://wa.me/527228520937" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:anapau951@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
         </div>
 
-        <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.5;">© 2025 • Ana Pau • Diseñado bajo las estrellas</p>
+        <div class="direct-info">
+            <p>Estado de México, México | <a href="tel:+527228520937">+52 722 852 0937</a></p>
+            <p><a href="mailto:anapau951@gmail.com">anapau951@gmail.com</a></p>
+        </div>
+        
+        <p style="margin-top: 60px; font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px;">© 2025 • ANA PAU • CREADO BAJO UN CIELO ESTRELLADO</p>
     </footer>
 
     <script>
         const starField = document.getElementById('starField');
-        for (let i = 0; i < 120; i++) {
+        const starCount = 150;
+        for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 3 + 'px';
