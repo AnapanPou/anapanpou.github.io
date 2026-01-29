@@ -153,7 +153,7 @@
             box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* ÓRBITAS DINÁMICAS (SCROLL) */
+        /* ÓRBITAS FIJAS */
         .orbit {
             position: absolute;
             width: 170%;
@@ -206,7 +206,6 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.9);
             left: 100px;
             top: -40px;
-            transform: rotate(0deg) !important; /* Mantiene el texto derecho */
         }
 
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
@@ -214,13 +213,12 @@
         .project-detail h4 { margin: 0 0 8px 0; color: var(--p-orange); text-transform: uppercase; font-size: 0.9rem; }
         .project-detail p { font-size: 0.8rem; line-height: 1.4; color: var(--text-cream); margin-bottom: 12px; }
 
-        /* LUNAS REDONDEADAS DENTRO DEL DETALLE */
         .project-images { display: flex; gap: 15px; justify-content: center; }
         .project-images img { 
             width: 80px; 
             height: 80px; 
             object-fit: cover; 
-            border-radius: 50%; /* LUNAS REDONDAS */
+            border-radius: 50%; 
             border: 2px solid var(--p-blue-light);
             transition: transform 0.3s;
         }
@@ -264,7 +262,7 @@
 
     <header>
         <div class="perfil-container">
-            <img src="C:\Users\AnaPau\Documents\GitHub\anapanpou.github.io\perfil.PNG" alt="Ana Pau" class="foto-perfil">
+            <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
@@ -279,15 +277,15 @@
                 <span class="material-symbols-outlined" style="font-size: 45px;">precision_manufacturing</span>
                 <span>Diseño Industrial</span>
             </a>
-            <div class="orbit scroll-orbit">
+            <div class="orbit">
                 <div class="project-moon moon-1">
                     <span>Mobiliario</span>
                     <div class="project-detail">
                         <h4>Closeth para oficina</h4>
-                        <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad que necesitas en el día a día. Usé tonos oscuros para darle ese toque sobrio.</p>
+                        <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad que necesitas en el día a día.</p>
                         <div class="project-images">
-                            <img src="C:\Users\AnaPau\Documents\GitHub\anapanpou.github.io\CLOSETH1.JPG" alt="C1">
-                            <img src="C:\Users\AnaPau\Documents\GitHub\anapanpou.github.io\CLOSETH2.JPG" alt="C2">
+                            <img src="CLOSETH1.JPG" alt="C1">
+                            <img src="CLOSETH2.JPG" alt="C2">
                         </div>
                     </div>
                 </div>
@@ -300,19 +298,9 @@
                 <span class="material-symbols-outlined" style="font-size: 45px;">devices</span>
                 <span>Diseño UX</span>
             </a>
-            <div class="orbit scroll-orbit">
+            <div class="orbit">
                 <div class="project-moon moon-1"><span>App</span></div>
                 <div class="project-moon moon-2"><span>Web</span></div>
-            </div>
-        </div>
-
-        <div class="planet-system sys-artesanal" data-depth="0.12">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
-                <span class="material-symbols-outlined" style="font-size: 35px;">palette</span>
-                <span>Artesanía</span>
-            </a>
-            <div class="orbit scroll-orbit">
-                <div class="project-moon moon-1"><span>Arte</span></div>
             </div>
         </div>
     </section>
@@ -353,7 +341,6 @@
     </footer>
 
     <script>
-        // Estrellas
         const starField = document.getElementById('starField');
         for (let i = 0; i < 140; i++) {
             const star = document.createElement('div');
@@ -366,24 +353,6 @@
             starField.appendChild(star);
         }
 
-        // Lógica de Scroll para Órbitas
-        window.addEventListener('scroll', () => {
-            const scrollPos = window.pageYOffset;
-            const orbits = document.querySelectorAll('.scroll-orbit');
-            const moons = document.querySelectorAll('.project-moon');
-            
-            // Hace que las órbitas giren según el scroll
-            orbits.forEach(orbit => {
-                orbit.style.transform = `rotate(${scrollPos * 0.15}deg)`;
-            });
-
-            // Re-vierte la rotación en las lunas para que el texto NO gire y sea legible
-            moons.forEach(moon => {
-                moon.style.transform = `rotate(-${scrollPos * 0.15}deg)`;
-            });
-        });
-
-        // Parallax de los sistemas planetarios
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             systems.forEach(sys => {
