@@ -15,6 +15,8 @@
             --p-orange: #F2AC57;
             --p-white: #FFF8EE;
             --text-cream: #FAF9F6;
+            /* Nuevo tono cálido rosado transparente */
+            --p-rose-trans: rgba(255, 182, 193, 0.25); 
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -28,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* ESTRELLAS */
         .stars-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -49,7 +50,6 @@
             50% { opacity: 0.6; transform: scale(1.1); }
         }
 
-        /* --- FOTO PERFIL --- */
         .perfil-container {
             width: 220px;
             height: 220px;
@@ -63,8 +63,6 @@
             box-shadow: 0 0 20px rgba(141, 172, 219, 0.4), 0 0 40px rgba(242, 172, 87, 0.2);
             transition: transform 0.5s ease;
         }
-
-        .perfil-container:hover { transform: scale(1.05); }
 
         .foto-perfil {
             width: 100%;
@@ -83,12 +81,6 @@
             align-items: center;
             text-align: center;
             padding: 50px 10%;
-            animation: fadeInUpper 1.2s ease-out;
-        }
-
-        @keyframes fadeInUpper {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -97,7 +89,6 @@
             letter-spacing: 10px;
             margin: 0;
             text-transform: uppercase;
-            line-height: 1;
         }
 
         .subtitulo {
@@ -109,16 +100,7 @@
             text-transform: uppercase;
         }
 
-        .descripcion-perfil {
-            font-weight: 300;
-            font-size: 1.05rem;
-            max-width: 750px;
-            line-height: 1.7;
-            margin: 0 auto;
-            opacity: 0.8;
-        }
-
-        /* SECCIÓN PLANETAS */
+        /* --- SECCIÓN PLANETAS MODIFICADA --- */
         .planets-container {
             position: relative;
             height: 140vh;
@@ -150,10 +132,8 @@
             text-align: center;
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
         }
 
-        /* ÓRBITAS FIJAS */
         .orbit {
             position: absolute;
             width: 170%;
@@ -165,95 +145,81 @@
             pointer-events: none;
         }
 
-        .planet-system:hover .orbit { 
-            opacity: 1; 
-            pointer-events: auto;
-            border-color: rgba(255, 255, 255, 0.3); 
-        }
+        .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
 
         .project-moon {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             background: var(--bg-deep);
             border: 1px solid var(--p-blue-light);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--p-cream);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            z-index: 50;
         }
 
-        .project-moon:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--p-blue-light); }
-
-        /* TARJETA DE DETALLES */
+        /* --- LA TARJETA ROSADA REDONDA --- */
         .project-detail {
             position: absolute;
-            width: 300px;
-            background: rgba(25, 4, 38, 0.98);
-            border: 1px solid var(--p-orange);
-            border-radius: 15px;
-            padding: 20px;
+            width: 550px; /* Más ancha para acomodar texto a la derecha */
+            height: 320px;
+            background: var(--p-rose-trans); /* Tono rosado cálido transparente */
+            border: none; /* Sin borde */
+            border-radius: 160px; /* Redondeado total */
+            padding: 30px 50px;
             opacity: 0;
             pointer-events: none;
             transition: all 0.4s ease;
             z-index: 200;
-            text-align: left;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-            left: 100px;
-            top: -40px;
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            left: 110px;
+            top: -110px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
-        .project-detail h4 { margin: 0 0 8px 0; color: var(--p-orange); text-transform: uppercase; font-size: 0.9rem; }
-        .project-detail p { font-size: 0.8rem; line-height: 1.4; color: var(--text-cream); margin-bottom: 12px; }
+        /* Contenedor de imágenes agrandadas */
+        .project-images { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
 
-        .project-images { display: flex; gap: 15px; justify-content: center; }
         .project-images img { 
-            width: 80px; 
-            height: 80px; 
+            width: 120px; /* Imágenes más grandes */
+            height: 120px; 
             object-fit: cover; 
             border-radius: 50%; 
-            border: 2px solid var(--p-blue-light);
-            transition: transform 0.3s;
+            border: 3px solid white;
         }
-        .project-images img:hover { transform: scale(1.1) rotate(5deg); }
 
-        /* POSICIONES INICIALES */
+        /* Texto a la derecha */
+        .detail-text {
+            text-align: left;
+            flex: 1;
+        }
+
+        .detail-text h4 { margin: 0 0 10px 0; color: white; text-transform: uppercase; font-size: 1.1rem; }
+        .detail-text p { font-size: 0.9rem; line-height: 1.5; color: white; margin: 0; }
+
+        /* POSICIONES */
         .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .moon-2 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-
-        /* CONFIG PLANETAS */
         .sys-industrial { left: 8%; top: 15%; }
         .p-industrial { width: 300px; height: 300px; background: linear-gradient(135deg, rgba(141, 172, 219, 0.3), rgba(160, 185, 217, 0.05)); }
         
-        .sys-ux { right: 10%; top: 20%; }
-        .p-ux { width: 280px; height: 280px; background: linear-gradient(135deg, rgba(246, 229, 177, 0.25), rgba(242, 172, 87, 0.1)); }
-
-        .sys-artesanal { left: 38%; bottom: 10%; }
-        .p-artesanal { width: 220px; height: 220px; background: linear-gradient(135deg, rgba(242, 172, 87, 0.25), rgba(255, 248, 238, 0.05)); }
-
-        .planet-link span { font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; margin-top: 15px; }
-
-        /* SKILLS & FOOTER */
-        .skills-section { padding: 100px 10%; text-align: center; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .skill-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); padding: 40px 20px; border-radius: 15px; transition: 0.4s; }
-        .skill-card:hover { border-color: var(--p-blue-light); background: rgba(255,255,255,0.05); }
-        .skill-card .icon { font-size: 40px; color: var(--p-cream); margin-bottom: 20px; }
-        
-        .footer-contact { background: rgba(10, 5, 20, 0.8); padding: 80px 10% 40px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
-        .cv-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
-        .cv-button { padding: 12px 24px; border: 1px solid var(--p-blue-light); color: var(--p-white); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; font-weight: 700; transition: 0.3s; }
+        /* FOOTER Y DEMÁS */
+        .footer-contact { background: rgba(10, 5, 20, 0.8); padding: 80px 10%; text-align: center; }
+        .cv-button { padding: 12px 24px; border: 1px solid var(--p-blue-light); color: var(--p-white); text-decoration: none; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
-        .social-links { display: flex; justify-content: center; gap: 35px; margin-bottom: 30px; }
-        .social-links a { color: var(--p-blue-muted); font-size: 1.8rem; transition: 0.3s; }
-        .social-links a:hover { color: var(--p-orange); transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -266,14 +232,11 @@
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
-        <p class="descripcion-perfil">
-            Como diseñadora con experiencia en productos físicos y digitales, me dedico a crear soluciones que combinan lo mejor de ambos mundos. Me especializo en entender qué necesitan los usuarios para diseñar objetos e interfaces funcionales y estéticas.
-        </p>
     </header>
 
-    <section class="planets-container" id="parallax-container">
+    <section class="planets-container">
         <div class="planet-system sys-industrial" data-depth="0.05">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
+            <a href="#" class="planet-link p-industrial">
                 <span class="material-symbols-outlined" style="font-size: 45px;">precision_manufacturing</span>
                 <span>Diseño Industrial</span>
             </a>
@@ -281,63 +244,26 @@
                 <div class="project-moon moon-1">
                     <span>Mobiliario</span>
                     <div class="project-detail">
-                        <h4>Closeth para oficina</h4>
-                        <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad que necesitas en el día a día.</p>
                         <div class="project-images">
                             <img src="CLOSETH1.JPG" alt="C1">
                             <img src="CLOSETH2.JPG" alt="C2">
                         </div>
+                        <div class="detail-text">
+                            <h4>Closeth para oficina</h4>
+                            <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad que necesitas en el día a día. Usé tonos oscuros para darle ese toque sobrio y profesional que destaca en cualquier espacio de trabajo.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="project-moon moon-2"><span>Prod</span></div>
-            </div>
-        </div>
-
-        <div class="planet-system sys-ux" data-depth="0.08">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
-                <span class="material-symbols-outlined" style="font-size: 45px;">devices</span>
-                <span>Diseño UX</span>
-            </a>
-            <div class="orbit">
-                <div class="project-moon moon-1"><span>App</span></div>
-                <div class="project-moon moon-2"><span>Web</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills-section">
-        <h2 style="letter-spacing: 8px; text-transform: uppercase; font-weight: 300; margin-bottom: 50px;">Habilidades Estelares</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <span class="material-symbols-outlined icon">draw</span>
-                <h3>SolidWorks & 3D</h3>
-                <p>Modelado técnico y renderizado de producto.</p>
-            </div>
-            <div class="skill-card">
-                <span class="material-symbols-outlined icon">ads_click</span>
-                <h3>Figma & Prototipado</h3>
-                <p>Interfaces digitales y flujos de usuario.</p>
-            </div>
-            <div class="skill-card">
-                <span class="material-symbols-outlined icon">category</span>
-                <h3>Manufactura</h3>
-                <p>Gestión de procesos desde el diseño a la fábrica.</p>
             </div>
         </div>
     </section>
 
     <footer class="footer-contact">
-        <div class="cv-grid">
+        <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 40px;">
             <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" target="_blank" class="cv-button">CV Industrial</a>
             <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" target="_blank" class="cv-button">CV UX Designer</a>
         </div>
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.behance.net/anapaulapm" target="_blank"><i class="fab fa-behance"></i></a>
-            <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="mailto:anapau951@gmail.com"><i class="far fa-envelope"></i></a>
-        </div>
-        <p style="margin-top: 50px; font-size: 0.65rem; opacity: 0.3; letter-spacing: 3px;">© 2025 Ana Pau • Diseñado con visión UX</p>
+        <p>© 2026 Ana Pau • Diseñado con visión UX</p>
     </footer>
 
     <script>
