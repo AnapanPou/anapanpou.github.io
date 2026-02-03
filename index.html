@@ -16,6 +16,9 @@
             --p-white: #FFF8EE;
             --text-cream: #FAF9F6;
             --p-rose-trans: rgba(255, 182, 193, 0.25); 
+            /* Variables para el efecto de sombra de la ilustración */
+            --planet-inner-shadow: rgba(0, 0, 0, 0.4);
+            --planet-glow: rgba(255, 255, 255, 0.15);
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -29,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* ESTRELLAS */
+        /* --- ESTRELLAS --- */
         .stars-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -111,7 +114,7 @@
             opacity: 0.8;
         }
 
-        /* --- SISTEMA DE PLANETAS --- */
+        /* --- SISTEMA DE PLANETAS ESTILO ILUSTRACIÓN --- */
         .planets-container {
             position: relative;
             height: 140vh;
@@ -141,9 +144,32 @@
             color: var(--p-white);
             transition: all 0.5s ease;
             text-align: center;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
+            border: none; /* Sin borde como pediste */
+            /* Efecto de degradado y sombra interna minimalista */
+            box-shadow: 
+                inset -20px -20px 60px var(--planet-inner-shadow),
+                inset 10px 10px 40px var(--planet-glow),
+                0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* Paleta cálida con degradados suaves */
+        .p-industrial { 
+            width: 300px; height: 300px; 
+            background: radial-gradient(circle at 35% 35%, #8DACDB, #3a547e); 
+        }
+        
+        .p-ux { 
+            width: 280px; height: 280px; 
+            background: radial-gradient(circle at 35% 35%, #F2AC57, #7a4d1a);
+        }
+
+        .p-artesanal { 
+            width: 220px; height: 220px; 
+            background: radial-gradient(circle at 35% 35%, #e094b0, #5e2a3d); 
+        }
+
+        .planet-link:hover {
+            transform: scale(1.03);
         }
 
         .orbit {
@@ -175,7 +201,7 @@
             z-index: 50;
         }
 
-        /* --- TARJETA ROSADA REDONDA --- */
+        /* --- TARJETA ROSADA REDONDA MODIFICADA --- */
         .project-detail {
             position: absolute;
             width: 550px;
@@ -199,22 +225,24 @@
 
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
-        .project-images { display: flex; flex-direction: column; gap: 10px; }
-        .project-images img { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 3px solid white; }
+        /* Imágenes más grandes y texto a la derecha */
+        .project-images { display: flex; flex-direction: column; gap: 15px; }
+        .project-images img { 
+            width: 125px; 
+            height: 125px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            border: 3px solid white; 
+        }
 
         .detail-text { text-align: left; flex: 1; }
         .detail-text h4 { margin: 0 0 10px 0; color: white; text-transform: uppercase; font-size: 1.1rem; }
-        .detail-text p { font-size: 0.9rem; line-height: 1.5; color: white; margin: 0; }
+        .detail-text p { font-size: 0.95rem; line-height: 1.6; color: white; margin: 0; }
 
-        /* POSICIONES PLANETAS */
+        /* POSICIONES */
         .sys-industrial { left: 8%; top: 15%; }
-        .p-industrial { width: 300px; height: 300px; background: linear-gradient(135deg, rgba(141, 172, 219, 0.3), rgba(160, 185, 217, 0.05)); }
-        
         .sys-ux { right: 10%; top: 20%; }
-        .p-ux { width: 280px; height: 280px; background: linear-gradient(135deg, rgba(246, 229, 177, 0.25), rgba(242, 172, 87, 0.1)); }
-
         .sys-artesanal { left: 38%; bottom: 10%; }
-        .p-artesanal { width: 220px; height: 220px; background: linear-gradient(135deg, rgba(242, 172, 87, 0.25), rgba(255, 248, 238, 0.05)); }
 
         .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
         .moon-2 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
@@ -266,12 +294,12 @@
                     <span>Mobiliario</span>
                     <div class="project-detail">
                         <div class="project-images">
-                            <img src="CLOSETH1.JPG" alt="C1">
-                            <img src="CLOSETH2.JPG" alt="C2">
+                            <img src="CLOSETH1.JPG" alt="Closet 1">
+                            <img src="CLOSETH2.JPG" alt="Closet 2">
                         </div>
                         <div class="detail-text">
                             <h4>Closeth para oficina</h4>
-                            <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad necesaria en el día a día. Tonos oscuros y acabados profesionales.</p>
+                            <p>Diseñé esta pieza pensando en el balance ideal: la elegancia de una oficina moderna y la funcionalidad necesaria en el día a día. Tonos oscuros y acabados profesionales que destacan en cualquier ambiente corporativo.</p>
                         </div>
                     </div>
                 </div>
@@ -308,17 +336,17 @@
             <div class="skill-card">
                 <span class="material-symbols-outlined icon">draw</span>
                 <h3>SolidWorks & 3D</h3>
-                <p>Modelado técnico y renderizado de producto.</p>
+                <p>Modelado técnico y renderizado de producto para manufactura real.</p>
             </div>
             <div class="skill-card">
                 <span class="material-symbols-outlined icon">ads_click</span>
                 <h3>Figma & Prototipado</h3>
-                <p>Interfaces digitales y flujos de usuario.</p>
+                <p>Interfaces digitales centradas en el usuario y flujos interactivos.</p>
             </div>
             <div class="skill-card">
                 <span class="material-symbols-outlined icon">category</span>
                 <h3>Manufactura</h3>
-                <p>Gestión de procesos desde el diseño a la fábrica.</p>
+                <p>Gestión de materiales y procesos desde el concepto hasta la producción.</p>
             </div>
         </div>
     </section>
