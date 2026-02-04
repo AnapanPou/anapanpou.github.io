@@ -26,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* --- FONTO ESTRELLADO --- */
+        /* --- FONDO ESTRELLADO --- */
         .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .star { position: absolute; background: white; border-radius: 50%; opacity: 0.4; }
 
@@ -93,7 +93,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        /* Capas de color para simular profundidad plana sin degradados */
         .planet-link::before, .planet-link::after {
             content: '';
             position: absolute;
@@ -101,29 +100,20 @@
             z-index: 1;
         }
 
-        /* Capa de Sombra Intermedia (Rígida) */
-        .planet-link::before {
-            width: 120%; height: 120%;
-            top: 30%; left: 15%;
-        }
+        .planet-link::before { width: 120%; height: 120%; top: 30%; left: 15%; }
+        .planet-link::after { width: 100%; height: 100%; top: 60%; left: 30%; }
 
-        /* Capa de Sombra Profunda (Rígida) */
-        .planet-link::after {
-            width: 100%; height: 100%;
-            top: 60%; left: 30%;
-        }
-
-        /* PLANETA INDUSTRIAL: Azules y Violetas */
+        /* PLANETA INDUSTRIAL */
         .p-industrial { width: 300px; height: 300px; background-color: #8DACDB; }
         .p-industrial::before { background-color: #5c7ba8; }
         .p-industrial::after { background-color: #3a547e; }
 
-        /* PLANETA UX: Naranjas, Ocres y Rojizos */
+        /* PLANETA UX */
         .p-ux { width: 280px; height: 280px; background-color: #F2AC57; }
         .p-ux::before { background-color: #d18d3a; }
         .p-ux::after { background-color: #9c5a24; }
 
-        /* PLANETA ARTESANÍA: Rosas y Púrpuras */
+        /* PLANETA ARTESANÍA */
         .p-artesanal { width: 220px; height: 220px; background-color: #e094b0; }
         .p-artesanal::before { background-color: #b56b87; }
         .p-artesanal::after { background-color: #7d3f56; }
@@ -150,7 +140,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* --- TARJETA DE DETALLES --- */
         .project-detail {
             position: absolute; width: 550px; height: 320px;
             background: var(--p-rose-trans); border-radius: 160px;
@@ -161,7 +150,6 @@
         }
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
         .project-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid white; }
-        .detail-text h4 { margin: 0 0 10px 0; font-size: 1.2rem; text-transform: uppercase; }
 
         /* UBICACIONES */
         .sys-industrial { left: 8%; top: 15%; }
@@ -169,14 +157,18 @@
         .sys-artesanal { left: 38%; bottom: 10%; }
         .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
 
-        /* --- SECCIONES FINALES --- */
+        /* --- SECCIÓN HABILIDADES --- */
         .skills-section { padding: 100px 10%; text-align: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
         .skill-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-5px); }
+        .skill-card h3 { color: var(--p-orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+        .skill-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.9; text-align: center; }
 
+        /* --- FOOTER --- */
         .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; }
-        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 10px; display: inline-block; transition: 0.3s; }
+        .cv-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 50px; }
+        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: 0.3s; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
         .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
@@ -199,7 +191,6 @@
     </header>
 
     <section class="planets-container">
-        
         <div class="planet-system sys-industrial" data-depth="0.05">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
                 <span class="material-symbols-outlined icon-ui">precision_manufacturing</span>
@@ -238,26 +229,27 @@
                 <span>Artesanía</span>
             </a>
         </div>
-
     </section>
 
     <section class="skills-section">
-        <h2 style="letter-spacing: 8px; text-transform: uppercase;">Habilidades</h2>
+        <h2 style="letter-spacing: 8px; text-transform: uppercase;">Habilidades Estratégicas</h2>
         <div class="skills-grid">
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-orange);">draw</span>
-                <h3>SolidWorks</h3>
-                <p>Modelado técnico avanzado y visualización 3D.</p>
+                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">3d_rotation</span>
+                <h3>Modelado 3D & Técnico</h3>
+                <p>Dominio de geometría compleja y ensambles. Capacidad para generar archivos listos para producción, garantizando precisión técnica y viabilidad estructural en cada pieza física.</p>
             </div>
+            
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-orange);">ads_click</span>
-                <h3>Figma</h3>
-                <p>Diseño de interfaces e investigación de usuario.</p>
+                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">psychology_alt</span>
+                <h3>Storytelling & Design Thinking</h3>
+                <p>Metodologías de resolución de problemas centradas en el usuario. Transformo datos complejos en narrativas visuales coherentes que facilitan la toma de decisiones y la empatía con el producto.</p>
             </div>
+            
             <div class="skill-card">
-                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-orange);">factory</span>
-                <h3>Manufactura</h3>
-                <p>Control de procesos de producción y materiales.</p>
+                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">manage_search</span>
+                <h3>UX Research & Estrategia</h3>
+                <p>Análisis profundo del comportamiento del usuario. Diseño basado en evidencia, pruebas de usabilidad y validación de conceptos para asegurar que cada solución sea intuitiva y funcional.</p>
             </div>
         </div>
     </section>
@@ -277,7 +269,6 @@
     </footer>
 
     <script>
-        // Generador de estrellas
         const starField = document.getElementById('starField');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
@@ -289,7 +280,6 @@
             starField.appendChild(star);
         }
 
-        // Parallax
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             systems.forEach(sys => {
