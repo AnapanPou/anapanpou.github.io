@@ -12,8 +12,9 @@
             --p-cream: #F6E5B1;
             --p-blue-light: #8DACDB;
             --p-orange: #F2AC57;
-            --p-rose-trans: rgba(255, 182, 193, 0.35);
+            --p-rose-trans: rgba(255, 182, 193, 0.4);
             --text-white: #FAF9F6;
+            --star-color: #FFF4D2; /* Tono amarillito para las estrellas */
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -26,15 +27,29 @@
             overflow-x: hidden;
         }
 
-        /* --- FONDO ESTRELLADO --- */
+        /* --- FONDO ESTRELLADO CON TINTINEO --- */
         .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.4; }
+        
+        .star { 
+            position: absolute; 
+            background: var(--star-color); 
+            border-radius: 50%; 
+            opacity: 0.6;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
 
         /* --- HEADER --- */
         header {
             min-height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 50px 10%;
+            position: relative;
+            z-index: 10; /* Asegura que el texto esté visible */
         }
 
         .perfil-container {
@@ -50,10 +65,10 @@
         .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS (ESPACIADO AMPLIADO PARA NO ENCIMARSE) --- */
+        /* --- PLANETAS (ESPACIADO PARA NO TAPE EL TEXTO) --- */
         .planets-container {
             position: relative; 
-            min-height: 180vh; /* Estiramos la página para dar espacio */
+            min-height: 180vh; 
             width: 100%;
             display: flex; justify-content: center; align-items: center;
         }
@@ -68,26 +83,14 @@
             overflow: hidden; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .planet-link::before, .planet-link::after { content: ''; position: absolute; border-radius: 50%; z-index: 1; }
-        .planet-link::before { width: 120%; height: 120%; top: 30%; left: 15%; }
-        .planet-link::after { width: 100%; height: 100%; top: 60%; left: 30%; }
-
         .p-industrial { width: 300px; height: 300px; background-color: #8DACDB; }
-        .p-industrial::before { background-color: #5c7ba8; }
-        .p-industrial::after { background-color: #3a547e; }
-
         .p-ux { width: 280px; height: 280px; background-color: #F2AC57; }
-        .p-ux::before { background-color: #d18d3a; }
-        .p-ux::after { background-color: #9c5a24; }
-
         .p-artesanal { width: 220px; height: 220px; background-color: #e094b0; }
-        .p-artesanal::before { background-color: #b56b87; }
-        .p-artesanal::after { background-color: #7d3f56; }
 
         .planet-link:hover { transform: scale(1.08); }
         .planet-link span { position: relative; z-index: 10; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-top: 15px; }
 
-        /* --- LUNAS Y DETALLE ORGÁNICO --- */
+        /* --- LUNAS Y GALERÍA SOBREPUESTA --- */
         .orbit {
             position: absolute; width: 170%; height: 170%;
             border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
@@ -102,59 +105,58 @@
             font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
         }
 
-        /* Contenedor de la Galería "Nube" */
         .project-detail {
             position: absolute; width: 600px; height: 450px;
-            opacity: 0; pointer-events: none; transition: 0.4s; z-index: 200;
+            opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500;
             display: flex; justify-content: center; align-items: center;
         }
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
-        /* El cuadro de texto central */
+        /* Cuadro de texto (Atrás de las fotos) */
         .detail-text-box {
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
             padding: 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            width: 320px; text-align: center; z-index: 10; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            width: 320px; text-align: center; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* Imágenes rodeando el texto (MÁS JUNTAS) */
+        /* Imágenes (Encima del cuadro rosa) */
         .floating-images img {
             position: absolute; border-radius: 50%; border: 4px solid white;
             object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease, z-index 0.2s;
+            transition: transform 0.4s ease; z-index: 10;
         }
-        .floating-images img:hover { transform: scale(1.4); z-index: 150; }
+        .floating-images img:hover { transform: scale(1.4); z-index: 100; }
 
-        /* Posicionamiento Cocina (Ajustado para estar más cerca) */
-        .img-k1 { width: 180px; height: 180px; top: 20px; left: 60px; }
-        .img-k2 { width: 220px; height: 220px; bottom: 10px; left: 10px; }
-        .img-k3 { width: 200px; height: 200px; top: 40px; right: 20px; }
+        /* Posicionamiento Imágenes */
+        .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
+        .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
+        .img-k3 { width: 200px; height: 200px; top: 40px; right: 10px; }
 
-        /* Posicionamiento Closet (Ajustado para estar más cerca) */
-        .img-c1 { width: 200px; height: 200px; top: 10px; right: 40px; }
-        .img-c2 { width: 220px; height: 220px; bottom: 20px; left: 30px; }
+        .img-c1 { width: 200px; height: 200px; top: 10px; right: 30px; }
+        .img-c2 { width: 220px; height: 220px; bottom: 20px; left: 20px; }
 
-        /* UBICACIONES DE LOS PLANETAS (MÁS ALEJADOS ENTRE SÍ) */
-        .sys-industrial { left: 5%; top: 10%; }
+        /* UBICACIONES PLANETARIAS (Ajustadas para no tapar el header) */
+        .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
         .sys-artesanal { left: 35%; bottom: 8%; }
 
         .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
         .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .detail-pos { left: 110px; top: -180px; }
+        
+        /* Bajamos el detalle para que el hover no bloquee el texto superior */
+        .detail-pos { left: 120px; top: -100px; } 
 
-        /* --- HABILIDADES --- */
+        /* --- HABILIDADES & FOOTER --- */
         .skills-section { padding: 120px 10%; text-align: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .skill-card h3 { color: var(--p-orange); text-transform: uppercase; margin-bottom: 15px; }
-
+        
         .footer-contact { background: #0d0216; padding: 100px 10%; text-align: center; }
-        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: 0.3s; margin: 8px; display: inline-block; }
+        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
         .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
-        .social-links a:hover { color: var(--p-orange); transform: translateY(-3px); }
+        .social-links a:hover { color: var(--p-orange); }
     </style>
 </head>
 <body>
@@ -202,7 +204,7 @@
                         </div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
-                            <p style="font-size:0.8rem;">Propuesta que mezcla madera con gris salvia sutil para crear un espacio acogedor.</p>
+                            <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil para crear un espacio acogedor y funcional.</p>
                         </div>
                     </div>
                 </div>
@@ -256,17 +258,24 @@
     </footer>
 
     <script>
+        // Generador de estrellas con duración aleatoria para el tintineo
         const starField = document.getElementById('starField');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 2 + 'px';
-            star.style.width = size; star.style.height = size;
+            const size = Math.random() * 3 + 'px';
+            const duration = (Math.random() * 3 + 2) + 's'; // Entre 2 y 5 segundos
+            
+            star.style.width = size; 
+            star.style.height = size;
             star.style.top = Math.random() * 100 + '%';
             star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', duration);
+            
             starField.appendChild(star);
         }
 
+        // Efecto Parallax
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             systems.forEach(sys => {
