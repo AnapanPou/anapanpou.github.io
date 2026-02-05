@@ -12,7 +12,7 @@
             --p-cream: #F6E5B1;
             --p-blue-light: #8DACDB;
             --p-orange: #F2AC57;
-            --p-rose-trans: rgba(255, 182, 193, 0.3);
+            --p-rose-trans: rgba(255, 182, 193, 0.35);
             --text-white: #FAF9F6;
         }
 
@@ -50,13 +50,15 @@
         .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS --- */
+        /* --- PLANETAS (ESPACIADO AMPLIADO PARA NO ENCIMARSE) --- */
         .planets-container {
-            position: relative; height: 140vh; width: 100%;
+            position: relative; 
+            min-height: 180vh; /* Estiramos la página para dar espacio */
+            width: 100%;
             display: flex; justify-content: center; align-items: center;
         }
 
-        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
+        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; transition: transform 0.1s ease-out; }
 
         .planet-link {
             position: relative; z-index: 10; border-radius: 50%;
@@ -102,7 +104,7 @@
 
         /* Contenedor de la Galería "Nube" */
         .project-detail {
-            position: absolute; width: 700px; height: 500px;
+            position: absolute; width: 600px; height: 450px;
             opacity: 0; pointer-events: none; transition: 0.4s; z-index: 200;
             display: flex; justify-content: center; align-items: center;
         }
@@ -112,45 +114,47 @@
         .detail-text-box {
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
             padding: 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            width: 320px; text-align: center; z-index: 10;
+            width: 320px; text-align: center; z-index: 10; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* Imágenes rodeando el texto */
+        /* Imágenes rodeando el texto (MÁS JUNTAS) */
         .floating-images img {
             position: absolute; border-radius: 50%; border: 4px solid white;
             object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease, z-index 0.2s;
         }
-        .floating-images img:hover { transform: scale(1.5); z-index: 100; }
+        .floating-images img:hover { transform: scale(1.4); z-index: 150; }
 
-        /* Posicionamiento Cocina */
-        .img-k1 { width: 180px; height: 180px; top: 0; left: 20px; }
-        .img-k2 { width: 220px; height: 220px; bottom: 0; left: -50px; }
-        .img-k3 { width: 200px; height: 200px; top: 40px; right: -50px; }
+        /* Posicionamiento Cocina (Ajustado para estar más cerca) */
+        .img-k1 { width: 180px; height: 180px; top: 20px; left: 60px; }
+        .img-k2 { width: 220px; height: 220px; bottom: 10px; left: 10px; }
+        .img-k3 { width: 200px; height: 200px; top: 40px; right: 20px; }
 
-        /* Posicionamiento Closet */
-        .img-c1 { width: 200px; height: 200px; top: -30px; right: 0; }
-        .img-c2 { width: 220px; height: 220px; bottom: -30px; left: 0; }
+        /* Posicionamiento Closet (Ajustado para estar más cerca) */
+        .img-c1 { width: 200px; height: 200px; top: 10px; right: 40px; }
+        .img-c2 { width: 220px; height: 220px; bottom: 20px; left: 30px; }
 
-        /* UBICACIONES */
-        .sys-industrial { left: 8%; top: 15%; }
-        .sys-ux { right: 10%; top: 20%; }
-        .sys-artesanal { left: 38%; bottom: 10%; }
+        /* UBICACIONES DE LOS PLANETAS (MÁS ALEJADOS ENTRE SÍ) */
+        .sys-industrial { left: 5%; top: 10%; }
+        .sys-ux { right: 8%; top: 40%; }
+        .sys-artesanal { left: 35%; bottom: 8%; }
+
         .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
         .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .detail-pos { left: 100px; top: -200px; }
+        .detail-pos { left: 110px; top: -180px; }
 
         /* --- HABILIDADES --- */
-        .skills-section { padding: 100px 10%; text-align: center; }
+        .skills-section { padding: 120px 10%; text-align: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .skill-card h3 { color: var(--p-orange); text-transform: uppercase; margin-bottom: 15px; }
 
-        .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; }
-        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: 0.3s; margin: 5px; display: inline-block; }
+        .footer-contact { background: #0d0216; padding: 100px 10%; text-align: center; }
+        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; transition: 0.3s; margin: 8px; display: inline-block; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
-        .social-links a { color: var(--p-blue-light); font-size: 2rem; }
+        .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--p-orange); transform: translateY(-3px); }
     </style>
 </head>
 <body>
@@ -169,7 +173,7 @@
     </header>
 
     <section class="planets-container">
-        <div class="planet-system sys-industrial">
+        <div class="planet-system sys-industrial" data-depth="0.05">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
                 <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">precision_manufacturing</span>
                 <span>Industrial</span>
@@ -198,20 +202,21 @@
                         </div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
-                            <p style="font-size:0.8rem;">¿Quién dijo que lo moderno tiene que ser frío? En esta propuesta, quisimos crear un espacio que invitara a quedarse mezclando madera con un gris salvia muy sutil.</p>
+                            <p style="font-size:0.8rem;">Propuesta que mezcla madera con gris salvia sutil para crear un espacio acogedor.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="planet-system sys-ux">
+        <div class="planet-system sys-ux" data-depth="0.08">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
                 <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">devices</span>
                 <span>Diseño UX</span>
             </a>
         </div>
-        <div class="planet-system sys-artesanal">
+
+        <div class="planet-system sys-artesanal" data-depth="0.12">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
                 <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">palette</span>
                 <span>Artesanía</span>
@@ -228,11 +233,11 @@
             </div>
             <div class="skill-card">
                 <h3>Storytelling & Design Thinking</h3>
-                <p>Transformo datos complejos en narrativas visuales coherentes que facilitan la empatía con el producto.</p>
+                <p>Transformo datos complejos en narrativas visuales coherentes que facilitan la toma de decisiones.</p>
             </div>
             <div class="skill-card">
                 <h3>UX Research & Estrategia</h3>
-                <p>Diseño basado en evidencia, pruebas de usabilidad y validación de conceptos intuitivos.</p>
+                <p>Diseño basado en evidencia y validación de conceptos intuitivos para asegurar funcionalidad.</p>
             </div>
         </div>
     </section>
