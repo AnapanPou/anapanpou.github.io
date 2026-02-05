@@ -50,7 +50,7 @@
         .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS MULTITONALES 2D --- */
+        /* --- PLANETAS MULTITONALES (SOMBRAS DE COLORES, NO NEGRAS) --- */
         .planets-container {
             position: relative; height: 140vh; width: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -66,10 +66,12 @@
             overflow: hidden; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
+        /* Capas de color sólido para el estilo 2D solicitado */
         .planet-link::before, .planet-link::after { content: ''; position: absolute; border-radius: 50%; z-index: 1; }
         .planet-link::before { width: 120%; height: 120%; top: 30%; left: 15%; }
         .planet-link::after { width: 100%; height: 100%; top: 60%; left: 30%; }
 
+        /* Colores coordinados por planeta */
         .p-industrial { width: 300px; height: 300px; background-color: #8DACDB; }
         .p-industrial::before { background-color: #5c7ba8; }
         .p-industrial::after { background-color: #3a547e; }
@@ -101,7 +103,6 @@
             font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s;
         }
-        .project-moon:hover { background: var(--p-blue-light); color: var(--bg-deep); }
 
         /* DETALLES Y ZOOM DE IMAGEN */
         .project-detail {
@@ -117,11 +118,10 @@
         .project-images img { 
             width: 100px; height: 100px; object-fit: cover; 
             border-radius: 50%; border: 3px solid white; 
-            transition: transform 0.4s ease; 
+            transition: transform 0.4s ease; /* Efecto de crecimiento solicitado */
             cursor: pointer;
         }
-        /* EFECTO ZOOM */
-        .project-images img:hover { transform: scale(1.5); z-index: 300; position: relative; }
+        .project-images img:hover { transform: scale(1.6); z-index: 300; position: relative; }
 
         .detail-text h4 { margin: 0 0 10px 0; font-size: 1.1rem; text-transform: uppercase; color: var(--p-cream); }
         .detail-text p { font-size: 0.85rem; line-height: 1.4; margin: 0; }
@@ -136,11 +136,10 @@
         .detail-right { left: 110px; top: -110px; }
         .detail-bottom { left: 110px; bottom: -110px; }
 
-        /* --- HABILIDADES --- */
+        /* --- HABILIDADES (TEXTOS CORREGIDOS) --- */
         .skills-section { padding: 100px 10%; text-align: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .skill-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-5px); }
         .skill-card h3 { color: var(--p-orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
 
         /* --- FOOTER --- */
@@ -209,11 +208,7 @@
                 <span class="material-symbols-outlined icon-ui">devices</span>
                 <span>Diseño UX</span>
             </a>
-            <div class="orbit">
-                <div class="project-moon moon-closet"><span>Proyectos</span></div>
-            </div>
         </div>
-
         <div class="planet-system sys-artesanal" data-depth="0.12">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
                 <span class="material-symbols-outlined icon-ui">palette</span>
@@ -230,11 +225,13 @@
                 <h3>Modelado 3D & Técnico</h3>
                 <p>Dominio de geometría compleja y ensambles. Capacidad para generar archivos listos para producción, garantizando precisión técnica y viabilidad estructural en cada pieza física.</p>
             </div>
+            
             <div class="skill-card">
                 <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">psychology_alt</span>
                 <h3>Storytelling & Design Thinking</h3>
                 <p>Metodologías de resolución de problemas centradas en el usuario. Transformo datos complejos en narrativas visuales coherentes que facilitan la toma de decisiones y la empatía con el producto.</p>
             </div>
+            
             <div class="skill-card">
                 <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">manage_search</span>
                 <h3>UX Research & Estrategia</h3>
