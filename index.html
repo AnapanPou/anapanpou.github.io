@@ -33,101 +33,63 @@
         /* --- HEADER --- */
         header {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 50px 10%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 50px 10%;
         }
 
         .perfil-container {
-            width: 220px;
-            height: 220px;
-            margin-bottom: 25px;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange));
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 220px; height: 220px; margin-bottom: 25px; border-radius: 50%;
+            padding: 5px; background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange));
+            display: flex; justify-content: center; align-items: center;
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
-        .foto-perfil {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--bg-deep);
-        }
+        .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
 
         h1 { font-weight: 900; font-size: clamp(3rem, 10vw, 5.5rem); letter-spacing: 10px; margin: 0; text-transform: uppercase; }
         .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS MULTITONALES (ESTILO ILUSTRACIÓN 2D) --- */
+        /* --- PLANETAS MULTITONALES 2D --- */
         .planets-container {
-            position: relative;
-            height: 140vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative; height: 140vh; width: 100%;
+            display: flex; justify-content: center; align-items: center;
         }
 
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
 
         .planet-link {
-            position: relative;
-            z-index: 10;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: white;
+            position: relative; z-index: 10; border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-decoration: none; color: white;
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
-            border: none;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .planet-link::before, .planet-link::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
+        .planet-link::before, .planet-link::after { content: ''; position: absolute; border-radius: 50%; z-index: 1; }
         .planet-link::before { width: 120%; height: 120%; top: 30%; left: 15%; }
         .planet-link::after { width: 100%; height: 100%; top: 60%; left: 30%; }
 
-        /* PLANETA INDUSTRIAL */
         .p-industrial { width: 300px; height: 300px; background-color: #8DACDB; }
         .p-industrial::before { background-color: #5c7ba8; }
         .p-industrial::after { background-color: #3a547e; }
 
-        /* PLANETA UX */
         .p-ux { width: 280px; height: 280px; background-color: #F2AC57; }
         .p-ux::before { background-color: #d18d3a; }
         .p-ux::after { background-color: #9c5a24; }
 
-        /* PLANETA ARTESANÍA */
         .p-artesanal { width: 220px; height: 220px; background-color: #e094b0; }
         .p-artesanal::before { background-color: #b56b87; }
         .p-artesanal::after { background-color: #7d3f56; }
 
         .planet-link:hover { transform: scale(1.08); }
-        .planet-link .icon-ui { position: relative; z-index: 10; font-size: 50px; text-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
+        .planet-link .icon-ui { position: relative; z-index: 10; font-size: 50px; }
         .planet-link span { position: relative; z-index: 10; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-top: 15px; }
 
         /* --- LUNAS Y ORBITAS --- */
         .orbit {
-            position: absolute;
-            width: 170%; height: 170%;
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
+            position: absolute; width: 170%; height: 170%;
+            border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
             opacity: 0; transition: 0.5s; pointer-events: none;
         }
         .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
@@ -137,33 +99,49 @@
             background: #2e104d; border: 2px solid var(--p-blue-light);
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
             font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s;
         }
+        .project-moon:hover { background: var(--p-blue-light); color: var(--bg-deep); }
 
+        /* DETALLES Y ZOOM DE IMAGEN */
         .project-detail {
-            position: absolute; width: 550px; height: 320px;
+            position: absolute; width: 580px; height: 320px;
             background: var(--p-rose-trans); border-radius: 160px;
             padding: 30px 50px; opacity: 0; pointer-events: none;
             transition: 0.4s; z-index: 200; backdrop-filter: blur(15px);
-            display: flex; align-items: center; gap: 25px; left: 110px; top: -110px;
-            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; gap: 20px; border: 1px solid rgba(255,255,255,0.1);
         }
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
-        .project-images img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid white; }
+
+        .project-images { display: flex; flex-direction: column; gap: 8px; }
+        .project-images img { 
+            width: 100px; height: 100px; object-fit: cover; 
+            border-radius: 50%; border: 3px solid white; 
+            transition: transform 0.4s ease; 
+            cursor: pointer;
+        }
+        /* EFECTO ZOOM */
+        .project-images img:hover { transform: scale(1.5); z-index: 300; position: relative; }
+
+        .detail-text h4 { margin: 0 0 10px 0; font-size: 1.1rem; text-transform: uppercase; color: var(--p-cream); }
+        .detail-text p { font-size: 0.85rem; line-height: 1.4; margin: 0; }
 
         /* UBICACIONES */
         .sys-industrial { left: 8%; top: 15%; }
         .sys-ux { right: 10%; top: 20%; }
         .sys-artesanal { left: 38%; bottom: 10%; }
-        .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        
+        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
+        .detail-right { left: 110px; top: -110px; }
+        .detail-bottom { left: 110px; bottom: -110px; }
 
-        /* --- SECCIÓN HABILIDADES --- */
+        /* --- HABILIDADES --- */
         .skills-section { padding: 100px 10%; text-align: center; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
         .skill-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-5px); }
         .skill-card h3 { color: var(--p-orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
-        .skill-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.9; text-align: center; }
 
         /* --- FOOTER --- */
         .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; }
@@ -172,7 +150,6 @@
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
         .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
-        .social-links a:hover { color: var(--p-orange); transform: translateY(-5px); }
     </style>
 </head>
 <body>
@@ -197,16 +174,30 @@
                 <span>Industrial</span>
             </a>
             <div class="orbit">
-                <div class="project-moon moon-1">
-                    <span>Mobiliario</span>
-                    <div class="project-detail">
+                <div class="project-moon moon-closet">
+                    <span>Closet</span>
+                    <div class="project-detail detail-right">
                         <div class="project-images">
-                            <img src="CLOSETH1.JPG" alt="P1">
-                            <img src="CLOSETH2.JPG" alt="P2">
+                            <img src="CLOSETH1.JPG" alt="C1">
+                            <img src="CLOSETH2.JPG" alt="C2">
                         </div>
                         <div class="detail-text">
-                            <h4>Closeth para oficina</h4>
+                            <h4>Closet de Oficina</h4>
                             <p>Un diseño que equilibra la elegancia corporativa con la optimización de espacios de trabajo modernos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-moon moon-cocina">
+                    <span>Cocina</span>
+                    <div class="project-detail detail-bottom">
+                        <div class="project-images">
+                            <img src="COCINA1.png" alt="K1">
+                            <img src="COCINA2.png" alt="K2">
+                            <img src="COCINA3.png" alt="K3">
+                        </div>
+                        <div class="detail-text">
+                            <h4>Cocina</h4>
+                            <p>¿Quién dijo que lo moderno tiene que ser frío? En esta propuesta de cocina, quisimos crear un espacio que invitara a quedarse. La clave fue mezclar la textura natural de la madera con un gris salvia muy sutil.</p>
                         </div>
                     </div>
                 </div>
@@ -219,7 +210,7 @@
                 <span>Diseño UX</span>
             </a>
             <div class="orbit">
-                <div class="project-moon moon-1"><span>Proyectos</span></div>
+                <div class="project-moon moon-closet"><span>Proyectos</span></div>
             </div>
         </div>
 
@@ -239,13 +230,11 @@
                 <h3>Modelado 3D & Técnico</h3>
                 <p>Dominio de geometría compleja y ensambles. Capacidad para generar archivos listos para producción, garantizando precisión técnica y viabilidad estructural en cada pieza física.</p>
             </div>
-            
             <div class="skill-card">
                 <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">psychology_alt</span>
                 <h3>Storytelling & Design Thinking</h3>
                 <p>Metodologías de resolución de problemas centradas en el usuario. Transformo datos complejos en narrativas visuales coherentes que facilitan la toma de decisiones y la empatía con el producto.</p>
             </div>
-            
             <div class="skill-card">
                 <span class="material-symbols-outlined" style="font-size: 40px; color: var(--p-blue-light); margin-bottom: 15px;">manage_search</span>
                 <h3>UX Research & Estrategia</h3>
