@@ -4,287 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ana Pau | Portafolio Profesional</title>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-deep: #190426;
-            --p-cream: #F6E5B1;
-            --p-blue-light: #8DACDB;
-            --p-orange: #F2AC57;
-            --p-rose-trans: rgba(255, 182, 193, 0.4);
-            --text-white: #FAF9F6;
-            --star-color: #FFF4D2; /* Tono amarillito para las estrellas */
-        }
-
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            margin: 0;
-            background-color: var(--bg-deep);
-            color: var(--text-white);
-            font-family: 'Segoe UI', sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* --- FONDO ESTRELLADO CON TINTINEO --- */
-        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        
-        .star { 
-            position: absolute; 
-            background: var(--star-color); 
-            border-radius: 50%; 
-            opacity: 0.6;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* --- HEADER --- */
-        header {
-            min-height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 50px 10%;
-            position: relative;
-            z-index: 10; /* Asegura que el texto esté visible */
-        }
-
-        .perfil-container {
-            width: 220px; height: 220px; margin-bottom: 25px; border-radius: 50%;
-            padding: 5px; background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange));
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-        .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
-
-        h1 { font-weight: 900; font-size: clamp(3rem, 10vw, 5.5rem); letter-spacing: 10px; margin: 0; text-transform: uppercase; }
-        .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
-        .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
-
-        /* --- PLANETAS (ESPACIADO PARA NO TAPE EL TEXTO) --- */
-        .planets-container {
-            position: relative; 
-            min-height: 180vh; 
-            width: 100%;
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; transition: transform 0.1s ease-out; }
-
-        .planet-link {
-            position: relative; z-index: 10; border-radius: 50%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-decoration: none; color: white;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden; border: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .p-industrial { width: 300px; height: 300px; background-color: #8DACDB; }
-        .p-ux { width: 280px; height: 280px; background-color: #F2AC57; }
-        .p-artesanal { width: 220px; height: 220px; background-color: #e094b0; }
-
-        .planet-link:hover { transform: scale(1.08); }
-        .planet-link span { position: relative; z-index: 10; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-top: 15px; }
-
-        /* --- LUNAS Y GALERÍA SOBREPUESTA --- */
-        .orbit {
-            position: absolute; width: 170%; height: 170%;
-            border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
-            opacity: 0; transition: 0.5s; pointer-events: none;
-        }
-        .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
-
-        .project-moon {
-            position: absolute; width: 85px; height: 85px;
-            background: #2e104d; border: 2px solid var(--p-blue-light);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
-        }
-
-        .project-detail {
-            position: absolute; width: 600px; height: 450px;
-            opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
-
-        /* Cuadro de texto (Atrás de las fotos) */
-        .detail-text-box {
-            background: var(--p-rose-trans); backdrop-filter: blur(15px);
-            padding: 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            width: 320px; text-align: center; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        /* Imágenes (Encima del cuadro rosa) */
-        .floating-images img {
-            position: absolute; border-radius: 50%; border: 4px solid white;
-            object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease; z-index: 10;
-        }
-        .floating-images img:hover { transform: scale(1.4); z-index: 100; }
-
-        /* Posicionamiento Imágenes */
-        .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
-        .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
-        .img-k3 { width: 200px; height: 200px; top: 40px; right: 10px; }
-
-        .img-c1 { width: 200px; height: 200px; top: 10px; right: 30px; }
-        .img-c2 { width: 220px; height: 220px; bottom: 20px; left: 20px; }
-
-        /* UBICACIONES PLANETARIAS (Ajustadas para no tapar el header) */
-        .sys-industrial { left: 5%; top: 15%; }
-        .sys-ux { right: 8%; top: 40%; }
-        .sys-artesanal { left: 35%; bottom: 8%; }
-
-        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        
-        /* Bajamos el detalle para que el hover no bloquee el texto superior */
-        .detail-pos { left: 120px; top: -100px; } 
-
-        /* --- HABILIDADES & FOOTER --- */
-        .skills-section { padding: 120px 10%; text-align: center; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
-        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        
-        .footer-contact { background: #0d0216; padding: 100px 10%; text-align: center; }
-        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
-        .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
-        .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
-        .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
-        .social-links a:hover { color: var(--p-orange); }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="stars-container" id="starField"></div>
 
-    <header>
-        <div class="perfil-container">
+    <header class="hero flex-center">
+        <div class="perfil-border">
             <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
-        <h1>Ana Pau</h1>
-        <p class="subtitulo">Diseñadora Industrial & UX</p>
-        <p class="descripcion-perfil">
-            Como diseñadora con experiencia en productos físicos y digitales, me dedico a crear soluciones que combinan lo mejor de ambos mundos. Especialista en objetos e interfaces funcionales con visión estética.
-        </p>
+        <h1 class="text-upper">Ana Pau</h1>
+        <p class="subtitulo title-gold text-upper">Diseñadora Industrial & UX</p>
+        <p class="descripcion-perfil">Especialista en objetos e interfaces funcionales con visión estética.</p>
     </header>
 
-    <section class="planets-container">
-        <div class="planet-system sys-industrial" data-depth="0.05">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
-                <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">precision_manufacturing</span>
-                <span>Industrial</span>
+    <main class="planets-area flex-center">
+        
+        <section class="planet-sys sys-industrial" data-depth="0.05">
+            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-node industrial flex-center">
+                <span class="material-symbols-outlined icon-size">precision_manufacturing</span>
+                <span class="text-upper">Industrial</span>
             </a>
             <div class="orbit">
-                <div class="project-moon moon-closet">
-                    <span>Closet</span>
-                    <div class="project-detail detail-pos">
-                        <div class="floating-images">
-                            <img src="CLOSETH1.JPG" class="img-c1" alt="C1">
-                            <img src="CLOSETH2.JPG" class="img-c2" alt="C2">
-                        </div>
-                        <div class="detail-text-box">
-                            <h4 style="color:var(--p-cream); margin-top:0;">Closet de Oficina</h4>
-                            <p style="font-size:0.85rem;">Un diseño que equilibra la elegancia corporativa con la optimización de espacios de trabajo modernos.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-moon moon-cocina">
+                <div class="project-moon moon-cocina flex-center">
                     <span>Cocina</span>
-                    <div class="project-detail detail-pos">
+                    <div class="project-detail flex-center">
                         <div class="floating-images">
-                            <img src="COCINA1.png" class="img-k1" alt="K1">
-                            <img src="COCINA2.png" class="img-k2" alt="K2">
-                            <img src="COCINA3.png" class="img-k3" alt="K3">
+                            <img src="COCINA1.png" class="img-k1">
+                            <img src="COCINA2.png" class="img-k2">
+                            <img src="COCINA3.png" class="img-k3">
                         </div>
-                        <div class="detail-text-box">
-                            <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
-                            <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil para crear un espacio acogedor y funcional.</p>
+                        <div class="glass-morphism detail-card">
+                            <h4 class="title-gold">Cocina Integral</h4>
+                            <p>Madera y gris salvia para un ambiente moderno.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="planet-system sys-ux" data-depth="0.08">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
-                <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">devices</span>
-                <span>Diseño UX</span>
+        <section class="planet-sys sys-ux" data-depth="0.08">
+            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-node ux flex-center">
+                <span class="material-symbols-outlined icon-size">devices</span>
+                <span class="text-upper">Diseño UX</span>
             </a>
-        </div>
+        </section>
 
-        <div class="planet-system sys-artesanal" data-depth="0.12">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
-                <span class="material-symbols-outlined" style="font-size: 50px; position: relative; z-index: 10;">palette</span>
-                <span>Artesanía</span>
-            </a>
-        </div>
-    </section>
+    </main>
 
-    <section class="skills-section">
-        <h2 style="letter-spacing: 8px; text-transform: uppercase;">Habilidades Estratégicas</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Modelado 3D & Técnico</h3>
-                <p>Dominio de geometría compleja y ensambles para producción garantizando viabilidad estructural.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Storytelling & Design Thinking</h3>
-                <p>Transformo datos complejos en narrativas visuales coherentes que facilitan la toma de decisiones.</p>
-            </div>
-            <div class="skill-card">
-                <h3>UX Research & Estrategia</h3>
-                <p>Diseño basado en evidencia y validación de conceptos intuitivos para asegurar funcionalidad.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer-contact">
-        <div class="cv-grid">
-            <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" target="_blank" class="cv-button">CV Industrial</a>
-            <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" target="_blank" class="cv-button">CV UX Designer</a>
-        </div>
+    <footer class="main-footer">
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.behance.net/anapaulapm" target="_blank"><i class="fab fa-behance"></i></a>
             <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         </div>
-        <p style="opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top:20px;">© 2026 ANA PAU • MÉXICO</p>
+        <p class="copyright">© 2026 ANA PAU • MÉXICO</p>
     </footer>
 
-    <script>
-        // Generador de estrellas con duración aleatoria para el tintineo
-        const starField = document.getElementById('starField');
-        for (let i = 0; i < 150; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 3 + 'px';
-            const duration = (Math.random() * 3 + 2) + 's'; // Entre 2 y 5 segundos
-            
-            star.style.width = size; 
-            star.style.height = size;
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', duration);
-            
-            starField.appendChild(star);
-        }
-
-        // Efecto Parallax
-        document.addEventListener('mousemove', (e) => {
-            const systems = document.querySelectorAll('.planet-system');
-            systems.forEach(sys => {
-                const depth = sys.getAttribute('data-depth') || 0.05;
-                const x = (window.innerWidth / 2 - e.clientX) * depth;
-                const y = (window.innerHeight / 2 - e.clientY) * depth;
-                sys.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
