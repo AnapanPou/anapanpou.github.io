@@ -1,14 +1,14 @@
 /* ==========================================
-   CONFIGURACIÓN GENERAL (Variables)
+   CONFIGURACIÓN BASE Y VARIABLES
    ========================================== */
 :root {
     --bg-deep: #190426;
     --p-cream: #F6E5B1;
     --p-blue-light: #8DACDB;
     --p-orange: #F2AC57;
-    --p-rose-trans: rgba(255, 182, 193, 0.4);
+    --p-rose-trans: rgba(255, 182, 193, 0.45); /* Un poco más opaco para legibilidad */
     --text-white: #FAF9F6;
-    --star-color: #FFF4D2;
+    --star-color: #FFF4D2; /* Tono amarillito para las estrellas */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +25,7 @@ body {
    ========================================== */
 .flex-center { display: flex; justify-content: center; align-items: center; }
 .text-upper { text-transform: uppercase; letter-spacing: 5px; }
-.title-gold { color: var(--p-orange); font-weight: 600; margin-bottom: 5px; }
+.title-gold { color: var(--p-orange); font-weight: 600; }
 .glass-morphism { background: var(--p-rose-trans); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
 
 /* ==========================================
@@ -37,52 +37,87 @@ body {
 }
 
 /* ==========================================
-   COMPONENTES
+   HEADER Y PERFIL
    ========================================== */
-.stars-container { position: fixed; inset: 0; z-index: -1; }
+.stars-container { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
 .star { position: absolute; background: var(--star-color); border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; }
 
-.hero { min-height: 100vh; text-align: center; padding: 2rem; flex-direction: column; }
+.hero { min-height: 100vh; text-align: center; padding: 2rem; flex-direction: column; position: relative; z-index: 10; }
 .perfil-border { width: 220px; height: 220px; border-radius: 50%; padding: 5px; background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange)); margin-bottom: 1.5rem; }
 .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
+.descripcion-perfil { max-width: 700px; font-weight: 300; margin-top: 1rem; opacity: 0.9; }
 
+/* ==========================================
+   SISTEMA DE PLANETAS
+   ========================================== */
 .planets-area { position: relative; min-height: 180vh; width: 100%; }
-.planet-sys { position: absolute; transition: transform 0.1s ease-out; }
+.planet-sys { position: absolute; transition: transform 0.1s ease-out; display: flex; justify-content: center; align-items: center; }
 
 .planet-node {
     width: var(--size); height: var(--size); border-radius: 50%;
     text-decoration: none; color: white; flex-direction: column;
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 10;
 }
+.planet-node:hover { transform: scale(1.05); }
 
+/* Tamaños y colores de planetas */
 .industrial { --size: 300px; background: #8DACDB; }
 .ux { --size: 280px; background: #F2AC57; }
-
+.artesanal { --size: 220px; background: #e094b0; }
 .icon-size { font-size: 3.5rem; margin-bottom: 10px; }
 
-/* Galería de Proyectos */
-.orbit { position: absolute; inset: -35%; border: 1px solid rgba(255,255,255,0.05); border-radius: 50%; opacity: 0; transition: 0.5s; pointer-events: none; }
+/* Ubicaciones de los sistemas */
+.sys-industrial { left: 5%; top: 15%; }
+.sys-ux { right: 8%; top: 40%; }
+.sys-artesanal { left: 35%; bottom: 8%; }
+
+/* ==========================================
+   LUNAS Y DETALLE DE PROYECTO
+   ========================================== */
+.orbit { position: absolute; width: 180%; height: 180%; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; opacity: 0; transition: 0.5s; pointer-events: none; }
 .planet-sys:hover .orbit { opacity: 1; pointer-events: auto; }
 
 .project-moon { position: absolute; width: 85px; height: 85px; background: #2e104d; border: 2px solid var(--p-blue-light); border-radius: 50%; font-size: 0.75rem; font-weight: bold; cursor: pointer; z-index: 50; }
+.moon-closet { top: 0; left: 50%; transform: translate(-50%, -50%); }
 .moon-cocina { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
 
-.project-detail { position: absolute; width: 600px; height: 450px; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500; left: 110px; top: -100px; }
+.project-detail { position: absolute; width: 500px; height: 400px; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500; left: 120px; top: -150px; }
 .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
-.detail-card { padding: 2rem; border-radius: 40px; width: 320px; text-align: center; z-index: 1; }
+/* El cuadro rosa con letras blancas */
+.detail-card { 
+    padding: 2.5rem; 
+    border-radius: 40px; 
+    width: 350px; 
+    text-align: center; 
+    z-index: 5; 
+    color: #FFFFFF; 
+}
+.detail-card h4 { color: #FFFFFF; margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+.detail-card p { color: #FFFFFF; font-size: 0.9rem; line-height: 1.5; }
 
-.floating-images img { position: absolute; border-radius: 50%; border: 4px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10; transition: 0.3s; }
-.floating-images img:hover { transform: scale(1.2); z-index: 100; }
+/* Imagen Única Grande */
+.img-grande {
+    position: absolute;
+    width: 300px; height: auto;
+    border-radius: 20px;
+    border: 5px solid white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    top: -180px; /* Posicionada arriba para no tapar texto */
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 10;
+}
 
-.img-k1 { width: 170px; height: 170px; top: 0; left: 40px; }
-.img-k2 { width: 210px; height: 210px; bottom: -10px; left: -20px; }
-.img-k3 { width: 190px; height: 190px; top: 30px; right: 0; }
-
-.sys-industrial { left: 5%; top: 15%; }
-.sys-ux { right: 8%; top: 40%; }
-
-.main-footer { padding: 4rem; text-align: center; background: #0d0216; }
-.social-links a { color: var(--p-blue-light); font-size: 1.5rem; margin: 0 1rem; transition: 0.3s; }
-.copyright { opacity: 0.4; font-size: 0.7rem; margin-top: 2rem; letter-spacing: 2px; }
+/* ==========================================
+   FOOTER
+   ========================================== */
+.main-footer { padding: 5rem 10%; text-align: center; background: #0d0216; }
+.cv-button { padding: 12px 24px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.75rem; font-weight: 700; margin: 10px; display: inline-block; transition: 0.3s; }
+.cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
+.social-links { margin: 2rem 0; display: flex; justify-content: center; gap: 30px; }
+.social-links a { color: var(--p-blue-light); font-size: 1.8rem; transition: 0.3s; }
+.social-links a:hover { color: var(--p-orange); transform: translateY(-5px); }
+.copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; }
