@@ -1,7 +1,8 @@
 const starField = document.getElementById('starField');
 
-// Estrellas
-if (starField) {
+// CREAR ESTRELLAS
+function createStars() {
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < 120; i++) {
         const star = document.createElement('div');
         star.className = 'star';
@@ -11,17 +12,19 @@ if (starField) {
         star.style.top = Math.random() * 100 + '%';
         star.style.left = Math.random() * 100 + '%';
         star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        starField.appendChild(star);
+        fragment.appendChild(star);
     }
+    starField.appendChild(fragment);
 }
 
-// Parallax
+// PARALLAX
 document.addEventListener('mousemove', (e) => {
     const systems = document.querySelectorAll('.planet-sys');
+    const x = (window.innerWidth / 2 - e.clientX) * 0.05;
+    const y = (window.innerHeight / 2 - e.clientY) * 0.05;
     systems.forEach(sys => {
-        const depth = sys.getAttribute('data-depth');
-        const x = (window.innerWidth / 2 - e.clientX) * depth;
-        const y = (window.innerHeight / 2 - e.clientY) * depth;
         sys.style.transform = `translate(${x}px, ${y}px)`;
     });
 });
+
+createStars();
