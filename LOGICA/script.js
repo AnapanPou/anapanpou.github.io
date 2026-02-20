@@ -37,6 +37,6 @@ function handleParallax(e) {
     });
 }
 
-// Inicializar funciones
+// Inicializar funciones al cargar
 createStars();
 document.addEventListener('mousemove', handleParallax);
