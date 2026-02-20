@@ -1,30 +1,42 @@
+/* ==========================================
+   GENERADOR DE ESTRELLAS
+   ========================================== */
 const starField = document.getElementById('starField');
 
-// CREAR ESTRELLAS
 function createStars() {
     const fragment = document.createDocumentFragment();
-    for (let i = 0; i < 120; i++) {
+    for (let i = 0; i < 150; i++) {
         const star = document.createElement('div');
         star.className = 'star';
         const size = Math.random() * 3 + 'px';
+        
         star.style.width = size;
         star.style.height = size;
         star.style.top = Math.random() * 100 + '%';
         star.style.left = Math.random() * 100 + '%';
         star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+        
         fragment.appendChild(star);
     }
     starField.appendChild(fragment);
 }
 
-// PARALLAX
-document.addEventListener('mousemove', (e) => {
+/* ==========================================
+   EFECTO PARALLAX (Movimiento de planetas)
+   ========================================== */
+function handleParallax(e) {
     const systems = document.querySelectorAll('.planet-sys');
-    const x = (window.innerWidth / 2 - e.clientX) * 0.05;
-    const y = (window.innerHeight / 2 - e.clientY) * 0.05;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
     systems.forEach(sys => {
+        const depth = parseFloat(sys.getAttribute('data-depth'));
+        const x = (centerX - e.clientX) * depth;
+        const y = (centerY - e.clientY) * depth;
         sys.style.transform = `translate(${x}px, ${y}px)`;
     });
-});
+}
 
+// Inicializar funciones
 createStars();
+document.addEventListener('mousemove', handleParallax);
