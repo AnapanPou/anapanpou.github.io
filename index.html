@@ -30,38 +30,40 @@
             position: relative;
         }
 
-        /* --- ANIMACIÓN DE ASOMARSE (MOVIMIENTO LIGERO) --- */
+        /* --- ANIMACIÓN DE ASOMARSE --- */
         @keyframes peekTopRight {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-30px, 30px) rotate(-5deg); }
+            0%, 100% { transform: translate(0, 0) scaleY(-1) rotate(-15deg); }
+            50% { transform: translate(-40px, 40px) scaleY(-1) rotate(-10deg); }
         }
 
         @keyframes peekBottomLeft {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(30px, -30px) rotate(5deg); }
+            0%, 100% { transform: translate(0, 0) rotate(10deg); }
+            50% { transform: translate(40px, -40px) rotate(15deg); }
         }
 
         .canario-peek {
             position: absolute;
             z-index: 100;
             pointer-events: none;
-            width: 400px; /* Tamaño grande restaurado */
+            width: 550px; /* ¡SUPER GRANDES! */
             height: auto;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* CANARIO 1: ASOMADO SUPERIOR DERECHA */
+        /* CANARIO 1: DE CABEZA - SUPERIOR DERECHA */
         .canario-uno {
-            top: -80px;
-            right: -120px; /* Empieza un poco afuera */
-            animation: peekTopRight 6s infinite ease-in-out;
+            top: -120px;
+            right: -100px;
+            transform: scaleY(-1) rotate(-15deg); /* Volteo de 180 grados vertical */
+            animation: peekTopRight 7s infinite ease-in-out;
         }
 
-        /* CANARIO 2: ASOMADO INFERIOR IZQUIERDA */
+        /* CANARIO 2: NORMAL - INFERIOR IZQUIERDA */
         .canario-dos {
-            bottom: -80px;
-            left: -120px; /* Empieza un poco afuera */
-            animation: peekBottomLeft 6s infinite ease-in-out;
+            bottom: -120px;
+            left: -100px;
+            transform: rotate(10deg);
+            animation: peekBottomLeft 7s infinite ease-in-out;
         }
 
         /* --- FONDO ESTRELLADO --- */
@@ -277,7 +279,6 @@
     </footer>
 
     <script>
-        // Estrellas
         const starField = document.getElementById('starField');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
@@ -291,7 +292,6 @@
             starField.appendChild(star);
         }
 
-        // Parallax planetas
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             const centerX = window.innerWidth / 2;
