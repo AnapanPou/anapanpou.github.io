@@ -32,8 +32,8 @@
 
         /* --- ANIMACIÓN DE ASOMARSE --- */
         @keyframes peekTopRight {
-            0%, 100% { transform: translate(0, 0) scaleY(-1) rotate(-15deg); }
-            50% { transform: translate(-40px, 40px) scaleY(-1) rotate(-10deg); }
+            0%, 100% { transform: rotate(180deg) translate(0, 0) rotate(-5deg); }
+            50% { transform: rotate(180deg) translate(40px, -40px) rotate(5deg); }
         }
 
         @keyframes peekBottomLeft {
@@ -45,23 +45,24 @@
             position: absolute;
             z-index: 100;
             pointer-events: none;
-            width: 550px; /* ¡SUPER GRANDES! */
+            width: 550px; /* Tamaño grande mantenido */
             height: auto;
+            display: block;
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* CANARIO 1: DE CABEZA - SUPERIOR DERECHA */
+        /* CANARIO 1: FORZADO 180 GRADOS - SUPERIOR DERECHA */
         .canario-uno {
-            top: -120px;
-            right: -100px;
-            transform: scaleY(-1) rotate(-15deg); /* Volteo de 180 grados vertical */
+            top: -150px;
+            right: -80px;
+            transform: rotate(180deg); /* Rotación total */
             animation: peekTopRight 7s infinite ease-in-out;
         }
 
         /* CANARIO 2: NORMAL - INFERIOR IZQUIERDA */
         .canario-dos {
-            bottom: -120px;
-            left: -100px;
+            bottom: -150px;
+            left: -80px;
             transform: rotate(10deg);
             animation: peekBottomLeft 7s infinite ease-in-out;
         }
