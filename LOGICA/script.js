@@ -1,5 +1,5 @@
 /* ==========================================
-   GENERADOR DE ESTRELLAS
+   MOTOR DE ESTRELLAS
    ========================================== */
 const starField = document.getElementById('starField');
 
@@ -9,26 +9,23 @@ function createStars() {
         const star = document.createElement('div');
         star.className = 'star';
         const size = Math.random() * 3 + 'px';
-        
         star.style.width = size;
         star.style.height = size;
         star.style.top = Math.random() * 100 + '%';
         star.style.left = Math.random() * 100 + '%';
         star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-        
         fragment.appendChild(star);
     }
     starField.appendChild(fragment);
 }
 
 /* ==========================================
-   EFECTO PARALLAX (Movimiento de planetas)
+   MOTOR PARALLAX (Movimiento Suave)
    ========================================== */
 function handleParallax(e) {
     const systems = document.querySelectorAll('.planet-sys');
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
-
     systems.forEach(sys => {
         const depth = parseFloat(sys.getAttribute('data-depth'));
         const x = (centerX - e.clientX) * depth;
@@ -37,6 +34,6 @@ function handleParallax(e) {
     });
 }
 
-// Inicializar funciones al cargar
+// Inicialización
 createStars();
 document.addEventListener('mousemove', handleParallax);
