@@ -10,19 +10,19 @@
     
     <style>
         /* ==========================================
-           ESTILOS (CSS) - UNIFICADOS
+           CONFIGURACIÓN Y VARIABLES (GitHub base)
            ========================================== */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
             --p-blue-light: #8DACDB;
             --p-orange: #F2AC57;
-            --p-rose-trans: rgba(255, 182, 193, 0.45);
+            --p-rose-trans: rgba(255, 182, 193, 0.4);
             --text-white: #FAF9F6;
             --star-color: #FFF4D2;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; scroll-behavior: smooth; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-deep);
@@ -33,109 +33,156 @@
 
         .flex-center { display: flex; justify-content: center; align-items: center; }
         .text-upper { text-transform: uppercase; letter-spacing: 5px; }
-        .title-gold { color: var(--p-orange); font-weight: 600; margin-bottom: 5px; }
-        .title-white { color: #FFFFFF; font-weight: 600; margin-bottom: 5px; }
-        .text-white { color: #FFFFFF; }
-        .glass-morphism { background: var(--p-rose-trans); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
 
-        /* ESTRELLAS */
+        /* --- FONDO ESTRELLADO --- */
+        .stars-container { position: fixed; inset: 0; z-index: -1; }
+        .star { 
+            position: absolute; 
+            background: var(--star-color); 
+            border-radius: 50%; 
+            opacity: 0.6;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
-        .stars-container { position: fixed; inset: 0; z-index: -1; }
-        .star { position: absolute; background: var(--star-color); border-radius: 50%; animation: twinkle var(--duration) infinite ease-in-out; }
 
-        /* HERO */
-        .hero { min-height: 100vh; text-align: center; padding: 2rem; flex-direction: column; }
-        .perfil-border { width: 220px; height: 220px; border-radius: 50%; padding: 5px; background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange)); margin-bottom: 1.5rem; }
+        /* --- HEADER --- */
+        header.hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 50px 10%;
+            position: relative; z-index: 10;
+        }
+
+        .perfil-border { 
+            width: 220px; height: 220px; border-radius: 50%; padding: 5px; 
+            background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange)); 
+            margin-bottom: 1.5rem; 
+        }
         .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
+        
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-top: 20px; }
+        .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; }
+        .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* SISTEMA DE PLANETAS */
+        /* --- SISTEMA PLANETARIO --- */
         .planets-area { position: relative; min-height: 180vh; width: 100%; }
-        .planet-sys { position: absolute; transition: transform 0.1s ease-out; }
+        .planet-system { position: absolute; transition: transform 0.1s ease-out; }
 
-        .planet-node {
+        .planet-link {
             width: var(--size); height: var(--size); border-radius: 50%;
-            text-decoration: none; color: white; flex-direction: column;
+            text-decoration: none; color: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden; border: none;
         }
 
-        /* LAS IMÁGENES PNG DE FONDO */
-        .img-planeta-fondo {
-            position: absolute;
-            top: 0; left: 0;
+        /* IMÁGENES PNG DE FONDO */
+        .img-planeta-png {
+            position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: -1;
+            object-fit: cover; z-index: -1;
         }
 
-        .industrial { --size: 300px; }
-        .artesania { --size: 220px; }
-        .ux { --size: 280px; }
-        .icon-size { font-size: 3.5rem; margin-bottom: 10px; z-index: 1; }
-        .planet-node span { z-index: 1; }
+        .p-industrial { --size: 300px; }
+        .p-ux { --size: 280px; }
+        .p-artesanal { --size: 220px; }
 
-        /* ÓRBITAS Y LUNAS */
-        .orbit { position: absolute; inset: -35%; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; opacity: 0; transition: 0.5s; pointer-events: none; }
-        .planet-sys:hover .orbit { opacity: 1; pointer-events: auto; }
+        .planet-link:hover { transform: scale(1.08); }
+        .planet-link span { position: relative; z-index: 10; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-top: 15px; }
+        .icon-size { font-size: 3.5rem; position: relative; z-index: 10; }
 
-        .project-moon { position: absolute; width: 85px; height: 85px; background: #2e104d; border: 2px solid var(--p-blue-light); border-radius: 50%; font-size: 0.75rem; font-weight: bold; cursor: pointer; z-index: 50; }
-        .moon-closet { top: 0; left: 50%; transform: translate(-50%, -50%); }
-        .moon-cocina { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+        /* --- LUNAS Y GALERÍA --- */
+        .orbit {
+            position: absolute; width: 170%; height: 170%;
+            border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; opacity: 0; transition: 0.6s;
+        }
+        .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
 
-        .project-detail { position: absolute; width: 600px; height: 450px; opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500; left: 110px; top: -100px; }
+        .project-moon {
+            position: absolute; width: 85px; height: 85px; background: #2e104d;
+            border: 2px solid var(--p-blue-light); border-radius: 50%;
+            font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
+        }
+
+        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
+
+        /* GALERÍA FLOTANTE */
+        .project-detail {
+            position: absolute; width: 600px; height: 450px;
+            opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500;
+            left: 120px; top: -100px;
+        }
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
-        .detail-card { padding: 2.5rem; border-radius: 40px; width: 340px; text-align: center; z-index: 1; }
-        .floating-images img { position: absolute; border-radius: 20px; border: 5px solid white; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10; transition: 0.3s; }
-        .img-grande { width: 300px; height: auto; top: -180px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+        .detail-text-box {
+            background: var(--p-rose-trans); backdrop-filter: blur(15px);
+            padding: 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+            width: 320px; text-align: center; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .floating-images img {
+            position: absolute; border-radius: 50%; border: 4px solid white;
+            object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease; z-index: 10;
+        }
+        .floating-images img:hover { transform: scale(1.4); z-index: 100; }
+
+        .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
+        .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
+        .img-k3 { width: 200px; height: 200px; top: 40px; right: 10px; }
 
         /* UBICACIONES */
         .sys-industrial { left: 5%; top: 15%; }
-        .sys-artesania { left: 40%; bottom: 10%; }
         .sys-ux { right: 8%; top: 40%; }
+        .sys-artesanal { left: 35%; bottom: 8%; }
 
-        /* FOOTER */
-        .main-footer { padding: 4rem; text-align: center; background: #0d0216; }
-        .social-links a { color: var(--p-blue-light); font-size: 1.5rem; margin: 0 1rem; transition: 0.3s; }
-        .copyright { opacity: 0.4; font-size: 0.7rem; margin-top: 2rem; letter-spacing: 2px; }
+        /* --- FOOTER --- */
+        .main-footer { background: #0d0216; padding: 80px 10%; text-align: center; }
+        .social-links { display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; }
+        .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--p-orange); transform: translateY(-3px); }
+        .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <div class="stars-container" id="starField"></div>
 
-    <header class="hero flex-center">
+    <header class="hero">
         <div class="perfil-border">
             <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1 class="text-upper">Ana Pau</h1>
-        <p class="subtitulo title-gold text-upper">Diseñadora Industrial & UX</p>
+        <p class="subtitulo text-upper">Diseñadora Industrial & UX</p>
         <p class="descripcion-perfil">Especialista en objetos e interfaces funcionales con visión estética.</p>
     </header>
 
     <main class="planets-area flex-center">
         
-        <section class="planet-sys sys-industrial" data-depth="0.05">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-node industrial flex-center">
-                <img src="PLANETA1.png" class="img-planeta-fondo">
+        <section class="planet-system sys-industrial" data-depth="0.05">
+            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
+                <img src="PLANETA1.png" class="img-planeta-png">
                 <span class="material-symbols-outlined icon-size">precision_manufacturing</span>
-                <span class="text-upper">Industrial</span>
+                <span>Industrial</span>
             </a>
             <div class="orbit">
                 <div class="project-moon moon-closet flex-center">
                     <span>Closet</span>
                     <div class="project-detail flex-center">
                         <div class="floating-images">
-                            <img src="CLOSETH1.JPG" class="img-grande">
+                            <img src="CLOSETH1.JPG" class="img-k1">
                         </div>
-                        <div class="glass-morphism detail-card">
-                            <h4 class="title-white">Closet de Oficina</h4>
-                            <p class="text-white">Optimización de espacios con un toque de elegancia contemporánea.</p>
+                        <div class="detail-text-box">
+                            <h4 style="color:var(--p-cream); margin-bottom:10px;">Closet</h4>
+                            <p style="font-size:0.8rem; color:white;">Optimización de espacios con un toque de elegancia contemporánea.</p>
                         </div>
                     </div>
                 </div>
@@ -143,30 +190,30 @@
                     <span>Cocina</span>
                     <div class="project-detail flex-center">
                         <div class="floating-images">
-                            <img src="COCINA3.png" class="img-grande">
+                            <img src="COCINA3.png" class="img-k2">
                         </div>
-                        <div class="glass-morphism detail-card">
-                            <h4 class="title-white">Cocina Integral</h4>
-                            <p class="text-white">Madera y gris salvia para un ambiente moderno y funcional.</p>
+                        <div class="detail-text-box">
+                            <h4 style="color:var(--p-cream); margin-bottom:10px;">Cocina</h4>
+                            <p style="font-size:0.8rem; color:white;">Mezcla de madera con gris salvia sutil para un espacio funcional.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="planet-sys sys-artesania" data-depth="0.12">
-            <div class="planet-node artesania flex-center">
-                <img src="PLANETA2.png" class="img-planeta-fondo">
+        <section class="planet-system sys-artesanal" data-depth="0.12">
+            <div class="planet-link p-artesanal">
+                <img src="PLANETA2.png" class="img-planeta-png">
                 <span class="material-symbols-outlined icon-size">draw</span>
-                <span class="text-upper">Artesanía</span>
+                <span>Artesanía</span>
             </div>
         </section>
 
-        <section class="planet-sys sys-ux" data-depth="0.08">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-node ux flex-center">
-                <img src="PLANETA3.png" class="img-planeta-fondo">
+        <section class="planet-system sys-ux" data-depth="0.08">
+            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
+                <img src="PLANETA3.png" class="img-planeta-png">
                 <span class="material-symbols-outlined icon-size">devices</span>
-                <span class="text-upper">Diseño UX</span>
+                <span>Diseño UX</span>
             </a>
         </section>
 
@@ -181,41 +228,33 @@
     </footer>
 
     <script>
-        /* ==========================================
-           LÓGICA (JS) - UNIFICADA
-           ========================================== */
+        // Estrellas
         const starField = document.getElementById('starField');
-
-        function createStars() {
-            const fragment = document.createDocumentFragment();
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3 + 'px';
-                star.style.width = size;
-                star.style.height = size;
-                star.style.top = Math.random() * 100 + '%';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-                fragment.appendChild(star);
-            }
-            starField.appendChild(fragment);
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            const duration = (Math.random() * 3 + 2) + 's';
+            star.style.width = size; star.style.height = size;
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.setProperty('--duration', duration);
+            starField.appendChild(star);
         }
 
-        function handleParallax(e) {
-            const systems = document.querySelectorAll('.planet-sys');
+        // Parallax
+        document.addEventListener('mousemove', (e) => {
+            const systems = document.querySelectorAll('.planet-system');
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
+            
             systems.forEach(sys => {
                 const depth = parseFloat(sys.getAttribute('data-depth'));
                 const x = (centerX - e.clientX) * depth;
                 const y = (centerY - e.clientY) * depth;
                 sys.style.transform = `translate(${x}px, ${y}px)`;
             });
-        }
-
-        createStars();
-        document.addEventListener('mousemove', handleParallax);
+        });
     </script>
 </body>
 </html>
