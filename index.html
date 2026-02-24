@@ -30,37 +30,38 @@
             position: relative;
         }
 
-        /* --- ANIMACIÓN DE ASOMARSE (PEEK) --- */
-        @keyframes peekMovement {
+        /* --- ANIMACIÓN DE ASOMARSE (MOVIMIENTO LIGERO) --- */
+        @keyframes peekTopRight {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-15px, 15px) rotate(3deg); }
+            50% { transform: translate(-30px, 30px) rotate(-5deg); }
         }
 
-        @keyframes peekMovementReverse {
+        @keyframes peekBottomLeft {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(15px, -15px) rotate(-3deg); }
+            50% { transform: translate(30px, -30px) rotate(5deg); }
         }
 
         .canario-peek {
             position: absolute;
             z-index: 100;
             pointer-events: none;
-            width: 300px;
+            width: 400px; /* Tamaño grande restaurado */
             height: auto;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
         /* CANARIO 1: ASOMADO SUPERIOR DERECHA */
         .canario-uno {
-            top: -50px;
-            right: -80px;
-            animation: peekMovement 5s infinite ease-in-out;
+            top: -80px;
+            right: -120px; /* Empieza un poco afuera */
+            animation: peekTopRight 6s infinite ease-in-out;
         }
 
         /* CANARIO 2: ASOMADO INFERIOR IZQUIERDA */
         .canario-dos {
-            bottom: -50px;
-            left: -80px;
-            animation: peekMovementReverse 5s infinite ease-in-out;
+            bottom: -80px;
+            left: -120px; /* Empieza un poco afuera */
+            animation: peekBottomLeft 6s infinite ease-in-out;
         }
 
         /* --- FONDO ESTRELLADO --- */
@@ -276,6 +277,7 @@
     </footer>
 
     <script>
+        // Estrellas
         const starField = document.getElementById('starField');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
@@ -289,6 +291,7 @@
             starField.appendChild(star);
         }
 
+        // Parallax planetas
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             const centerX = window.innerWidth / 2;
