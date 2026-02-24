@@ -58,22 +58,22 @@ body {
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     position: relative; /* Para la imagen de fondo */
-    overflow: hidden; /* Para que la imagen no se salga del círculo */
+    overflow: hidden;
 }
 
-/* NUEVA REGLA PARA LOS PLANETAS PNG */
+/* AJUSTE PARA LAS IMÁGENES PNG */
 .img-planeta-fondo {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1; /* Queda detrás del texto e ícono */
+    z-index: -1; /* Va detrás del texto e iconos */
 }
 
-.industrial { --size: 300px; background: #8DACDB; }
-.ux { --size: 280px; background: #F2AC57; }
-.icon-size { font-size: 3.5rem; margin-bottom: 10px; z-index: 2; }
-.planet-node .text-upper { z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.industrial { --size: 300px; }
+.artesania { --size: 220px; }
+.ux { --size: 280px; }
+.icon-size { font-size: 3.5rem; margin-bottom: 10px; }
 
 /* ÓRBITAS Y LUNAS */
 .orbit { position: absolute; inset: -35%; border: 1px solid rgba(255,255,255,0.08); border-radius: 50%; opacity: 0; transition: 0.5s; pointer-events: none; }
@@ -95,6 +95,7 @@ body {
 
 /* UBICACIONES */
 .sys-industrial { left: 5%; top: 15%; }
+.sys-artesania { left: 40%; bottom: 10%; } /* Nueva ubicación */
 .sys-ux { right: 8%; top: 40%; }
 
 /* FOOTER */
