@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES DE COLOR --- */
+        /* --- VARIABLES DE COLOR ACTUALIZADAS --- */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
-            --p-blue-light: #8DACDB;
-            --p-orange: #F2AC57;
-            --p-rose-trans: rgba(255, 182, 193, 0.4);
+            --p-blue-light: #D3B3DC; /* NUEVO LILA */
+            --p-orange: #F2A0A7;     /* NUEVO CORAL */
+            --p-rose-trans: rgba(242, 160, 167, 0.3); /* Ajustado al nuevo coral */
             --text-white: #FAF9F6;
             --star-color: #FFF4D2;
         }
@@ -45,21 +45,19 @@
             position: absolute;
             z-index: 100;
             pointer-events: none;
-            width: 550px; /* Tamaño grande mantenido */
+            width: 550px; 
             height: auto;
             display: block;
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* CANARIO 1: FORZADO 180 GRADOS - SUPERIOR DERECHA */
         .canario-uno {
             top: -150px;
             right: -80px;
-            transform: rotate(180deg); /* Rotación total */
+            transform: rotate(180deg);
             animation: peekTopRight 7s infinite ease-in-out;
         }
 
-        /* CANARIO 2: NORMAL - INFERIOR IZQUIERDA */
         .canario-dos {
             bottom: -150px;
             left: -80px;
