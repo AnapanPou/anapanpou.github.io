@@ -27,27 +27,15 @@
             color: var(--text-white);
             font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
-            position: relative; /* Para que los canarios se posicionen respecto al inicio */
         }
 
-        /* --- CANARIOS ESTÁTICOS --- */
+        /* --- ESTILO GENERAL CANARIOS --- */
         .canario-peek {
-            position: absolute; /* Estáticos: se quedan arriba al hacer scroll */
-            z-index: 100;
+            position: absolute;
+            z-index: 5;
             pointer-events: none;
-            width: 300px; /* Ajusta el tamaño aquí */
-        }
-
-        /* CANARIO 1: SUPERIOR DERECHA */
-        .canario-uno {
-            top: 20px;
-            right: 20px;
-        }
-
-        /* CANARIO 2: INFERIOR IZQUIERDA */
-        .canario-dos {
-            bottom: 20px;
-            left: 20px;
+            width: 250px; /* Ajustado para que no tape tanto el contenido */
+            height: auto;
         }
 
         /* --- FONDO ESTRELLADO --- */
@@ -65,19 +53,28 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER (Contenedor de Canario 1) --- */
         header {
             min-height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 50px 10%;
-            position: relative;
+            position: relative; /* Clave para posicionar al canario 1 */
             z-index: 10;
+        }
+
+        /* CANARIO 1: Superior Derecha del perfil */
+        .canario-uno {
+            top: 10%;
+            right: 5%;
+            transform: rotate(-10deg);
         }
 
         .perfil-container {
             width: 220px; height: 220px; border-radius: 50%; padding: 5px; 
             background: linear-gradient(135deg, var(--p-blue-light), var(--p-orange)); 
             margin-bottom: 25px;
+            position: relative;
+            z-index: 11;
         }
         .foto-perfil { 
             width: 100%; height: 100%; border-radius: 50%; 
@@ -117,74 +114,46 @@
         .p-ux { --size: 280px; }
         .p-artesanal { --size: 220px; }
 
-        /* --- LUNAS Y GALERÍA --- */
-        .orbit {
-            position: absolute; width: 170%; height: 170%;
-            border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            pointer-events: none; opacity: 0; transition: 0.6s;
-        }
-        .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
-
-        .project-moon {
-            position: absolute; width: 85px; height: 85px; background: #2e104d;
-            border: 2px solid var(--p-blue-light); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
-        }
-
-        .project-detail {
-            position: absolute; width: 600px; height: 450px;
-            opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
-
-        .detail-text-box {
-            background: var(--p-rose-trans); backdrop-filter: blur(15px);
-            padding: 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            width: 320px; text-align: center; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        .floating-images img {
-            position: absolute; border-radius: 50%; border: 4px solid white;
-            object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease; z-index: 10;
-        }
-
-        .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
-        .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
-
         .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
         .sys-artesanal { left: 35%; bottom: 8%; }
 
-        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .detail-pos { left: 120px; top: -100px; } 
-
-        /* --- HABILIDADES & FOOTER --- */
+        /* --- HABILIDADES --- */
         .skills-section { padding: 120px 10%; text-align: center; position: relative; z-index: 10; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .skill-card h3 { color: var(--p-orange); text-transform: uppercase; margin-bottom: 15px; }
 
-        .footer-contact { background: #0d0216; padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
+        /* --- FOOTER (Contenedor de Canario 2) --- */
+        .footer-contact { 
+            background: #0d0216; 
+            padding: 100px 10%; 
+            text-align: center; 
+            position: relative; /* Clave para posicionar al canario 2 */
+            z-index: 10; 
+            overflow: visible;
+        }
+
+        /* CANARIO 2: Inferior Izquierda de la zona de contacto */
+        .canario-dos {
+            bottom: 10%;
+            left: 5%;
+            transform: rotate(15deg);
+        }
+
         .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
-        .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
+        .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; position: relative; z-index: 12; }
         .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
         .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <img src="CANARIO1.PNG" alt="Canario Superior Derecha" class="canario-peek canario-uno">
-    <img src="CANARIO2.PNG" alt="Canario Inferior Izquierda" class="canario-peek canario-dos">
-
     <div class="stars-container" id="starField"></div>
 
     <header>
+        <img src="CANARIO1.PNG" alt="Canario Superior Derecha" class="canario-peek canario-uno">
+        
         <div class="perfil-container">
             <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
@@ -197,37 +166,15 @@
         <section class="planet-system sys-industrial" data-depth="0.05">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined icon-size">precision_manufacturing</span>
+                <span class="material-symbols-outlined">precision_manufacturing</span>
                 <span>Industrial</span>
             </a>
-            <div class="orbit">
-                <div class="project-moon moon-closet">
-                    <span>Closet</span>
-                    <div class="project-detail detail-pos">
-                        <div class="floating-images"><img src="CLOSETH1.JPG" class="img-k1"></div>
-                        <div class="detail-text-box">
-                            <h4 style="color:var(--p-cream); margin-top:0;">Closet de Oficina</h4>
-                            <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-moon moon-cocina">
-                    <span>Cocina</span>
-                    <div class="project-detail detail-pos">
-                        <div class="floating-images"><img src="COCINA3.png" class="img-k2"></div>
-                        <div class="detail-text-box">
-                            <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
-                            <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil para crear un espacio acogedor y funcional.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section class="planet-system sys-artesanal" data-depth="0.12">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined icon-size">draw</span>
+                <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
             </a>
         </section>
@@ -235,7 +182,7 @@
         <section class="planet-system sys-ux" data-depth="0.08">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
                 <img src="PLANETA3.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined icon-size">devices</span>
+                <span class="material-symbols-outlined">devices</span>
                 <span>Diseño UX</span>
             </a>
         </section>
@@ -244,15 +191,18 @@
     <section class="skills-section">
         <h2 class="subtitulo">Habilidades</h2>
         <div class="skills-grid">
-            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario, modelado 3D y procesos de manufactura.</p></div>
-            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación de usuario, prototipado y diseño de interfaces.</p></div>
-            <div class="skill-card"><h3>Diseño Artesanal</h3><p>Exploración de materiales y técnicas tradicionales.</p></div>
+            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario y procesos de manufactura.</p></div>
+            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación de usuario y prototipado.</p></div>
+            <div class="skill-card"><h3>Diseño Artesanal</h3><p>Exploración de técnicas tradicionales.</p></div>
         </div>
     </section>
 
     <footer class="footer-contact">
+        <img src="CANARIO2.PNG" alt="Canario Inferior Izquierda" class="canario-peek canario-dos">
+
         <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
         <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
+        
         <div class="social-links">
             <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
@@ -262,6 +212,7 @@
     </footer>
 
     <script>
+        // Lógica de estrellas y paralaje de planetas
         const starField = document.getElementById('starField');
         for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
