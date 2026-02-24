@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES DE COLOR (GitHub) --- */
+        /* --- VARIABLES DE COLOR --- */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
@@ -29,37 +29,38 @@
             overflow-x: hidden;
         }
 
-        /* --- NUEVA SECCIÓN: CANARIOS ASOMADOS --- */
-        .canario-asomado {
+        /* --- ESTILO NUEVO: CANARIOS --- */
+        .canario-peek {
             position: fixed;
-            z-index: 1000; /* Siempre por encima de todo */
-            pointer-events: none; /* No interfieren con el mouse */
-            animation: balanceo 4s infinite ease-in-out;
+            z-index: 9999; 
+            pointer-events: none;
         }
 
-        /* CANARI1: Esquina superior derecha */
-        .canario-top-right {
-            top: -50px;
-            right: -80px;
-            width: 450px; /* Tamaño grande */
-            transform-origin: top right;
+        .canario-uno {
+            top: -20px;
+            right: -50px;
+            width: 350px; 
+            animation: balanceo-uno 5s infinite ease-in-out;
         }
 
-        /* CANARIO2: Esquina inferior izquierda */
-        .canario-bottom-left {
-            bottom: -60px;
-            left: -100px;
-            width: 500px; /* Tamaño grande */
-            transform-origin: bottom left;
+        .canario-dos {
+            bottom: -30px;
+            left: -60px;
+            width: 380px; 
+            animation: balanceo-dos 6s infinite ease-in-out;
         }
 
-        /* Animación de vida (balanceo suave) */
-        @keyframes balanceo {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(3deg) scale(1.02); }
+        @keyframes balanceo-uno {
+            0%, 100% { transform: rotate(-10deg) translate(0, 0); }
+            50% { transform: rotate(-5deg) translate(15px, 15px); }
         }
 
-        /* --- FONDO ESTRELLADO CON TINTINEO --- */
+        @keyframes balanceo-dos {
+            0%, 100% { transform: rotate(5deg) translate(0, 0); }
+            50% { transform: rotate(10deg) translate(-15px, -10px); }
+        }
+
+        /* --- FONDO ESTRELLADO --- */
         .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .star { 
             position: absolute; 
@@ -194,8 +195,8 @@
 </head>
 <body>
 
-    <img src="CANARI1.PNG" alt="Canario Superior" class="canario-asomado canario-top-right">
-    <img src="CANARIO2.PNG" alt="Canario Inferior" class="canario-asomado canario-bottom-left">
+    <img src="CANARIO1.PNG" alt="Canario Arriba" class="canario-peek canario-uno">
+    <img src="CANARIO2.PNG" alt="Canario Abajo" class="canario-peek canario-dos">
 
     <div class="stars-container" id="starField"></div>
 
@@ -259,7 +260,6 @@
                 <span>Diseño UX</span>
             </a>
         </section>
-
     </main>
 
     <section class="skills-section">
@@ -299,13 +299,10 @@
             star.className = 'star';
             const size = Math.random() * 3 + 'px';
             const duration = (Math.random() * 3 + 2) + 's'; 
-            
-            star.style.width = size; 
-            star.style.height = size;
+            star.style.width = size; star.style.height = size;
             star.style.top = Math.random() * 100 + '%';
             star.style.left = Math.random() * 100 + '%';
             star.style.setProperty('--duration', duration);
-            
             starField.appendChild(star);
         }
 
@@ -313,7 +310,6 @@
             const systems = document.querySelectorAll('.planet-system');
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-            
             systems.forEach(sys => {
                 const depth = parseFloat(sys.getAttribute('data-depth'));
                 const x = (centerX - e.clientX) * depth;
