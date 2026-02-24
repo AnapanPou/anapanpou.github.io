@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES DE COLOR --- */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
@@ -29,44 +28,36 @@
             overflow-x: hidden;
         }
 
-        /* --- ESTILO GENERAL CANARIOS --- */
+        /* --- ANIMACIÓN DE ASOMARSE --- */
+        @keyframes peekMove {
+            0%, 100% { transform: rotate(0deg) translate(0, 0); }
+            50% { transform: rotate(5deg) translate(-10px, 10px); }
+        }
+
         .canario-peek {
             position: absolute;
             z-index: 5;
             pointer-events: none;
-            width: 250px; /* Ajustado para que no tape tanto el contenido */
+            width: 280px;
             height: auto;
+            /* Aplicamos la animación */
+            animation: peekMove 4s infinite ease-in-out;
         }
 
-        /* --- FONDO ESTRELLADO --- */
-        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .star { 
-            position: absolute; 
-            background: var(--star-color); 
-            border-radius: 50%; 
-            opacity: 0.6;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* --- HEADER (Contenedor de Canario 1) --- */
+        /* --- HEADER (Canario 1) --- */
         header {
             min-height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 50px 10%;
-            position: relative; /* Clave para posicionar al canario 1 */
+            position: relative;
             z-index: 10;
         }
 
-        /* CANARIO 1: Superior Derecha del perfil */
+        /* Asomado desde la esquina superior derecha */
         .canario-uno {
-            top: 10%;
-            right: 5%;
-            transform: rotate(-10deg);
+            top: -40px;
+            right: -60px; /* Escondido parcialmente */
+            transform-origin: top right;
         }
 
         .perfil-container {
@@ -83,7 +74,6 @@
 
         h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; letter-spacing: 5px; margin-top: 20px; }
         .subtitulo { color: var(--p-orange); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
-        .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
         /* --- PLANETAS --- */
         .planets-container {
@@ -92,59 +82,48 @@
             width: 100%;
             display: flex; justify-content: center; align-items: center;
         }
-
         .planet-system { position: absolute; transition: transform 0.1s ease-out; }
-
         .planet-link {
             width: var(--size); height: var(--size); border-radius: 50%;
             text-decoration: none; color: white; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            position: relative; overflow: hidden; border: none;
+            position: relative; overflow: hidden;
         }
-
-        .img-planeta-png {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover; z-index: -1;
-        }
-
+        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
         .p-industrial { --size: 300px; }
         .p-ux { --size: 280px; }
         .p-artesanal { --size: 220px; }
-
         .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
         .sys-artesanal { left: 35%; bottom: 8%; }
 
-        /* --- HABILIDADES --- */
-        .skills-section { padding: 120px 10%; text-align: center; position: relative; z-index: 10; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 60px; }
-        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
-
-        /* --- FOOTER (Contenedor de Canario 2) --- */
+        /* --- FOOTER (Canario 2) --- */
         .footer-contact { 
             background: #0d0216; 
             padding: 100px 10%; 
             text-align: center; 
-            position: relative; /* Clave para posicionar al canario 2 */
+            position: relative;
             z-index: 10; 
-            overflow: visible;
         }
 
-        /* CANARIO 2: Inferior Izquierda de la zona de contacto */
+        /* Asomado desde la esquina inferior izquierda */
         .canario-dos {
-            bottom: 10%;
-            left: 5%;
-            transform: rotate(15deg);
+            bottom: -30px;
+            left: -50px; /* Escondido parcialmente */
+            transform-origin: bottom left;
+            animation-delay: 1s; /* Desfase para que no se muevan igual */
         }
 
-        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
+        .cv-button { padding: 14px 28px; border: 2px solid var(--p-blue-light); color: white; text-decoration: none; text-transform: uppercase; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
-        .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; position: relative; z-index: 12; }
-        .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
-        .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
+        .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
+        .social-links a { color: var(--p-blue-light); font-size: 2rem; }
+        .copyright { opacity: 0.4; font-size: 0.7rem; margin-top: 20px; }
+
+        /* Estrellas */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
     </style>
 </head>
 <body>
@@ -152,88 +131,69 @@
     <div class="stars-container" id="starField"></div>
 
     <header>
-        <img src="CANARIO1.PNG" alt="Canario Superior Derecha" class="canario-peek canario-uno">
+        <img src="CANARIO1.PNG" alt="Canario" class="canario-peek canario-uno">
         
         <div class="perfil-container">
             <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
-        <p class="descripcion-perfil">Especialista en objetos e interfaces funcionales con visión estética.</p>
     </header>
 
     <main class="planets-container">
         <section class="planet-system sys-industrial" data-depth="0.05">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
+            <a href="#" class="planet-link p-industrial">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined">precision_manufacturing</span>
                 <span>Industrial</span>
             </a>
         </section>
-
         <section class="planet-system sys-artesanal" data-depth="0.12">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-artesanal">
+            <a href="#" class="planet-link p-artesanal">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
             </a>
         </section>
-
         <section class="planet-system sys-ux" data-depth="0.08">
-            <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-ux">
+            <a href="#" class="planet-link p-ux">
                 <img src="PLANETA3.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined">devices</span>
                 <span>Diseño UX</span>
             </a>
         </section>
     </main>
 
-    <section class="skills-section">
-        <h2 class="subtitulo">Habilidades</h2>
-        <div class="skills-grid">
-            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario y procesos de manufactura.</p></div>
-            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación de usuario y prototipado.</p></div>
-            <div class="skill-card"><h3>Diseño Artesanal</h3><p>Exploración de técnicas tradicionales.</p></div>
-        </div>
-    </section>
-
     <footer class="footer-contact">
-        <img src="CANARIO2.PNG" alt="Canario Inferior Izquierda" class="canario-peek canario-dos">
+        <img src="CANARIO2.PNG" alt="Canario" class="canario-peek canario-dos">
 
-        <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
-        <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
+        <a href="#" class="cv-button">CV Industrial</a>
+        <a href="#" class="cv-button">CV UX</a>
         
         <div class="social-links">
-            <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.behance.net/anapaulapm" target="_blank"><i class="fab fa-behance"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-behance"></i></a>
         </div>
         <p class="copyright">© 2026 ANA PAU • MÉXICO</p>
     </footer>
 
     <script>
-        // Lógica de estrellas y paralaje de planetas
         const starField = document.getElementById('starField');
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 3 + 'px';
-            const duration = (Math.random() * 3 + 2) + 's'; 
             star.style.width = size; star.style.height = size;
             star.style.top = Math.random() * 100 + '%';
             star.style.left = Math.random() * 100 + '%';
-            star.style.setProperty('--duration', duration);
+            star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
             starField.appendChild(star);
         }
 
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
             systems.forEach(sys => {
                 const depth = parseFloat(sys.getAttribute('data-depth'));
-                const x = (centerX - e.clientX) * depth;
-                const y = (centerY - e.clientY) * depth;
+                const x = (window.innerWidth / 2 - e.clientX) * depth;
+                const y = (window.innerHeight / 2 - e.clientY) * depth;
                 sys.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
