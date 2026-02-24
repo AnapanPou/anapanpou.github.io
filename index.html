@@ -27,37 +27,27 @@
             color: var(--text-white);
             font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
+            position: relative; /* Para que los canarios se posicionen respecto al inicio */
         }
 
-        /* --- ESTILO NUEVO: CANARIOS --- */
+        /* --- CANARIOS ESTÁTICOS --- */
         .canario-peek {
-            position: fixed;
-            z-index: 9999; 
+            position: absolute; /* Estáticos: se quedan arriba al hacer scroll */
+            z-index: 100;
             pointer-events: none;
+            width: 300px; /* Ajusta el tamaño aquí */
         }
 
+        /* CANARIO 1: SUPERIOR DERECHA */
         .canario-uno {
-            top: -20px;
-            right: -50px;
-            width: 350px; 
-            animation: balanceo-uno 5s infinite ease-in-out;
+            top: 20px;
+            right: 20px;
         }
 
+        /* CANARIO 2: INFERIOR IZQUIERDA */
         .canario-dos {
-            bottom: -30px;
-            left: -60px;
-            width: 380px; 
-            animation: balanceo-dos 6s infinite ease-in-out;
-        }
-
-        @keyframes balanceo-uno {
-            0%, 100% { transform: rotate(-10deg) translate(0, 0); }
-            50% { transform: rotate(-5deg) translate(15px, 15px); }
-        }
-
-        @keyframes balanceo-dos {
-            0%, 100% { transform: rotate(5deg) translate(0, 0); }
-            50% { transform: rotate(10deg) translate(-15px, -10px); }
+            bottom: 20px;
+            left: 20px;
         }
 
         /* --- FONDO ESTRELLADO --- */
@@ -127,10 +117,6 @@
         .p-ux { --size: 280px; }
         .p-artesanal { --size: 220px; }
 
-        .planet-link:hover { transform: scale(1.08); }
-        .planet-link span { position: relative; z-index: 10; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-top: 15px; }
-        .icon-size { font-size: 3.5rem; position: relative; z-index: 10; }
-
         /* --- LUNAS Y GALERÍA --- */
         .orbit {
             position: absolute; width: 170%; height: 170%;
@@ -165,7 +151,6 @@
             object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: transform 0.4s ease; z-index: 10;
         }
-        .floating-images img:hover { transform: scale(1.4); z-index: 100; }
 
         .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
         .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
@@ -189,14 +174,13 @@
         .cv-button:hover { background: var(--p-blue-light); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 40px; margin: 40px 0; }
         .social-links a { color: var(--p-blue-light); font-size: 2rem; transition: 0.3s; }
-        .social-links a:hover { color: var(--p-orange); transform: translateY(-3px); }
         .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <img src="CANARIO1.PNG" alt="Canario Arriba" class="canario-peek canario-uno">
-    <img src="CANARIO2.PNG" alt="Canario Abajo" class="canario-peek canario-dos">
+    <img src="CANARIO1.PNG" alt="Canario Superior Derecha" class="canario-peek canario-uno">
+    <img src="CANARIO2.PNG" alt="Canario Inferior Izquierda" class="canario-peek canario-dos">
 
     <div class="stars-container" id="starField"></div>
 
@@ -210,7 +194,6 @@
     </header>
 
     <main class="planets-container">
-        
         <section class="planet-system sys-industrial" data-depth="0.05">
             <a href="https://www.behance.net/anapaulapm" target="_blank" class="planet-link p-industrial">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
@@ -221,9 +204,7 @@
                 <div class="project-moon moon-closet">
                     <span>Closet</span>
                     <div class="project-detail detail-pos">
-                        <div class="floating-images">
-                            <img src="CLOSETH1.JPG" class="img-k1">
-                        </div>
+                        <div class="floating-images"><img src="CLOSETH1.JPG" class="img-k1"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Closet de Oficina</h4>
                             <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
@@ -233,9 +214,7 @@
                 <div class="project-moon moon-cocina">
                     <span>Cocina</span>
                     <div class="project-detail detail-pos">
-                        <div class="floating-images">
-                            <img src="COCINA3.png" class="img-k2">
-                        </div>
+                        <div class="floating-images"><img src="COCINA3.png" class="img-k2"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
                             <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil para crear un espacio acogedor y funcional.</p>
@@ -265,25 +244,15 @@
     <section class="skills-section">
         <h2 class="subtitulo">Habilidades</h2>
         <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Diseño Industrial</h3>
-                <p>Mobiliario, modelado 3D y procesos de manufactura.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Diseño UX/UI</h3>
-                <p>Investigación de usuario, prototipado y diseño de interfaces.</p>
-            </div>
-            <div class="skill-card">
-                <h3>Diseño Artesanal</h3>
-                <p>Exploración de materiales y técnicas tradicionales.</p>
-            </div>
+            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario, modelado 3D y procesos de manufactura.</p></div>
+            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación de usuario, prototipado y diseño de interfaces.</p></div>
+            <div class="skill-card"><h3>Diseño Artesanal</h3><p>Exploración de materiales y técnicas tradicionales.</p></div>
         </div>
     </section>
 
     <footer class="footer-contact">
         <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
         <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
-
         <div class="social-links">
             <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
