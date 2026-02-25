@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES DE COLOR --- */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
             --p-accent-lila: #D3B3DC;   
             --p-accent-salmon: #F2A0A7; 
-            --p-rose-trans: rgba(46, 16, 77, 0.95);
+            --p-rose-trans: rgba(46, 16, 77, 0.9);
             --text-white: #FAF9F6;
             --star-color: #FFF4D2;
         }
@@ -30,7 +29,7 @@
             position: relative;
         }
 
-        /* --- ANIMACIÓN CANARIOS --- */
+        /* --- CANARIOS --- */
         @keyframes peekTopRight {
             0%, 100% { transform: rotate(180deg) translate(0, 0) rotate(-5deg); }
             50% { transform: rotate(180deg) translate(40px, -40px) rotate(5deg); }
@@ -62,85 +61,87 @@
             margin-bottom: 25px;
         }
         .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
-
         h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; letter-spacing: 5px; margin-top: 20px; }
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS (SIN BORDES) --- */
-        .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; }
-        .planet-system { position: absolute; transition: transform 0.1s ease-out; display: flex; justify-content: center; align-items: center; }
-        .planet-link {
-            width: var(--size); height: var(--size); border-radius: 50%; border: none;
-            text-decoration: none; color: white; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: 0.4s;
-            position: relative; overflow: hidden; background: transparent;
+        /* --- SISTEMA DE PLANETAS (SIN BORDES) --- */
+        .planets-container { position: relative; min-height: 150vh; width: 100%; display: flex; justify-content: center; align-items: center; }
+        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
+
+        .planet-btn {
+            width: var(--size); height: var(--size); border-radius: 50%; border: none; cursor: pointer;
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; color: white; transition: 0.4s;
+            z-index: 20; background: transparent;
         }
+        .planet-btn:hover { transform: scale(1.05); }
         .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 
-        .p-industrial { --size: 280px; }
-        .p-ux { --size: 260px; }
-        .p-artesanal { --size: 200px; }
+        .sys-industrial { --size: 250px; left: 10%; top: 20%; }
+        .sys-ux { --size: 230px; right: 10%; top: 40%; }
+        .sys-artesanal { --size: 200px; left: 30%; bottom: 10%; }
 
-        /* --- LUNAS (COLOR LUNA, SIN BORDES) --- */
+        /* --- ORBITA Y LUNAS (SIN BORDES) --- */
         .orbit {
             position: absolute; width: 450px; height: 450px;
-            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
-            display: none; pointer-events: auto; z-index: 5;
+            border: 1px solid rgba(211, 179, 220, 0.1); border-radius: 50%;
+            display: none; justify-content: center; align-items: center; pointer-events: auto;
         }
-        .planet-system:hover .orbit { display: block; }
+        .orbit.active { display: block; animation: fadeIn 0.5s ease; }
 
         .project-moon {
             position: absolute; width: 85px; height: 85px; 
-            background: #B3C7DC; /* Azulito/Morado claro tipo luna */
-            border: none; border-radius: 50%;
+            background: var(--p-rose-trans); /* Color tipo luna/profundo */
+            border: none; border-radius: 50%; /* SIN BORDE */
             display: flex; justify-content: center; align-items: center;
-            font-size: 0.7rem; font-weight: bold; color: #190426; cursor: pointer;
-            text-align: center; padding: 10px; transition: 0.3s; z-index: 50;
-            box-shadow: 0 0 15px rgba(179, 199, 220, 0.4);
+            font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
+            text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .project-moon:hover { transform: scale(1.1); background: var(--p-accent-lila); }
+        .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
-        /* Posiciones arco derecho */
-        .moon-closet { top: 0%; right: 10%; transform: translate(50%, -50%); }
-        .moon-cocina { top: 40%; right: -10%; transform: translate(50%, -50%); }
-        .moon-espejo { bottom: 40%; right: -10%; transform: translate(50%, 50%); }
-        .moon-animal { bottom: 0%; right: 10%; transform: translate(50%, 50%); }
+        .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        .moon-2 { top: 40%; right: -10%; transform: translate(0, -50%); }
+        .moon-3 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
+        .moon-4 { top: 40%; left: -10%; transform: translate(0, -50%); }
 
-        /* --- CUADRO DE DETALLE (MEJORADO) --- */
+        /* --- DETALLE DE PROYECTO (X CREMA Y ESPACIADO) --- */
         .project-detail {
-            position: absolute; width: 320px; padding: 25px; border-radius: 30px;
+            position: absolute; width: 320px; padding: 25px; border-radius: 35px;
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
-            border: none; display: none; flex-direction: column; align-items: center; 
-            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); z-index: 1000;
+            border: 1px solid rgba(211, 179, 220, 0.3); display: none;
+            flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 100;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
-        .project-moon:hover .project-detail { display: flex; animation: fadeIn 0.3s ease; }
-
+        .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
+        
         .project-detail img { 
-            width: 100%; height: 180px; object-fit: cover; 
-            border-radius: 20px; margin-bottom: 20px; border: none; 
+            width: 100%; height: 190px; object-fit: cover; 
+            border-radius: 20px; margin-bottom: 20px; 
+            border: none; /* IMAGEN LIMPIA */
         }
-
-        /* X en color crema/texto, no salmón */
+        
         .close-detail { 
-            align-self: flex-end; color: var(--p-cream); 
-            font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; cursor: pointer;
+            align-self: flex-end; cursor: pointer; 
+            color: var(--p-cream); /* X COLOR CREMA */
+            font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; 
         }
-
-        .sys-industrial { left: 10%; top: 20%; }
-        .sys-ux { right: 10%; top: 40%; }
-        .sys-artesanal { left: 30%; bottom: 10%; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
-        /* --- SKILLS & FOOTER --- */
+        /* --- FOOTER & OTROS --- */
         .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
         .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; position: relative; z-index: 10; }
+        .cv-button { padding: 12px 24px; border: 2px solid var(--p-accent-lila); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
+        .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); }
         .social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
-        .social-links a { color: var(--p-accent-lila); font-size: 1.8rem; }
+        .social-links a { color: var(--p-accent-lila); font-size: 1.8rem; transition: 0.3s; }
+        .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -150,7 +151,7 @@
     <header>
         <img src="CANARIO1.PNG" alt="Canario" class="canario-peek canario-uno">
         <div class="perfil-container">
-            <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
+            <img src="tu-foto.jpg" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
@@ -158,79 +159,83 @@
     </header>
 
     <main class="planets-container">
-        <section class="planet-system sys-industrial" data-depth="0.05">
-            <div class="planet-link p-industrial">
+        <section class="planet-system sys-industrial">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-industrial')">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
                 <span class="material-symbols-outlined">precision_manufacturing</span>
                 <span>Industrial</span>
+            </button>
+
+            <div class="orbit" id="orbit-industrial">
+                <div class="project-moon moon-1" onclick="showDetail('det-closet')">Closet</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-cocina')">Cocina</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-espejo')">Espejo</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-animal')">Animal Route</div>
             </div>
-            
-            <div class="orbit">
-                <div class="project-moon moon-closet">
-                    <span>Closet</span>
-                    <div class="project-detail">
-                        <span class="close-detail">✕</span>
-                        <img src="CLOSETH1.JPG">
-                        <h4 style="color:var(--p-cream);">Closet de Oficina</h4>
-                        <p style="font-size:0.8rem;">Optimización de espacios con elegancia contemporánea.</p>
-                    </div>
-                </div>
 
-                <div class="project-moon moon-cocina">
-                    <span>Cocina</span>
-                    <div class="project-detail">
-                        <span class="close-detail">✕</span>
-                        <img src="COCINA3.png">
-                        <h4 style="color:var(--p-cream);">Cocina</h4>
-                        <p style="font-size:0.8rem;">Gris salvia y madera para un ambiente acogedor.</p>
-                    </div>
-                </div>
+            <div id="det-closet" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="CLOSETH1.JPG">
+                <h4 style="color:var(--p-cream);">Closet de Oficina</h4>
+                <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
+            </div>
 
-                <div class="project-moon moon-espejo">
-                    <span>Espejo</span>
-                    <div class="project-detail">
-                        <span class="close-detail">✕</span>
-                        <img src="ESPEJO MEDIA LUNA4.jpeg">
-                        <h4 style="color:var(--p-cream);">Espejo Media Luna</h4>
-                        <p style="font-size:0.8rem;">Retroiluminación y dinamismo visual artístico.</p>
-                    </div>
-                </div>
+            <div id="det-cocina" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="COCINA3.png">
+                <h4 style="color:var(--p-cream);">Cocina</h4>
+                <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil.</p>
+            </div>
 
-                <div class="project-moon moon-animal">
-                    <span>Animal Route</span>
-                    <div class="project-detail">
-                        <span class="close-detail">✕</span>
-                        <img src="ANIMALROUTE2.JPG">
-                        <h4 style="color:var(--p-cream);">Animal Route</h4>
-                        <p style="font-size:0.8rem;">Juguetes con perspectiva de género.</p>
-                    </div>
-                </div>
+            <div id="det-espejo" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="ESPEJO MEDIA LUNA4.jpeg">
+                <h4 style="color:var(--p-cream);">Espejo Media Luna</h4>
+                <p style="font-size:0.8rem;">Dinamismo visual y retroiluminación artística.</p>
+            </div>
+
+            <div id="det-animal" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="ANIMALROUTE2.JPG">
+                <h4 style="color:var(--p-cream);">Animal Route</h4>
+                <p style="font-size:0.8rem;">Juguetes con perspectiva de género.</p>
             </div>
         </section>
 
-        <section class="planet-system sys-artesanal" data-depth="0.1">
-            <div class="planet-link p-artesanal">
+        <section class="planet-system sys-artesanal">
+            <button class="planet-btn" onclick="window.open('https://www.behance.net/anapaulapm', '_blank')">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
                 <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
-            </div>
+            </button>
         </section>
 
-        <section class="planet-system sys-ux" data-depth="0.08">
-            <div class="planet-link p-ux">
+        <section class="planet-system sys-ux">
+            <button class="planet-btn" onclick="window.open('https://www.behance.net/anapaulapm', '_blank')">
                 <img src="PLANETA3.PNG" class="img-planeta-png">
                 <span class="material-symbols-outlined">devices</span>
                 <span>Diseño UX</span>
-            </div>
+            </button>
         </section>
     </main>
 
+    <section class="skills-section">
+        <h2 class="subtitulo">Habilidades</h2>
+        <div class="skills-grid">
+            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario y modelado 3D.</p></div>
+            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación y prototipado.</p></div>
+            <div class="skill-card"><h3>Artesanal</h3><p>Técnicas tradicionales.</p></div>
+        </div>
+    </section>
+
     <footer class="footer-contact">
         <img src="CANARIO2.PNG" alt="Canario" class="canario-peek canario-dos">
+        <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
+        <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
         <div class="social-links">
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-behance"></i></a>
+            <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.behance.net/anapaulapm" target="_blank"><i class="fab fa-behance"></i></a>
         </div>
         <p class="copyright">© 2026 ANA PAU • MÉXICO</p>
     </footer>
@@ -248,12 +253,28 @@
             starField.appendChild(star);
         }
 
+        function toggleOrbit(id) {
+            const orb = document.getElementById(id);
+            const isActive = orb.classList.contains('active');
+            document.querySelectorAll('.orbit').forEach(o => o.classList.remove('active'));
+            closeAllDetails();
+            if (!isActive) orb.classList.add('active');
+        }
+
+        function showDetail(id) {
+            closeAllDetails();
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeAllDetails() {
+            document.querySelectorAll('.project-detail').forEach(d => d.classList.remove('active'));
+        }
+
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             systems.forEach(sys => {
-                const depth = parseFloat(sys.getAttribute('data-depth')) || 0.02;
-                const x = (window.innerWidth / 2 - e.clientX) * depth;
-                const y = (window.innerHeight / 2 - e.clientY) * depth;
+                const x = (window.innerWidth / 2 - e.clientX) * 0.02;
+                const y = (window.innerHeight / 2 - e.clientY) * 0.02;
                 sys.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
