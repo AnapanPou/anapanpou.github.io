@@ -50,7 +50,7 @@
         .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* --- HEADER (FOTO RESTAURADA) --- */
+        /* --- HEADER --- */
         header {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 50px 10%; position: relative; z-index: 10;
@@ -65,7 +65,7 @@
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS Y LUNAS --- */
+        /* --- PLANETAS Y ORBITAS --- */
         .planets-container { position: relative; min-height: 150vh; width: 100%; display: flex; justify-content: center; align-items: center; }
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
 
@@ -95,6 +95,7 @@
             display: flex; justify-content: center; align-items: center;
             font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
             text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
@@ -113,10 +114,14 @@
             top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
         .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
-        .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; }
-        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; }
+        .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
+        .project-detail img:hover { filter: brightness(1.2); }
+        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
 
-        /* --- HABILIDADES (CONTENIDO CORREGIDO) --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+        /* --- HABILIDADES --- */
         .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
         .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
@@ -165,21 +170,18 @@
                 <h4 style="color:var(--p-cream);">Closet de Oficina</h4>
                 <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
             </div>
-
             <div id="det-cocina" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="COCINA3.png">
                 <h4 style="color:var(--p-cream);">Cocina</h4>
                 <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil.</p>
             </div>
-
             <div id="det-espejo" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="ESPEJO MEDIA LUNA4.jpeg">
                 <h4 style="color:var(--p-cream);">Espejo Media Luna</h4>
                 <p style="font-size:0.8rem;">Dinamismo visual y retroiluminación artística.</p>
             </div>
-
             <div id="det-animal" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="ANIMALROUTE2.JPG">
@@ -188,19 +190,51 @@
             </div>
         </section>
 
+        <section class="planet-system sys-ux">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-ux')">
+                <img src="PLANETA3.PNG" class="img-planeta-png">
+                <span class="material-symbols-outlined">devices</span>
+                <span>Diseño UX</span>
+            </button>
+            <div class="orbit" id="orbit-ux">
+                <div class="project-moon moon-1" onclick="showDetail('det-integra')">Integra</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-floral')">AppFloral</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-bambaline')">Bambaline</div>
+            </div>
+
+            <div id="det-integra" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/ljn3qHujOTIGTMaUO8m9in/MAQUETA-PAGINA-DE-LABORATORIO?node-id=69-31&t=h1aHQKBxjQaNyfuj-1" target="_blank">
+                    <img src="INTEGRALABORATORIOS.PNG" alt="Integra Ideas">
+                </a>
+                <h4 style="color:var(--p-cream);">Integra Ideas y Laboratorios</h4>
+                <p style="font-size:0.8rem;">Interfaz intuitiva para mobiliario especializado. Optimiza el flujo profesional priorizando jerarquía visual y acceso rápido.</p>
+            </div>
+
+            <div id="det-floral" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/NvUbupLHHXkjzSrKdBHDFd/FIGMA-Aplicaci%C3%B3n-flores--Community-?node-id=0-1&t=EPNbCTjdbar55OuM-1" target="_blank">
+                    <img src="APPFLORAL.PNG" alt="App Floral">
+                </a>
+                <h4 style="color:var(--p-cream);">APPFLORAL</h4>
+                <p style="font-size:0.8rem;">Aplicación diseñada para la comunidad de floreros en la zona del Edomex centro.</p>
+            </div>
+
+            <div id="det-bambaline" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/HoMnm7TIM2cEDiVhVo0aln/playlist-digital-prototipo-de-alta-fidelidad?node-id=0-1&t=Ybh7L1JtRMUmwX70-1" target="_blank">
+                    <img src="bambaline.PNG" alt="Bambaline">
+                </a>
+                <h4 style="color:var(--p-cream);">Bambaline (Tesis)</h4>
+                <p style="font-size:0.8rem;">Plataforma para artistas independientes en Toluca; permite gestión de eventos y cobro de comisiones.</p>
+            </div>
+        </section>
+
         <section class="planet-system sys-artesanal">
             <button class="planet-btn" onclick="window.open('https://www.behance.net/anapaulapm', '_blank')">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
                 <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
-            </button>
-        </section>
-
-        <section class="planet-system sys-ux">
-            <button class="planet-btn" onclick="window.open('https://www.behance.net/anapaulapm', '_blank')">
-                <img src="PLANETA3.PNG" class="img-planeta-png">
-                <span class="material-symbols-outlined">devices</span>
-                <span>Diseño UX</span>
             </button>
         </section>
     </main>
