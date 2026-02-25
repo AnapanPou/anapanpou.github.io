@@ -30,7 +30,7 @@
             position: relative;
         }
 
-        /* --- ANIMACIÓN DE ASOMARSE --- */
+        /* --- ANIMACIONES --- */
         @keyframes peekTopRight {
             0%, 100% { transform: rotate(180deg) translate(0, 0) rotate(-5deg); }
             50% { transform: rotate(180deg) translate(40px, -40px) rotate(5deg); }
@@ -103,7 +103,7 @@
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS --- */
+        /* --- SISTEMA DE PLANETAS --- */
         .planets-container {
             position: relative; 
             min-height: 180vh; 
@@ -120,6 +120,7 @@
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             position: relative; overflow: hidden; border: none;
+            z-index: 20;
         }
 
         .img-planeta-png {
@@ -132,7 +133,7 @@
         .p-ux { --size: 280px; }
         .p-artesanal { --size: 220px; }
 
-        /* --- LUNAS Y GALERÍA (ARCO DERECHO) --- */
+        /* --- ÓRBITA Y LUNAS (AJUSTE 180 GRADOS) --- */
         .orbit {
             position: absolute; width: 220%; height: 220%;
             border-right: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
@@ -150,10 +151,14 @@
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
+        /* --- DETALLES HACIA LA DERECHA --- */
         .project-detail {
             position: absolute; width: 600px; height: 450px;
             opacity: 0; pointer-events: none; transition: 0.4s; z-index: 500;
             display: flex; justify-content: center; align-items: center;
+            /* Posicionamiento a la derecha de la luna */
+            left: 100px; 
+            top: -180px;
         }
         .project-moon:hover .project-detail { opacity: 1; pointer-events: auto; }
 
@@ -169,21 +174,19 @@
             transition: transform 0.4s ease; z-index: 10;
         }
 
-        /* NUEVAS POSICIONES: ARCO DERECHO (EJES Y, X, -Y) */
-        .moon-closet { top: 15%; right: 10%; transform: translate(50%, -50%); } /* Eje Y (Arriba-Derecha) */
-        .moon-cocina { top: 38%; right: -5%; transform: translate(50%, -50%); } /* Entre Y y X */
-        .moon-espejo { top: 62%; right: -5%; transform: translate(50%, -50%); } /* Entre X y -Y */
-        .moon-animal { top: 85%; right: 10%; transform: translate(50%, -50%); } /* Eje -Y (Abajo-Derecha) */
+        /* --- POSICIONES EN ARCO DE 180° --- */
+        .moon-closet { top: 0%; right: 40%; transform: translate(50%, -50%); } 
+        .moon-cocina { top: 30%; right: -5%; transform: translate(50%, -50%); } 
+        .moon-espejo { top: 70%; right: -5%; transform: translate(50%, -50%); } 
+        .moon-animal { top: 100%; right: 40%; transform: translate(50%, -50%); } 
 
-        /* Imágenes de proyectos */
-        .img-k-closet { width: 180px; height: 180px; top: 0; left: 50px; }
-        .img-k-cocina { width: 220px; height: 220px; bottom: 0; left: 0px; }
-        .img-k-espejo { width: 200px; height: 200px; top: -20px; right: 20px; }
-        .img-k-animal { width: 190px; height: 190px; bottom: -10px; right: 50px; }
+        /* Imágenes de proyectos ajustadas */
+        .img-k-closet { width: 180px; height: 180px; top: 0; right: -50px; }
+        .img-k-cocina { width: 220px; height: 220px; bottom: 0; right: -80px; }
+        .img-k-espejo { width: 200px; height: 200px; top: -20px; right: -60px; }
+        .img-k-animal { width: 190px; height: 190px; bottom: -10px; right: -50px; }
 
-        /* Ajuste de tooltip para que salga a la izquierda y no se corte */
-        .detail-pos { right: 120px; top: -100px; } 
-
+        /* --- POSICIÓN DE SISTEMAS --- */
         .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
         .sys-artesanal { left: 35%; bottom: 8%; }
@@ -209,7 +212,7 @@
     <header>
         <img src="CANARIO1.PNG" alt="Canario" class="canario-peek canario-uno">
         <div class="perfil-container">
-            <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
+            <img src="tu-foto.jpg" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
@@ -226,7 +229,7 @@
             <div class="orbit">
                 <div class="project-moon moon-closet">
                     <span>Closet</span>
-                    <div class="project-detail detail-pos">
+                    <div class="project-detail">
                         <div class="floating-images"><img src="CLOSETH1.JPG" class="img-k-closet"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Closet de Oficina</h4>
@@ -236,7 +239,7 @@
                 </div>
                 <div class="project-moon moon-cocina">
                     <span>Cocina</span>
-                    <div class="project-detail detail-pos">
+                    <div class="project-detail">
                         <div class="floating-images"><img src="COCINA3.png" class="img-k-cocina"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
@@ -246,7 +249,7 @@
                 </div>
                 <div class="project-moon moon-espejo">
                     <span>Espejo Lunas</span>
-                    <div class="project-detail detail-pos">
+                    <div class="project-detail">
                         <div class="floating-images"><img src="ESPEJO MEDIA LUNA4.jpeg" class="img-k-espejo"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">ESPEJO MEDIA LUNA</h4>
@@ -256,11 +259,11 @@
                 </div>
                 <div class="project-moon moon-animal">
                     <span>Animal Route</span>
-                    <div class="project-detail detail-pos">
+                    <div class="project-detail">
                         <div class="floating-images"><img src="ANIMALROUTE2.JPG" class="img-k-animal"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">ANIMAL ROUTE</h4>
-                            <p style="font-size:0.8rem;">Juguetes con perspectiva de genero para motivar a las infancias a no tener ideologias de genero respecto el uso de motocicletas.</p>
+                            <p style="font-size:0.8rem;">Juguetes con perspectiva de género para motivar a las infancias.</p>
                         </div>
                     </div>
                 </div>
