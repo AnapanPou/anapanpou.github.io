@@ -50,7 +50,7 @@
         .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* --- HEADER --- */
+        /* --- HEADER (FOTO RESTAURADA) --- */
         header {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 50px 10%; position: relative; z-index: 10;
@@ -65,7 +65,7 @@
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- SISTEMA DE PLANETAS (SIN BORDES) --- */
+        /* --- PLANETAS Y LUNAS --- */
         .planets-container { position: relative; min-height: 150vh; width: 100%; display: flex; justify-content: center; align-items: center; }
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
 
@@ -82,7 +82,6 @@
         .sys-ux { --size: 230px; right: 10%; top: 40%; }
         .sys-artesanal { --size: 200px; left: 30%; bottom: 10%; }
 
-        /* --- ORBITA Y LUNAS (SIN BORDES) --- */
         .orbit {
             position: absolute; width: 450px; height: 450px;
             border: 1px solid rgba(211, 179, 220, 0.1); border-radius: 50%;
@@ -92,12 +91,10 @@
 
         .project-moon {
             position: absolute; width: 85px; height: 85px; 
-            background: var(--p-rose-trans); /* Color tipo luna/profundo */
-            border: none; border-radius: 50%; /* SIN BORDE */
+            background: var(--p-rose-trans); border: none; border-radius: 50%; 
             display: flex; justify-content: center; align-items: center;
             font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
             text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
@@ -106,7 +103,7 @@
         .moon-3 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
         .moon-4 { top: 40%; left: -10%; transform: translate(0, -50%); }
 
-        /* --- DETALLE DE PROYECTO (X CREMA Y ESPACIADO) --- */
+        /* --- DETALLE --- */
         .project-detail {
             position: absolute; width: 320px; padding: 25px; border-radius: 35px;
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
@@ -116,26 +113,16 @@
             top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
         .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
-        
-        .project-detail img { 
-            width: 100%; height: 190px; object-fit: cover; 
-            border-radius: 20px; margin-bottom: 20px; 
-            border: none; /* IMAGEN LIMPIA */
-        }
-        
-        .close-detail { 
-            align-self: flex-end; cursor: pointer; 
-            color: var(--p-cream); /* X COLOR CREMA */
-            font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; 
-        }
+        .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; }
+        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
-
-        /* --- FOOTER & OTROS --- */
+        /* --- HABILIDADES (CONTENIDO CORREGIDO) --- */
         .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .skill-card h3 { color: var(--p-accent-salmon); margin-bottom: 10px; font-size: 1.4rem; }
+        .skill-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
+
         .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; position: relative; z-index: 10; }
         .cv-button { padding: 12px 24px; border: 2px solid var(--p-accent-lila); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
         .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); }
@@ -151,7 +138,7 @@
     <header>
         <img src="CANARIO1.PNG" alt="Canario" class="canario-peek canario-uno">
         <div class="perfil-container">
-            <img src="tu-foto.jpg" alt="Ana Pau" class="foto-perfil">
+            <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
@@ -165,7 +152,6 @@
                 <span class="material-symbols-outlined">precision_manufacturing</span>
                 <span>Industrial</span>
             </button>
-
             <div class="orbit" id="orbit-industrial">
                 <div class="project-moon moon-1" onclick="showDetail('det-closet')">Closet</div>
                 <div class="project-moon moon-2" onclick="showDetail('det-cocina')">Cocina</div>
@@ -222,9 +208,18 @@
     <section class="skills-section">
         <h2 class="subtitulo">Habilidades</h2>
         <div class="skills-grid">
-            <div class="skill-card"><h3>Diseño Industrial</h3><p>Mobiliario y modelado 3D.</p></div>
-            <div class="skill-card"><h3>Diseño UX/UI</h3><p>Investigación y prototipado.</p></div>
-            <div class="skill-card"><h3>Artesanal</h3><p>Técnicas tradicionales.</p></div>
+            <div class="skill-card">
+                <h3>Diseño Industrial</h3>
+                <p>Mobiliario, modelado 3D y renderizado profesional.<br><strong>Software:</strong> SolidWorks, Rhinoceros, KeyShot.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Diseño UX/UI</h3>
+                <p>Investigación de usuario, prototipado y diseño de interfaces.<br><strong>Software:</strong> Figma, Adobe XD.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Artesanal</h3>
+                <p>Exploración de técnicas tradicionales y procesos manuales.<br><strong>Materiales:</strong> Cerámica, Textiles, Madera.</p>
+            </div>
         </div>
     </section>
 
