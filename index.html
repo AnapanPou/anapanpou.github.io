@@ -65,7 +65,7 @@
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- PLANETAS Y ORBITAS --- */
+        /* --- PLANETAS Y LUNAS --- */
         .planets-container { position: relative; min-height: 150vh; width: 100%; display: flex; justify-content: center; align-items: center; }
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
 
@@ -95,7 +95,6 @@
             display: flex; justify-content: center; align-items: center;
             font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
             text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
@@ -115,11 +114,8 @@
         }
         .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
         .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
-        .project-detail img:hover { filter: brightness(1.2); }
-        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+        .project-detail img:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; }
 
         /* --- HABILIDADES --- */
         .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
@@ -134,6 +130,9 @@
         .social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
         .social-links a { color: var(--p-accent-lila); font-size: 1.8rem; transition: 0.3s; }
         .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
     </style>
 </head>
 <body>
@@ -198,8 +197,8 @@
             </button>
             <div class="orbit" id="orbit-ux">
                 <div class="project-moon moon-1" onclick="showDetail('det-integra')">Integra</div>
-                <div class="project-moon moon-2" onclick="showDetail('det-floral')">AppFloral</div>
-                <div class="project-moon moon-3" onclick="showDetail('det-bambaline')">Bambaline</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-floral')">APPFLORAL</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-bambaline')">BAMBALINE</div>
             </div>
 
             <div id="det-integra" class="project-detail">
@@ -208,25 +207,25 @@
                     <img src="INTEGRALABORATORIOS.PNG" alt="Integra Ideas">
                 </a>
                 <h4 style="color:var(--p-cream);">Integra Ideas y Laboratorios</h4>
-                <p style="font-size:0.8rem;">Interfaz intuitiva para mobiliario especializado. Optimiza el flujo profesional priorizando jerarquía visual y acceso rápido.</p>
+                <p style="font-size:0.8rem;">Interfaz intuitiva para mobiliario especializado. Haz clic en la imagen para ver en Figma.</p>
             </div>
 
             <div id="det-floral" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <a href="https://www.figma.com/design/NvUbupLHHXkjzSrKdBHDFd/FIGMA-Aplicaci%C3%B3n-flores--Community-?node-id=0-1&t=EPNbCTjdbar55OuM-1" target="_blank">
-                    <img src="APPFLORAL.PNG" alt="App Floral">
+                    <img src="APPFLORAL.png" alt="App Floral">
                 </a>
                 <h4 style="color:var(--p-cream);">APPFLORAL</h4>
-                <p style="font-size:0.8rem;">Aplicación diseñada para la comunidad de floreros en la zona del Edomex centro.</p>
+                <p style="font-size:0.8rem;">App para la comunidad de floreros de Edomex. Haz clic en la imagen para ver en Figma.</p>
             </div>
 
             <div id="det-bambaline" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <a href="https://www.figma.com/design/HoMnm7TIM2cEDiVhVo0aln/playlist-digital-prototipo-de-alta-fidelidad?node-id=0-1&t=Ybh7L1JtRMUmwX70-1" target="_blank">
-                    <img src="bambaline.PNG" alt="Bambaline">
+                    <img src="BAMBALINE.PNG" alt="Bambaline">
                 </a>
-                <h4 style="color:var(--p-cream);">Bambaline (Tesis)</h4>
-                <p style="font-size:0.8rem;">Plataforma para artistas independientes en Toluca; permite gestión de eventos y cobro de comisiones.</p>
+                <h4 style="color:var(--p-cream);">BAMBALINE</h4>
+                <p style="font-size:0.8rem;">Proyecto de Tesis: artistas independientes de Toluca. Haz clic en la imagen para ver en Figma.</p>
             </div>
         </section>
 
