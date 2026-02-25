@@ -132,10 +132,10 @@
         .p-ux { --size: 280px; }
         .p-artesanal { --size: 220px; }
 
-        /* --- LUNAS Y GALERÍA --- */
+        /* --- LUNAS Y GALERÍA (ARCO DERECHO) --- */
         .orbit {
-            position: absolute; width: 180%; height: 180%;
-            border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
+            position: absolute; width: 220%; height: 220%;
+            border-right: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50%;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
             pointer-events: none; opacity: 0; transition: 0.6s;
         }
@@ -146,8 +146,9 @@
             border: 2px solid var(--p-accent-lila); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             font-size: 0.7rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
-            text-align: center; padding: 5px;
+            text-align: center; padding: 5px; transition: 0.3s ease;
         }
+        .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
         .project-detail {
             position: absolute; width: 600px; height: 450px;
@@ -168,11 +169,11 @@
             transition: transform 0.4s ease; z-index: 10;
         }
 
-        /* Posiciones de lunas en la órbita */
-        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .moon-espejo { left: 0%; top: 50%; transform: translate(-50%, -50%); }
-        .moon-animal { right: 0%; top: 50%; transform: translate(50%, -50%); }
+        /* NUEVAS POSICIONES: ARCO DERECHO (EJES Y, X, -Y) */
+        .moon-closet { top: 15%; right: 10%; transform: translate(50%, -50%); } /* Eje Y (Arriba-Derecha) */
+        .moon-cocina { top: 38%; right: -5%; transform: translate(50%, -50%); } /* Entre Y y X */
+        .moon-espejo { top: 62%; right: -5%; transform: translate(50%, -50%); } /* Entre X y -Y */
+        .moon-animal { top: 85%; right: 10%; transform: translate(50%, -50%); } /* Eje -Y (Abajo-Derecha) */
 
         /* Imágenes de proyectos */
         .img-k-closet { width: 180px; height: 180px; top: 0; left: 50px; }
@@ -180,7 +181,8 @@
         .img-k-espejo { width: 200px; height: 200px; top: -20px; right: 20px; }
         .img-k-animal { width: 190px; height: 190px; bottom: -10px; right: 50px; }
 
-        .detail-pos { left: 120px; top: -100px; } 
+        /* Ajuste de tooltip para que salga a la izquierda y no se corte */
+        .detail-pos { right: 120px; top: -100px; } 
 
         .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
