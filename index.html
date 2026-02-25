@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES DE COLOR ACTUALIZADAS --- */
+        /* --- VARIABLES DE COLOR --- */
         :root {
             --bg-deep: #190426;
             --p-cream: #F6E5B1;
-            --p-accent-lila: #D3B3DC;   /* Nuevo Azul -> Lila */
-            --p-accent-salmon: #F2A0A7; /* Nuevo Naranja -> Salmón */
+            --p-accent-lila: #D3B3DC;   
+            --p-accent-salmon: #F2A0A7; 
             --p-rose-trans: rgba(211, 179, 220, 0.4);
             --text-white: #FAF9F6;
             --star-color: #FFF4D2;
@@ -51,7 +51,6 @@
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
         }
 
-        /* CANARIO 1: ROTADO 180 GRADOS */
         .canario-uno {
             top: -150px;
             right: -80px;
@@ -59,7 +58,6 @@
             animation: peekTopRight 7s infinite ease-in-out;
         }
 
-        /* CANARIO 2: NORMAL */
         .canario-dos {
             bottom: -150px;
             left: -80px;
@@ -136,7 +134,7 @@
 
         /* --- LUNAS Y GALERÍA --- */
         .orbit {
-            position: absolute; width: 170%; height: 170%;
+            position: absolute; width: 180%; height: 180%;
             border: 2px solid rgba(255, 255, 255, 0.05); border-radius: 50%;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
             pointer-events: none; opacity: 0; transition: 0.6s;
@@ -144,10 +142,11 @@
         .planet-system:hover .orbit { opacity: 1; pointer-events: auto; }
 
         .project-moon {
-            position: absolute; width: 85px; height: 85px; background: #2e104d;
+            position: absolute; width: 90px; height: 90px; background: #2e104d;
             border: 2px solid var(--p-accent-lila); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
+            font-size: 0.7rem; font-weight: bold; color: var(--p-cream); cursor: pointer; z-index: 50;
+            text-align: center; padding: 5px;
         }
 
         .project-detail {
@@ -169,16 +168,23 @@
             transition: transform 0.4s ease; z-index: 10;
         }
 
-        .img-k1 { width: 180px; height: 180px; top: 0; left: 50px; }
-        .img-k2 { width: 220px; height: 220px; bottom: 0; left: 0px; }
+        /* Posiciones de lunas en la órbita */
+        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
+        .moon-espejo { left: 0%; top: 50%; transform: translate(-50%, -50%); }
+        .moon-animal { right: 0%; top: 50%; transform: translate(50%, -50%); }
+
+        /* Imágenes de proyectos */
+        .img-k-closet { width: 180px; height: 180px; top: 0; left: 50px; }
+        .img-k-cocina { width: 220px; height: 220px; bottom: 0; left: 0px; }
+        .img-k-espejo { width: 200px; height: 200px; top: -20px; right: 20px; }
+        .img-k-animal { width: 190px; height: 190px; bottom: -10px; right: 50px; }
+
+        .detail-pos { left: 120px; top: -100px; } 
 
         .sys-industrial { left: 5%; top: 15%; }
         .sys-ux { right: 8%; top: 40%; }
         .sys-artesanal { left: 35%; bottom: 8%; }
-
-        .moon-closet { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .moon-cocina { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .detail-pos { left: 120px; top: -100px; } 
 
         /* --- HABILIDADES & FOOTER --- */
         .skills-section { padding: 120px 10%; text-align: center; position: relative; z-index: 10; }
@@ -200,7 +206,6 @@
 
     <header>
         <img src="CANARIO1.PNG" alt="Canario" class="canario-peek canario-uno">
-        
         <div class="perfil-container">
             <img src="perfil.PNG" alt="Ana Pau" class="foto-perfil">
         </div>
@@ -220,7 +225,7 @@
                 <div class="project-moon moon-closet">
                     <span>Closet</span>
                     <div class="project-detail detail-pos">
-                        <div class="floating-images"><img src="CLOSETH1.JPG" class="img-k1"></div>
+                        <div class="floating-images"><img src="CLOSETH1.JPG" class="img-k-closet"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Closet de Oficina</h4>
                             <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
@@ -230,10 +235,30 @@
                 <div class="project-moon moon-cocina">
                     <span>Cocina</span>
                     <div class="project-detail detail-pos">
-                        <div class="floating-images"><img src="COCINA3.png" class="img-k2"></div>
+                        <div class="floating-images"><img src="COCINA3.png" class="img-k-cocina"></div>
                         <div class="detail-text-box">
                             <h4 style="color:var(--p-cream); margin-top:0;">Cocina</h4>
                             <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil para crear un espacio acogedor y funcional.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-moon moon-espejo">
+                    <span>Espejo Lunas</span>
+                    <div class="project-detail detail-pos">
+                        <div class="floating-images"><img src="ESPEJO MEDIA LUNA4.jpeg" class="img-k-espejo"></div>
+                        <div class="detail-text-box">
+                            <h4 style="color:var(--p-cream); margin-top:0;">ESPEJO MEDIA LUNA</h4>
+                            <p style="font-size:0.8rem;">El espejo de media luna retroiluminado aporta un dinamismo visual que transforma el mobiliario en un punto focal artístico.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-moon moon-animal">
+                    <span>Animal Route</span>
+                    <div class="project-detail detail-pos">
+                        <div class="floating-images"><img src="ANIMALROUTE2.JPG" class="img-k-animal"></div>
+                        <div class="detail-text-box">
+                            <h4 style="color:var(--p-cream); margin-top:0;">ANIMAL ROUTE</h4>
+                            <p style="font-size:0.8rem;">Juguetes con perspectiva de genero para motivar a las infancias a no tener ideologias de genero respecto el uso de motocicletas.</p>
                         </div>
                     </div>
                 </div>
@@ -268,7 +293,6 @@
 
     <footer class="footer-contact">
         <img src="CANARIO2.PNG" alt="Canario" class="canario-peek canario-dos">
-
         <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
         <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
         <div class="social-links">
