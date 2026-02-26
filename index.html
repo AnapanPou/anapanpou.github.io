@@ -66,7 +66,7 @@
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
         /* --- PLANETAS Y LUNAS --- */
-        .planets-container { position: relative; min-height: 150vh; width: 100%; display: flex; justify-content: center; align-items: center; }
+        .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; }
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
 
         .planet-btn {
@@ -78,9 +78,9 @@
         .planet-btn:hover { transform: scale(1.05); }
         .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 
-        .sys-industrial { --size: 250px; left: 10%; top: 20%; }
-        .sys-ux { --size: 230px; right: 10%; top: 40%; }
-        .sys-artesanal { --size: 200px; left: 30%; bottom: 10%; }
+        .sys-industrial { --size: 250px; left: 10%; top: 10%; }
+        .sys-ux { --size: 230px; right: 10%; top: 30%; }
+        .sys-artesanal { --size: 200px; left: 25%; bottom: 15%; }
 
         .orbit {
             position: absolute; width: 450px; height: 450px;
@@ -98,10 +98,12 @@
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
+        /* Posiciones de Lunas */
         .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
         .moon-2 { top: 40%; right: -10%; transform: translate(0, -50%); }
         .moon-3 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
         .moon-4 { top: 40%; left: -10%; transform: translate(0, -50%); }
+        .moon-5 { top: 10%; right: 10%; transform: translate(0, -50%); }
 
         /* --- DETALLE --- */
         .project-detail {
@@ -230,11 +232,53 @@
         </section>
 
         <section class="planet-system sys-artesanal">
-            <button class="planet-btn" onclick="window.open('https://www.behance.net/anapaulapm', '_blank')">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-artesanal')">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
                 <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
             </button>
+            <div class="orbit" id="orbit-artesanal">
+                <div class="project-moon moon-1" onclick="showDetail('det-patos-mos')">Patos Mosaico</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-silla-cuero')">Silla Cuero</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-patos-tal')">Patos Talavera</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-ternurin')">Superternurin</div>
+                <div class="project-moon moon-5" onclick="showDetail('det-reyes')">Reyes Payasos</div>
+            </div>
+
+            <div id="det-patos-mos" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="PATOMOSAICO.JPG">
+                <h4 style="color:var(--p-cream);">Patos Mosaicos</h4>
+                <p style="font-size:0.8rem;">Serie de 7 macetas de cerámica de alta temperatura con acabado de mosaico blanco en diversas tonalidades.</p>
+            </div>
+
+            <div id="det-silla-cuero" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="SILLATEJIDA.jpg">
+                <h4 style="color:var(--p-cream);">Silla Cuero Tejido</h4>
+                <p style="font-size:0.8rem;">Madera de pino con uniones mediante ensambles (sin tornillos) y asiento de cuero sintético tejido.</p>
+            </div>
+
+            <div id="det-patos-tal" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="JOYERIAPATOS.jpg">
+                <h4 style="color:var(--p-cream);">Patos Talavera</h4>
+                <p style="font-size:0.8rem;">Joyería cerámica con estética talavera y cobre calado con baño en oro.</p>
+            </div>
+
+            <div id="det-ternurin" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="SUPERTERNURIIN.png">
+                <h4 style="color:var(--p-cream);">Superternurin</h4>
+                <p style="font-size:0.8rem;">Comisión especial película Superman 2025: confección textil de miniatura y fotografía temática.</p>
+            </div>
+
+            <div id="det-reyes" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="PAYASOS4.jpg">
+                <h4 style="color:var(--p-cream);">Reyes Payasos</h4>
+                <p style="font-size:0.8rem;">Personajes confeccionados con textil reciclado y detalles en latón calado y pulido.</p>
+            </div>
         </section>
     </main>
 
