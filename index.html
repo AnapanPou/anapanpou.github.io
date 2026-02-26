@@ -67,25 +67,27 @@
 
         /* --- PLANETAS Y LUNAS --- */
         .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; }
-        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
+        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; z-index: 20; }
 
         .planet-btn {
             width: var(--size); height: var(--size); border-radius: 50%; border: none; cursor: pointer;
             position: relative; overflow: hidden; display: flex; flex-direction: column;
             justify-content: center; align-items: center; color: white; transition: 0.4s;
-            z-index: 20; background: transparent;
+            z-index: 25; background: transparent;
         }
         .planet-btn:hover { transform: scale(1.05); }
         .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 
         .sys-industrial { --size: 250px; left: 10%; top: 10%; }
         .sys-ux { --size: 230px; right: 10%; top: 30%; }
-        .sys-artesanal { --size: 200px; left: 25%; bottom: 15%; }
+        /* Ajuste de posición para que las lunas tengan espacio */
+        .sys-artesanal { --size: 200px; left: 25%; bottom: 20%; }
 
         .orbit {
             position: absolute; width: 450px; height: 450px;
             border: 1px solid rgba(211, 179, 220, 0.1); border-radius: 50%;
             display: none; justify-content: center; align-items: center; pointer-events: auto;
+            z-index: 15;
         }
         .orbit.active { display: block; animation: fadeIn 0.5s ease; }
 
