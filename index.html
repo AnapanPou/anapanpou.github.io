@@ -14,7 +14,7 @@
             --p-cream: #F6E5B1;
             --p-accent-lila: #D3B3DC;   
             --p-accent-salmon: #F2A0A7; 
-            --p-rose-trans: rgba(46, 16, 77, 0.9);
+            --p-rose-trans: rgba(46, 16, 77, 0.95);
             --text-white: #FAF9F6;
             --star-color: #FFF4D2;
         }
@@ -29,7 +29,12 @@
             position: relative;
         }
 
-        /* --- CANARIOS --- */
+        /* --- FONDO DE ESTRELLAS --- */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        /* --- CANARIOS ANIMADOS --- */
         @keyframes peekTopRight {
             0%, 100% { transform: rotate(180deg) translate(0, 0) rotate(-5deg); }
             50% { transform: rotate(180deg) translate(40px, -40px) rotate(5deg); }
@@ -50,11 +55,6 @@
         .canario-uno { top: -150px; right: -80px; transform: rotate(180deg); animation: peekTopRight 7s infinite ease-in-out; }
         .canario-dos { bottom: -150px; left: -80px; transform: rotate(10deg); animation: peekBottomLeft 7s infinite ease-in-out; }
 
-        /* --- FONDO --- */
-        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-        .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
-
         /* --- HEADER --- */
         header {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -70,75 +70,77 @@
         .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
         .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- SECCIÓN PROPÓSITO --- */
+        /* --- SECCIÓN PROPÓSITO (CORREGIDA) --- */
         .proposito-section {
-            padding: 100px 10%;
+            padding: 120px 10%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 50px;
+            gap: 60px;
             position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
+            z-index: 50; /* Aumentado para que esté por encima de todo */
+            max-width: 1100px;
+            margin: 50px auto;
+            background: rgba(25, 4, 38, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
         }
         .proposito-img {
-            width: 300px;
+            width: 320px;
             height: auto;
-            animation: floatCanario 5s infinite ease-in-out;
-            filter: drop-shadow(0 10px 20px rgba(211, 179, 220, 0.3));
+            animation: floatCanario 6s infinite ease-in-out;
+            filter: drop-shadow(0 10px 25px rgba(211, 179, 220, 0.4));
         }
-        .proposito-texto {
-            flex: 1;
-            text-align: left;
-        }
+        .proposito-texto { flex: 1; text-align: left; }
         .proposito-texto h2 {
             color: var(--p-accent-lila);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            font-size: 2rem;
             text-transform: uppercase;
         }
         .proposito-texto p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.15rem;
+            line-height: 1.9;
             font-weight: 300;
             color: var(--text-white);
-            opacity: 0.9;
         }
+        .proposito-texto strong { color: var(--p-accent-salmon); font-weight: 600; }
 
-        /* --- PLANETAS Y LUNAS --- */
-        .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; }
-        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; z-index: 20; }
+        /* --- SISTEMA PLANETARIO --- */
+        .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; z-index: 20; }
+        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; z-index: 20; transition: transform 0.1s ease-out; }
 
         .planet-btn {
             width: var(--size); height: var(--size); border-radius: 50%; border: none; cursor: pointer;
             position: relative; overflow: hidden; display: flex; flex-direction: column;
             justify-content: center; align-items: center; color: white; transition: 0.4s;
-            z-index: 25; background: transparent;
+            z-index: 30; background: transparent;
         }
-        .planet-btn:hover { transform: scale(1.05); }
-        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+        .planet-btn:hover { transform: scale(1.1); filter: brightness(1.2); }
+        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: -1; }
 
         .sys-industrial { --size: 250px; left: 10%; top: 10%; }
         .sys-ux { --size: 230px; right: 10%; top: 30%; }
-        .sys-artesanal { --size: 200px; left: 25%; bottom: 20%; }
+        .sys-artesanal { --size: 200px; left: 25%; bottom: 15%; }
 
         .orbit {
-            position: absolute; width: 450px; height: 450px;
-            border: 1px solid rgba(211, 179, 220, 0.1); border-radius: 50%;
-            display: none; justify-content: center; align-items: center; pointer-events: auto;
-            z-index: 15;
+            position: absolute; width: 460px; height: 460px;
+            border: 2px dashed rgba(211, 179, 220, 0.2); border-radius: 50%;
+            display: none; justify-content: center; align-items: center;
+            z-index: 15; pointer-events: none;
         }
-        .orbit.active { display: block; animation: fadeIn 0.5s ease; }
+        .orbit.active { display: block; animation: fadeIn 0.5s ease; pointer-events: auto; }
 
         .project-moon {
-            position: absolute; width: 85px; height: 85px; 
-            background: var(--p-rose-trans); border: none; border-radius: 50%; 
+            position: absolute; width: 90px; height: 90px; 
+            background: var(--p-rose-trans); border: 1px solid var(--p-accent-lila); border-radius: 50%; 
             display: flex; justify-content: center; align-items: center;
-            font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
-            text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
+            font-size: 0.75rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
+            text-align: center; padding: 12px; transition: 0.3s; z-index: 40;
+            box-shadow: 0 0 15px rgba(211, 179, 220, 0.2);
         }
-        .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
+        .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); box-shadow: 0 0 25px var(--p-accent-lila); }
 
         .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
         .moon-2 { top: 40%; right: -10%; transform: translate(0, -50%); }
@@ -146,42 +148,45 @@
         .moon-4 { top: 40%; left: -10%; transform: translate(0, -50%); }
         .moon-5 { top: 10%; right: 10%; transform: translate(0, -50%); }
 
-        /* --- DETALLE --- */
+        /* --- VENTANAS DE DETALLE --- */
         .project-detail {
-            position: absolute; width: 320px; padding: 25px; border-radius: 35px;
-            background: var(--p-rose-trans); backdrop-filter: blur(15px);
-            border: 1px solid rgba(211, 179, 220, 0.3); display: none;
+            position: fixed; width: 350px; padding: 30px; border-radius: 35px;
+            background: var(--p-rose-trans); backdrop-filter: blur(20px);
+            border: 1px solid var(--p-accent-lila); display: none;
             flex-direction: column; align-items: center; text-align: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 100;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 200;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
-        .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
-        .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
-        .project-detail img:hover { transform: scale(1.02); filter: brightness(1.1); }
-        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; }
+        .project-detail.active { display: flex; animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .project-detail img { width: 100%; height: 210px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.1); }
+        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-accent-salmon); font-size: 1.5rem; margin-top: -10px; }
 
         /* --- HABILIDADES --- */
         .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
-        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
-        .skill-card h3 { color: var(--p-accent-salmon); margin-bottom: 10px; font-size: 1.4rem; }
-        .skill-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
+        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 35px; border-radius: 25px; border: 1px solid rgba(255,255,255,0.1); text-align: left; transition: 0.3s; }
+        .skill-card:hover { border-color: var(--p-accent-lila); background: rgba(255, 255, 255, 0.05); }
+        .skill-card h3 { color: var(--p-accent-salmon); margin-bottom: 15px; font-size: 1.5rem; }
 
-        .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; position: relative; z-index: 10; }
-        .cv-button { padding: 12px 24px; border: 2px solid var(--p-accent-lila); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
-        .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); }
-        .social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
-        .social-links a { color: var(--p-accent-lila); font-size: 1.8rem; transition: 0.3s; }
-        .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
+        /* --- FOOTER --- */
+        .footer-contact { background: #0d0216; padding: 100px 10% 40px; text-align: center; position: relative; z-index: 10; }
+        .cv-button { padding: 14px 28px; border: 2px solid var(--p-accent-lila); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; font-weight: 700; margin: 10px; display: inline-block; transition: 0.3s; border-radius: 50px; }
+        .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); box-shadow: 0 0 20px rgba(211, 179, 220, 0.4); }
+        .social-links { display: flex; justify-content: center; gap: 35px; margin: 40px 0; }
+        .social-links a { color: var(--p-accent-lila); font-size: 2rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--p-accent-salmon); transform: translateY(-5px); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
-        /* Media query para móviles */
+        /* MÓVIL */
         @media (max-width: 768px) {
-            .proposito-section { flex-direction: column; text-align: center; }
+            .proposito-section { flex-direction: column; text-align: center; padding: 60px 5%; margin: 20px; }
+            .proposito-img { width: 220px; }
             .proposito-texto { text-align: center; }
-            .proposito-img { width: 200px; }
+            .sys-industrial, .sys-ux, .sys-artesanal { position: relative; left: auto; right: auto; top: auto; bottom: auto; margin: 100px auto; }
+            .planets-container { flex-direction: column; min-height: auto; padding: 50px 0; }
+            .orbit { width: 320px; height: 320px; }
         }
     </style>
 </head>
@@ -231,25 +236,25 @@
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="CLOSETH1.JPG">
                 <h4 style="color:var(--p-cream);">Closet de Oficina</h4>
-                <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Optimización de espacios con un toque de elegancia contemporánea.</p>
             </div>
             <div id="det-cocina" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="COCINA3.png">
                 <h4 style="color:var(--p-cream);">Cocina</h4>
-                <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Mezcla de madera con gris salvia sutil.</p>
             </div>
             <div id="det-espejo" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="ESPEJO MEDIA LUNA4.jpeg">
                 <h4 style="color:var(--p-cream);">Espejo Media Luna</h4>
-                <p style="font-size:0.8rem;">Dinamismo visual y retroiluminación artística.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Dinamismo visual y retroiluminación artística.</p>
             </div>
             <div id="det-animal" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="ANIMALROUTE2.JPG">
                 <h4 style="color:var(--p-cream);">Animal Route</h4>
-                <p style="font-size:0.8rem;">Juguetes con perspectiva de género.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Juguetes con perspectiva de género.</p>
             </div>
         </section>
 
@@ -267,29 +272,29 @@
 
             <div id="det-integra" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
-                <a href="https://www.figma.com/design/ljn3qHujOTIGTMaUO8m9in/MAQUETA-PAGINA-DE-LABORATORIO?node-id=69-31&t=h1aHQKBxjQaNyfuj-1" target="_blank">
+                <a href="https://www.figma.com/design/ljn3qHujOTIGTMaUO8m9in/MAQUETA-PAGINA-DE-LABORATORIO?node-id=69-31" target="_blank">
                     <img src="INTEGRALABORATORIOS.png" alt="INTEGRALABORATORIOS">
                 </a>
                 <h4 style="color:var(--p-cream);">Integra Ideas y Laboratorios</h4>
-                <p style="font-size:0.8rem;">Interfaz intuitiva para mobiliario especializado.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Interfaz intuitiva para mobiliario especializado.</p>
             </div>
 
             <div id="det-floral" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
-                <a href="https://www.figma.com/design/NvUbupLHHXkjzSrKdBHDFd/FIGMA-Aplicaci%C3%B3n-flores--Community-?node-id=0-1&t=EPNbCTjdbar55OuM-1" target="_blank">
+                <a href="https://www.figma.com/design/NvUbupLHHXkjzSrKdBHDFd/FIGMA-Aplicaci%C3%B3n-flores--Community-?node-id=0-1" target="_blank">
                     <img src="APPFLORAL.png" alt="App Floral">
                 </a>
                 <h4 style="color:var(--p-cream);">APPFLORAL</h4>
-                <p style="font-size:0.8rem;">App para la comunidad de floreros de Edomex.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">App para la comunidad de floreros de Edomex.</p>
             </div>
 
             <div id="det-bambaline" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
-                <a href="https://www.figma.com/design/HoMnm7TIM2cEDiVhVo0aln/playlist-digital-prototipo-de-alta-fidelidad?node-id=0-1&t=Ybh7L1JtRMUmwX70-1" target="_blank">
+                <a href="https://www.figma.com/design/HoMnm7TIM2cEDiVhVo0aln/playlist-digital-prototipo-de-alta-fidelidad?node-id=0-1" target="_blank">
                     <img src="BAMBALINE.png" alt="Bambaline">
                 </a>
                 <h4 style="color:var(--p-cream);">BAMBALINE</h4>
-                <p style="font-size:0.8rem;">Proyecto de Tesis: artistas independientes de Toluca.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Proyecto de Tesis: artistas independientes de Toluca.</p>
             </div>
         </section>
 
@@ -311,35 +316,35 @@
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="PATOMOSAICO.JPG">
                 <h4 style="color:var(--p-cream);">Patos Mosaicos</h4>
-                <p style="font-size:0.8rem;">Serie de 7 macetas de cerámica de alta temperatura.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Serie de 7 macetas de cerámica de alta temperatura.</p>
             </div>
 
             <div id="det-silla-cuero" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="SILLATEJIDA.jpg">
                 <h4 style="color:var(--p-cream);">Silla Cuero Tejido</h4>
-                <p style="font-size:0.8rem;">Madera de pino con asiento de cuero sintético tejido.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Madera de pino con asiento de cuero sintético tejido.</p>
             </div>
 
             <div id="det-patos-tal" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="JOYERIAPATOS.jpg">
                 <h4 style="color:var(--p-cream);">Patos Talavera</h4>
-                <p style="font-size:0.8rem;">Joyería cerámica con estética talavera.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Joyería cerámica con estética talavera.</p>
             </div>
 
             <div id="det-ternurin" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="SUPERTERNURIIN.png">
                 <h4 style="color:var(--p-cream);">Superternurin</h4>
-                <p style="font-size:0.8rem;">Confección textil de miniatura y fotografía temática.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Confección textil de miniatura y fotografía temática.</p>
             </div>
 
             <div id="det-reyes" class="project-detail">
                 <span class="close-detail" onclick="closeAllDetails()">✕</span>
                 <img src="PAYASOS4.jpg">
                 <h4 style="color:var(--p-cream);">Reyes Payasos</h4>
-                <p style="font-size:0.8rem;">Personajes confeccionados con textil reciclado.</p>
+                <p style="font-size:0.85rem; margin-top:10px;">Personajes confeccionados con textil reciclado.</p>
             </div>
         </section>
     </main>
@@ -349,15 +354,15 @@
         <div class="skills-grid">
             <div class="skill-card">
                 <h3>Diseño Industrial</h3>
-                <p>Mobiliario, modelado 3D y renderizado profesional.<br><strong>Software:</strong> SolidWorks, Rhinoceros, KeyShot.</p>
+                <p>Mobiliario, modelado 3D y renderizado profesional.<br><br><strong>Software:</strong> SolidWorks, Rhinoceros, KeyShot.</p>
             </div>
             <div class="skill-card">
                 <h3>Diseño UX/UI</h3>
-                <p>Investigación de usuario, prototipado y diseño de interfaces.<br><strong>Software:</strong> Figma, Adobe XD.</p>
+                <p>Investigación de usuario, prototipado y diseño de interfaces.<br><br><strong>Software:</strong> Figma, Adobe XD.</p>
             </div>
             <div class="skill-card">
                 <h3>Artesanal</h3>
-                <p>Exploración de técnicas tradicionales y procesos manuales.<br><strong>Materiales:</strong> Cerámica, Textiles, Madera.</p>
+                <p>Exploración de técnicas tradicionales y procesos manuales.<br><br><strong>Materiales:</strong> Cerámica, Textiles, Madera.</p>
             </div>
         </div>
     </section>
@@ -375,8 +380,9 @@
     </footer>
 
     <script>
+        // Generador de estrellas
         const starField = document.getElementById('starField');
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 3 + 'px';
@@ -387,6 +393,7 @@
             starField.appendChild(star);
         }
 
+        // Lógica de Órbitas
         function toggleOrbit(id) {
             const orb = document.getElementById(id);
             const isActive = orb.classList.contains('active');
@@ -395,23 +402,33 @@
             if (!isActive) orb.classList.add('active');
         }
 
+        // Mostrar Detalle
         function showDetail(id) {
             closeAllDetails();
             document.getElementById(id).classList.add('active');
         }
 
+        // Cerrar todo
         function closeAllDetails() {
             document.querySelectorAll('.project-detail').forEach(d => d.classList.remove('active'));
         }
 
+        // Efecto Parallax suave
         document.addEventListener('mousemove', (e) => {
             const systems = document.querySelectorAll('.planet-system');
             systems.forEach(sys => {
-                const x = (window.innerWidth / 2 - e.clientX) * 0.02;
-                const y = (window.innerHeight / 2 - e.clientY) * 0.02;
+                const x = (window.innerWidth / 2 - e.clientX) * 0.015;
+                const y = (window.innerHeight / 2 - e.clientY) * 0.015;
                 sys.style.transform = `translate(${x}px, ${y}px)`;
             });
         });
+
+        // Cerrar detalle al hacer clic fuera
+        window.onclick = function(event) {
+            if (event.target.className === 'planets-container') {
+                closeAllDetails();
+            }
+        }
     </script>
 </body>
 </html>
