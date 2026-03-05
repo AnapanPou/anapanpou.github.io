@@ -33,7 +33,6 @@
         .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* --- ANIMACIONES --- */
         @keyframes floatCanario {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
@@ -42,12 +41,10 @@
         /* --- HEADER --- */
         header {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 50px 10%; position: relative;
+            text-align: center; padding: 50px 10%; position: relative; z-index: 10;
         }
-        .canario-peek {
-            position: absolute; z-index: 100; pointer-events: none; width: 550px; height: auto; 
-        }
-        .canario-uno { top: -150px; right: -80px; transform: rotate(180deg); }
+        .canario-peek { position: absolute; z-index: 5; pointer-events: none; width: 500px; height: auto; }
+        .canario-uno { top: -100px; right: -50px; transform: rotate(180deg); }
 
         .perfil-container {
             width: 220px; height: 220px; border-radius: 50%; padding: 5px; 
@@ -58,89 +55,100 @@
         h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; letter-spacing: 5px; }
         .subtitulo { color: var(--p-accent-salmon); font-size: 1.5rem; letter-spacing: 6px; margin: 20px 0; text-transform: uppercase; }
 
-        /* --- SECCIÓN PROPÓSITO (FORZADA) --- */
+        /* --- SECCIÓN PROPÓSITO (CORREGIDA) --- */
         .proposito-section {
             position: relative;
+            z-index: 20; /* Elevado para que no lo tape la capa de planetas */
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 50px;
-            padding: 150px 10%;
-            max-width: 1200px;
+            padding: 120px 15%;
+            background: var(--bg-deep);
+            max-width: 1400px;
             margin: 0 auto;
-            z-index: 10;
         }
         .proposito-img {
-            width: 300px;
+            width: 280px;
             height: auto;
             animation: floatCanario 5s infinite ease-in-out;
         }
-        .proposito-texto { flex: 1; text-align: left; }
-        .proposito-texto h2 { color: var(--p-accent-lila); margin-bottom: 20px; text-transform: uppercase; }
+        .proposito-texto { flex: 1; max-width: 600px; }
+        .proposito-texto h2 { color: var(--p-accent-lila); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px; }
         .proposito-texto p { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; }
 
-        /* --- PLANETAS --- */
+        /* --- PLANETAS (SISTEMA OPTIMIZADO) --- */
         .planets-container { 
             position: relative; 
-            min-height: 150vh; 
             width: 100%; 
-            padding-top: 100px;
+            min-height: 180vh; /* Altura para acomodar los planetas absolutos */
+            z-index: 15;
         }
         .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
         
-        /* Ubicaciones manuales para evitar solapamiento */
-        .sys-industrial { --size: 250px; left: 15%; top: 0; }
-        .sys-ux { --size: 230px; right: 15%; top: 30%; }
-        .sys-artesanal { --size: 200px; left: 20%; top: 60%; }
+        .sys-industrial { --size: 240px; left: 15%; top: 50px; }
+        .sys-ux { --size: 220px; right: 15%; top: 450px; }
+        .sys-artesanal { --size: 200px; left: 25%; top: 900px; }
 
         .planet-btn {
             width: var(--size); height: var(--size); border-radius: 50%; border: none; cursor: pointer;
             position: relative; display: flex; flex-direction: column;
             justify-content: center; align-items: center; color: white; background: transparent;
+            z-index: 30;
         }
-        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; transition: 0.5s; }
+        .planet-btn:hover .img-planeta-png { transform: scale(1.1); filter: brightness(1.2); }
 
         .orbit {
-            position: absolute; width: 450px; height: 450px;
+            position: absolute; width: 420px; height: 420px;
             border: 1px solid rgba(211, 179, 220, 0.2); border-radius: 50%;
             display: none; justify-content: center; align-items: center;
+            z-index: 25;
         }
-        .orbit.active { display: block; }
+        .orbit.active { display: block; animation: fadeIn 0.4s ease; }
 
         .project-moon {
-            position: absolute; width: 80px; height: 80px; 
-            background: var(--p-rose-trans); border-radius: 50%; 
+            position: absolute; width: 85px; height: 85px; 
+            background: var(--p-rose-trans); border: 1px solid var(--p-accent-lila); border-radius: 50%; 
             display: flex; justify-content: center; align-items: center;
             font-size: 0.7rem; color: var(--p-cream); cursor: pointer; text-align: center;
+            padding: 5px; transition: 0.3s;
         }
+        .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
+
         .moon-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
         .moon-2 { top: 50%; right: 0; transform: translate(50%, -50%); }
         .moon-3 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
         .moon-4 { top: 50%; left: 0; transform: translate(-50%, -50%); }
 
-        /* --- MODALES DE DETALLE --- */
+        /* --- MODALES --- */
         .project-detail {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 320px; padding: 25px; border-radius: 35px;
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
             border: 1px solid var(--p-accent-lila); display: none;
-            flex-direction: column; align-items: center; z-index: 1000;
+            flex-direction: column; align-items: center; z-index: 2000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         .project-detail.active { display: flex; }
-        .project-detail img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        .project-detail img { width: 100%; border-radius: 20px; margin-bottom: 15px; }
 
-        /* --- HABILIDADES Y FOOTER --- */
-        .skills-section { padding: 100px 10%; text-align: center; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
-        .skill-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; }
+        /* --- SKILLS & FOOTER --- */
+        .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 20; background: var(--bg-deep); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .skill-card { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
 
-        footer { background: #0d0216; padding: 60px 10%; text-align: center; position: relative; }
-        .cv-button { padding: 10px 20px; border: 1px solid var(--p-accent-lila); color: white; text-decoration: none; margin: 10px; display: inline-block; }
-        
+        footer { background: #0d0216; padding: 80px 10%; text-align: center; position: relative; z-index: 20; }
+        .cv-button { padding: 12px 25px; border: 1px solid var(--p-accent-lila); color: white; text-decoration: none; margin: 10px; display: inline-block; transition: 0.3s; }
+        .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         @media (max-width: 768px) {
-            .proposito-section { flex-direction: column; padding: 80px 10%; }
+            .proposito-section { flex-direction: column; text-align: center; padding: 80px 10%; }
             .planets-container { display: flex; flex-direction: column; align-items: center; min-height: auto; }
-            .planet-system { position: relative; margin: 100px 0; left: auto; right: auto; top: auto; }
+            .planet-system { position: relative; margin: 80px 0; top: auto; left: auto; right: auto; }
+            .orbit { width: 320px; height: 320px; }
         }
     </style>
 </head>
@@ -171,62 +179,71 @@
 
     <main class="planets-container">
         <section class="planet-system sys-industrial">
-            <button class="planet-btn" onclick="toggleOrbit('orbit-ind')">
+            <button class="planet-btn" onclick="toggleOrbit('orb-ind')">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
                 <span>Industrial</span>
             </button>
-            <div class="orbit" id="orbit-ind">
-                <div class="project-moon moon-1" onclick="showDetail('det-1')">Closet</div>
-                <div class="project-moon moon-2" onclick="showDetail('det-2')">Cocina</div>
+            <div class="orbit" id="orb-ind">
+                <div class="project-moon moon-1" onclick="showDetail('det-closet')">Closet</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-cocina')">Cocina</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-silla')">Silla</div>
             </div>
         </section>
 
         <section class="planet-system sys-ux">
-            <button class="planet-btn" onclick="toggleOrbit('orbit-ux')">
+            <button class="planet-btn" onclick="toggleOrbit('orb-ux')">
                 <img src="PLANETA3.PNG" class="img-planeta-png">
                 <span>Diseño UX</span>
             </button>
-            <div class="orbit" id="orbit-ux">
-                <div class="project-moon moon-1" onclick="showDetail('det-3')">Integra</div>
+            <div class="orbit" id="orb-ux">
+                <div class="project-moon moon-1" onclick="showDetail('det-integra')">Integra</div>
             </div>
         </section>
 
         <section class="planet-system sys-artesanal">
-            <button class="planet-btn" onclick="toggleOrbit('orbit-art')">
+            <button class="planet-btn" onclick="toggleOrbit('orb-art')">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
                 <span>Artesanía</span>
             </button>
-            <div class="orbit" id="orbit-art">
-                <div class="project-moon moon-1" onclick="showDetail('det-4')">Patos</div>
+            <div class="orbit" id="orb-art">
+                <div class="project-moon moon-1" onclick="showDetail('det-patos')">Mosaico</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-joyas')">Joyas</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-payasos')">Payasos</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-ternurin')">Ternurín</div>
             </div>
         </section>
 
-        <div id="det-1" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer">✕</span><img src="CLOSETH1.JPG"><h4>Closet</h4></div>
-        <div id="det-2" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer">✕</span><img src="COCINA3.png"><h4>Cocina</h4></div>
-        <div id="det-3" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer">✕</span><img src="INTEGRALABORATORIOS.png"><h4>Integra</h4></div>
-        <div id="det-4" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer">✕</span><img src="PATOMOSAICO.JPG"><h4>Patos</h4></div>
+        <div id="det-closet" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="CLOSETH1.JPG"><h4>Closet</h4></div>
+        <div id="det-cocina" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="COCINA3.png"><h4>Cocina</h4></div>
+        <div id="det-silla" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="SILLATEJIDA.jpg"><h4>Silla Tejida</h4></div>
+        <div id="det-integra" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="INTEGRALABORATORIOS.png"><h4>Integra UX</h4></div>
+        <div id="det-patos" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="PATOMOSAICO.JPG"><h4>Pato Mosaico</h4></div>
+        <div id="det-joyas" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="JOYERIAPATOS.jpg"><h4>Joyas</h4></div>
+        <div id="det-payasos" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="PAYASOS4.jpg"><h4>Payasos</h4></div>
+        <div id="det-ternurin" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="SUPERTERNURIIN.png"><h4>Ternurín</h4></div>
     </main>
 
     <section class="skills-section">
         <h2 class="subtitulo">Habilidades</h2>
         <div class="skills-grid">
-            <div class="skill-card"><h3>Industrial</h3><p>SolidWorks, Rhino</p></div>
-            <div class="skill-card"><h3>UX/UI</h3><p>Figma, Adobe XD</p></div>
+            <div class="skill-card"><h3>Industrial</h3><p>SolidWorks, Rhino, KeyShot</p></div>
+            <div class="skill-card"><h3>UX/UI</h3><p>Figma, Adobe XD, Research</p></div>
+            <div class="skill-card"><h3>Artesanal</h3><p>Cerámica, Textiles, Carpintería</p></div>
         </div>
     </section>
 
     <footer>
-        <img src="CANARIO2.PNG" alt="Canario" style="width:200px; margin-bottom:20px;">
+        <img src="CANARIO2.PNG" alt="Canario" style="width:180px; margin-bottom:20px;">
         <br>
         <a href="#" class="cv-button">CV Industrial</a>
         <a href="#" class="cv-button">CV UX</a>
-        <p style="margin-top:20px; opacity:0.5">© 2026 ANA PAU</p>
+        <p style="margin-top:20px; opacity:0.5">© 2026 ANA PAU • Hecho con ✨</p>
     </footer>
 
     <script>
         // Estrellas
         const starField = document.getElementById('starField');
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < 100; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             star.style.width = star.style.height = Math.random() * 3 + 'px';
@@ -237,8 +254,11 @@
         }
 
         function toggleOrbit(id) {
+            const orb = document.getElementById(id);
+            const isActive = orb.classList.contains('active');
             document.querySelectorAll('.orbit').forEach(o => o.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+            if (!isActive) orb.classList.add('active');
+            closeAllDetails();
         }
 
         function showDetail(id) {
