@@ -26,146 +26,166 @@
             color: var(--text-white);
             font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
+
+        /* --- CANARIOS --- */
+        @keyframes peekTopRight {
+            0%, 100% { transform: rotate(180deg) translate(0, 0) rotate(-5deg); }
+            50% { transform: rotate(180deg) translate(40px, -40px) rotate(5deg); }
+        }
+        @keyframes peekBottomLeft {
+            0%, 100% { transform: translate(0, 0) rotate(10deg); }
+            50% { transform: translate(40px, -40px) rotate(15deg); }
+        }
+        @keyframes floatCanario {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .canario-peek {
+            position: absolute; z-index: 100; pointer-events: none;
+            width: 550px; height: auto; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+        }
+        .canario-uno { top: -150px; right: -80px; transform: rotate(180deg); animation: peekTopRight 7s infinite ease-in-out; }
+        .canario-dos { bottom: -150px; left: -80px; transform: rotate(10deg); animation: peekBottomLeft 7s infinite ease-in-out; }
 
         /* --- FONDO --- */
         .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
         .star { position: absolute; background: var(--star-color); border-radius: 50%; opacity: 0.6; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* --- ANIMACIONES --- */
-        @keyframes floatCanario {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-
         /* --- HEADER --- */
         header {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 50px 10%; position: relative;
+            text-align: center; padding: 50px 10%; position: relative; z-index: 10;
         }
-        .canario-peek {
-            position: absolute; z-index: 100; pointer-events: none; width: 550px; height: auto; 
-        }
-        .canario-uno { top: -150px; right: -80px; transform: rotate(180deg); }
-
         .perfil-container {
             width: 220px; height: 220px; border-radius: 50%; padding: 5px; 
             background: linear-gradient(135deg, var(--p-accent-lila), var(--p-accent-salmon)); 
             margin-bottom: 25px;
         }
         .foto-perfil { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-deep); }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; letter-spacing: 5px; }
-        .subtitulo { color: var(--p-accent-salmon); font-size: 1.5rem; letter-spacing: 6px; margin: 20px 0; text-transform: uppercase; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); text-transform: uppercase; letter-spacing: 5px; margin-top: 20px; }
+        .subtitulo { color: var(--p-accent-salmon); font-size: clamp(1.2rem, 2.5vw, 1.5rem); letter-spacing: 6px; margin: 25px 0; font-weight: 600; text-transform: uppercase; }
+        .descripcion-perfil { font-weight: 300; font-size: 1.05rem; max-width: 750px; line-height: 1.7; opacity: 0.8; }
 
-        /* --- SECCIÓN PROPÓSITO (TEXTO GRANDE Y NUEVO CONCEPTO) --- */
+        /* --- SECCIÓN PROPÓSITO --- */
         .proposito-section {
-            position: relative;
+            padding: 100px 10%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 50px;
-            padding: 120px 10%;
-            max-width: 1400px;
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
             margin: 0 auto;
-            z-index: 20;
-            background: var(--bg-deep);
         }
         .proposito-img {
-            width: 350px; /* Canario más grande */
+            width: 300px;
             height: auto;
             animation: floatCanario 5s infinite ease-in-out;
-            filter: drop-shadow(0 0 20px rgba(211, 179, 220, 0.3));
+            filter: drop-shadow(0 10px 20px rgba(211, 179, 220, 0.3));
         }
-        .proposito-texto { flex: 1; max-width: 700px; }
+        .proposito-texto {
+            flex: 1;
+            text-align: left;
+        }
         .proposito-texto h2 {
             color: var(--p-accent-lila);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            font-size: 2.2rem;
+            margin-bottom: 20px;
             letter-spacing: 3px;
+            text-transform: uppercase;
         }
         .proposito-texto p {
-            font-size: 1.3rem; /* Texto más grande */
-            line-height: 1.9;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: var(--text-white);
             opacity: 0.9;
         }
-        .proposito-texto strong { color: var(--p-accent-salmon); font-weight: 600; }
 
-        /* --- PLANETAS (SISTEMA RECUPERADO) --- */
-        .planets-container { 
-            position: relative; 
-            min-height: 150vh; 
-            width: 100%; 
-            padding-top: 100px;
-            z-index: 15;
-        }
-        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; }
-        
-        /* Ubicaciones manuales del primer HTML */
-        .sys-industrial { --size: 250px; left: 15%; top: 0; }
-        .sys-ux { --size: 230px; right: 15%; top: 30%; }
-        .sys-artesanal { --size: 200px; left: 20%; top: 60%; }
+        /* --- PLANETAS Y LUNAS --- */
+        .planets-container { position: relative; min-height: 180vh; width: 100%; display: flex; justify-content: center; align-items: center; }
+        .planet-system { position: absolute; display: flex; justify-content: center; align-items: center; z-index: 20; }
 
         .planet-btn {
             width: var(--size); height: var(--size); border-radius: 50%; border: none; cursor: pointer;
-            position: relative; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; color: white; background: transparent;
-            z-index: 30;
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; color: white; transition: 0.4s;
+            z-index: 25; background: transparent;
         }
-        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; transition: 0.4s; }
-        .planet-btn:hover .img-planeta-png { transform: scale(1.1); filter: brightness(1.2); }
+        .planet-btn:hover { transform: scale(1.05); }
+        .img-planeta-png { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+
+        .sys-industrial { --size: 250px; left: 10%; top: 10%; }
+        .sys-ux { --size: 230px; right: 10%; top: 30%; }
+        .sys-artesanal { --size: 200px; left: 25%; bottom: 20%; }
 
         .orbit {
             position: absolute; width: 450px; height: 450px;
-            border: 1px solid rgba(211, 179, 220, 0.2); border-radius: 50%;
-            display: none; justify-content: center; align-items: center;
-            z-index: 25;
+            border: 1px solid rgba(211, 179, 220, 0.1); border-radius: 50%;
+            display: none; justify-content: center; align-items: center; pointer-events: auto;
+            z-index: 15;
         }
-        .orbit.active { display: block; animation: fadeIn 0.5s; }
+        .orbit.active { display: block; animation: fadeIn 0.5s ease; }
 
         .project-moon {
             position: absolute; width: 85px; height: 85px; 
-            background: var(--p-rose-trans); border: 1px solid var(--p-accent-lila); border-radius: 50%; 
+            background: var(--p-rose-trans); border: none; border-radius: 50%; 
             display: flex; justify-content: center; align-items: center;
-            font-size: 0.75rem; color: var(--p-cream); cursor: pointer; text-align: center;
-            padding: 5px; transition: 0.3s;
+            font-size: 0.65rem; font-weight: bold; color: var(--p-cream); cursor: pointer;
+            text-align: center; padding: 10px; transition: 0.3s; z-index: 30;
         }
         .project-moon:hover { background: var(--p-accent-lila); color: var(--bg-deep); transform: scale(1.1); }
 
-        /* Posiciones de las lunas */
-        .moon-1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
-        .moon-2 { top: 50%; right: 0; transform: translate(50%, -50%); }
-        .moon-3 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
-        .moon-4 { top: 50%; left: 0; transform: translate(-50%, -50%); }
+        .moon-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
+        .moon-2 { top: 40%; right: -10%; transform: translate(0, -50%); }
+        .moon-3 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
+        .moon-4 { top: 40%; left: -10%; transform: translate(0, -50%); }
+        .moon-5 { top: 10%; right: 10%; transform: translate(0, -50%); }
 
-        /* --- MODALES --- */
+        /* --- DETALLE --- */
         .project-detail {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 320px; padding: 25px; border-radius: 35px;
+            position: absolute; width: 320px; padding: 25px; border-radius: 35px;
             background: var(--p-rose-trans); backdrop-filter: blur(15px);
-            border: 1px solid var(--p-accent-lila); display: none;
-            flex-direction: column; align-items: center; z-index: 2000;
+            border: 1px solid rgba(211, 179, 220, 0.3); display: none;
+            flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 100;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
-        .project-detail.active { display: flex; animation: fadeIn 0.3s; }
-        .project-detail img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        .project-detail.active { display: flex; animation: zoomIn 0.3s ease; }
+        .project-detail img { width: 100%; height: 190px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
+        .project-detail img:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .close-detail { align-self: flex-end; cursor: pointer; color: var(--p-cream); font-weight: bold; font-size: 1.2rem; }
 
-        /* --- HABILIDADES Y FOOTER --- */
-        .skills-section { padding: 100px 10%; text-align: center; background: var(--bg-deep); position: relative; z-index: 20; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
-        .skill-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        /* --- HABILIDADES --- */
+        .skills-section { padding: 100px 10%; text-align: center; position: relative; z-index: 10; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .skill-card { background: rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .skill-card h3 { color: var(--p-accent-salmon); margin-bottom: 10px; font-size: 1.4rem; }
+        .skill-card p { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
 
-        footer { background: #0d0216; padding: 60px 10%; text-align: center; position: relative; z-index: 20; }
-        .cv-button { padding: 10px 20px; border: 1px solid var(--p-accent-lila); color: white; text-decoration: none; margin: 10px; display: inline-block; transition: 0.3s; }
+        .footer-contact { background: #0d0216; padding: 80px 10%; text-align: center; position: relative; z-index: 10; }
+        .cv-button { padding: 12px 24px; border: 2px solid var(--p-accent-lila); color: white; text-decoration: none; text-transform: uppercase; font-size: 0.8rem; font-weight: 700; margin: 8px; display: inline-block; transition: 0.3s; }
         .cv-button:hover { background: var(--p-accent-lila); color: var(--bg-deep); }
+        .social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
+        .social-links a { color: var(--p-accent-lila); font-size: 1.8rem; transition: 0.3s; }
+        .copyright { opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; margin-top: 20px; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
+        /* Media query para móviles */
         @media (max-width: 768px) {
-            .proposito-section { flex-direction: column; padding: 80px 10%; text-align: center; }
-            .planets-container { display: flex; flex-direction: column; align-items: center; min-height: auto; }
-            .planet-system { position: relative; margin: 100px 0; left: auto; right: auto; top: auto; }
-            .orbit { width: 350px; height: 350px; }
+            .proposito-section { flex-direction: column; text-align: center; }
+            .proposito-texto { text-align: center; }
+            .proposito-img { width: 200px; }
+            .planets-container { min-height: 250vh; }
+            .sys-industrial { top: 5%; left: 50%; transform: translateX(-50%); }
+            .sys-ux { top: 35%; right: 50%; transform: translateX(50%); }
+            .sys-artesanal { bottom: 5%; left: 50%; transform: translateX(-50%); }
         }
     </style>
 </head>
@@ -180,88 +200,191 @@
         </div>
         <h1>Ana Pau</h1>
         <p class="subtitulo">Diseñadora Industrial & UX</p>
+        <p class="descripcion-perfil">Especialista en objetos e interfaces funcionales con visión estética.</p>
     </header>
 
-    <section class="proposito-section" id="proposito">
+    <section class="proposito-section">
         <img src="CANARIO4.PNG" alt="Canario Propósito" class="proposito-img">
         <div class="proposito-texto">
             <h2>Mi Propósito</h2>
             <p>
-                Mi misión es rediseñar constantemente los límites entre la manufactura técnica y la experiencia humana. Inspirada por una mentalidad de aprendizaje continuo, busco crear productos y experiencias donde la <strong>complejidad orgánica de la naturaleza</strong> se encuentre con la <strong>magia de la fantasía</strong>. Mi visión es fusionar lo moderno con lo fantástico, honrando la vida animal y el medio ambiente, integrando la funcionalidad de la ciencia ficción con el atrevimiento visual del <strong>modernismo de los 70s</strong>.
+                Mi misión es rediseñar constantemente los límites entre la manufactura técnica y la experiencia humana. 
+                Inspirada por una mentalidad de aprendizaje continuo y la ambición de transformar mi perspectiva cultural, 
+                busco integrar la <strong>elegancia del Art Deco</strong> con la <strong>funcionalidad de la ciencia ficción</strong>. 
+                No me conformo con lo establecido; mi visión es evolucionar para crear productos que no solo sean útiles, 
+                sino que respeten la vida animal y el medio ambiente, fusionando lo moderno con lo fantástico.
             </p>
         </div>
     </section>
 
     <main class="planets-container">
         <section class="planet-system sys-industrial">
-            <button class="planet-btn" onclick="toggleOrbit('orb-ind')">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-industrial')">
                 <img src="PLANETA1.PNG" class="img-planeta-png">
+                <span class="material-symbols-outlined">precision_manufacturing</span>
                 <span>Industrial</span>
             </button>
-            <div class="orbit" id="orb-ind">
+            <div class="orbit" id="orbit-industrial">
                 <div class="project-moon moon-1" onclick="showDetail('det-closet')">Closet</div>
                 <div class="project-moon moon-2" onclick="showDetail('det-cocina')">Cocina</div>
-                <div class="project-moon moon-3" onclick="showDetail('det-silla')">Silla Tejida</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-espejo')">Espejo</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-animal')">Animal Route</div>
+            </div>
+
+            <div id="det-closet" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="CLOSETH1.JPG">
+                <h4 style="color:var(--p-cream);">Closet de Oficina</h4>
+                <p style="font-size:0.8rem;">Optimización de espacios con un toque de elegancia contemporánea.</p>
+            </div>
+            <div id="det-cocina" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="COCINA3.png">
+                <h4 style="color:var(--p-cream);">Cocina</h4>
+                <p style="font-size:0.8rem;">Mezcla de madera con gris salvia sutil.</p>
+            </div>
+            <div id="det-espejo" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="ESPEJO MEDIA LUNA4.jpeg">
+                <h4 style="color:var(--p-cream);">Espejo Media Luna</h4>
+                <p style="font-size:0.8rem;">Dinamismo visual y retroiluminación artística.</p>
+            </div>
+            <div id="det-animal" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="ANIMALROUTE2.JPG">
+                <h4 style="color:var(--p-cream);">Animal Route</h4>
+                <p style="font-size:0.8rem;">Juguetes con perspectiva de género.</p>
             </div>
         </section>
 
         <section class="planet-system sys-ux">
-            <button class="planet-btn" onclick="toggleOrbit('orb-ux')">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-ux')">
                 <img src="PLANETA3.PNG" class="img-planeta-png">
+                <span class="material-symbols-outlined">devices</span>
                 <span>Diseño UX</span>
             </button>
-            <div class="orbit" id="orb-ux">
+            <div class="orbit" id="orbit-ux">
                 <div class="project-moon moon-1" onclick="showDetail('det-integra')">Integra</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-floral')">APPFLORAL</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-bambaline')">BAMBALINE</div>
+            </div>
+
+            <div id="det-integra" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/ljn3qHujOTIGTMaUO8m9in/MAQUETA-PAGINA-DE-LABORATORIO?node-id=69-31&t=h1aHQKBxjQaNyfuj-1" target="_blank">
+                    <img src="INTEGRALABORATORIOS.png" alt="INTEGRALABORATORIOS">
+                </a>
+                <h4 style="color:var(--p-cream);">Integra Ideas y Laboratorios</h4>
+                <p style="font-size:0.8rem;">Interfaz intuitiva para mobiliario especializado.</p>
+            </div>
+
+            <div id="det-floral" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/NvUbupLHHXkjzSrKdBHDFd/FIGMA-Aplicaci%C3%B3n-flores--Community-?node-id=0-1&t=EPNbCTjdbar55OuM-1" target="_blank">
+                    <img src="APPFLORAL.png" alt="App Floral">
+                </a>
+                <h4 style="color:var(--p-cream);">APPFLORAL</h4>
+                <p style="font-size:0.8rem;">App para la comunidad de floreros de Edomex.</p>
+            </div>
+
+            <div id="det-bambaline" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <a href="https://www.figma.com/design/HoMnm7TIM2cEDiVhVo0aln/playlist-digital-prototipo-de-alta-fidelidad?node-id=0-1&t=Ybh7L1JtRMUmwX70-1" target="_blank">
+                    <img src="BAMBALINE.png" alt="Bambaline">
+                </a>
+                <h4 style="color:var(--p-cream);">BAMBALINE</h4>
+                <p style="font-size:0.8rem;">Proyecto de Tesis: artistas independientes de Toluca.</p>
             </div>
         </section>
 
         <section class="planet-system sys-artesanal">
-            <button class="planet-btn" onclick="toggleOrbit('orb-art')">
+            <button class="planet-btn" onclick="toggleOrbit('orbit-artesanal')">
                 <img src="PLANETA2.PNG" class="img-planeta-png">
+                <span class="material-symbols-outlined">draw</span>
                 <span>Artesanía</span>
             </button>
-            <div class="orbit" id="orb-art">
-                <div class="project-moon moon-1" onclick="showDetail('det-patos')">Patos</div>
-                <div class="project-moon moon-2" onclick="showDetail('det-joyas')">Joyas</div>
-                <div class="project-moon moon-3" onclick="showDetail('det-payasos')">Payasos</div>
-                <div class="project-moon moon-4" onclick="showDetail('det-ternurin')">Ternurín</div>
+            <div class="orbit" id="orbit-artesanal">
+                <div class="project-moon moon-1" onclick="showDetail('det-patos-mos')">Patos Mosaico</div>
+                <div class="project-moon moon-2" onclick="showDetail('det-silla-cuero')">Silla Cuero</div>
+                <div class="project-moon moon-3" onclick="showDetail('det-patos-tal')">Patos Talavera</div>
+                <div class="project-moon moon-4" onclick="showDetail('det-ternurin')">Superternurin</div>
+                <div class="project-moon moon-5" onclick="showDetail('det-reyes')">Reyes Payasos</div>
+            </div>
+
+            <div id="det-patos-mos" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="PATOMOSAICO.JPG">
+                <h4 style="color:var(--p-cream);">Patos Mosaicos</h4>
+                <p style="font-size:0.8rem;">Serie de 7 macetas de cerámica de alta temperatura.</p>
+            </div>
+
+            <div id="det-silla-cuero" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="SILLATEJIDA.jpg">
+                <h4 style="color:var(--p-cream);">Silla Cuero Tejido</h4>
+                <p style="font-size:0.8rem;">Madera de pino con asiento de cuero sintético tejido.</p>
+            </div>
+
+            <div id="det-patos-tal" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="JOYERIAPATOS.jpg">
+                <h4 style="color:var(--p-cream);">Patos Talavera</h4>
+                <p style="font-size:0.8rem;">Juería cerámica con estética talavera.</p>
+            </div>
+
+            <div id="det-ternurin" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="SUPERTERNURIIN.png">
+                <h4 style="color:var(--p-cream);">Superternurin</h4>
+                <p style="font-size:0.8rem;">Confección textil de miniatura y fotografía temática.</p>
+            </div>
+
+            <div id="det-reyes" class="project-detail">
+                <span class="close-detail" onclick="closeAllDetails()">✕</span>
+                <img src="PAYASOS4.jpg">
+                <h4 style="color:var(--p-cream);">Reyes Payasos</h4>
+                <p style="font-size:0.8rem;">Personajes confeccionados con textil reciclado.</p>
             </div>
         </section>
-
-        <div id="det-closet" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="CLOSETH1.JPG"><h4>Closet</h4></div>
-        <div id="det-cocina" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="COCINA3.png"><h4>Cocina Integral</h4></div>
-        <div id="det-silla" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="SILLATEJIDA.jpg"><h4>Silla Tejida</h4></div>
-        <div id="det-integra" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="INTEGRALABORATORIOS.png"><h4>Integra UX</h4></div>
-        <div id="det-patos" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="PATOMOSAICO.JPG"><h4>Patos (Mosaico)</h4></div>
-        <div id="det-joyas" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="JOYERIAPATOS.jpg"><h4>Joyas Cerámicas</h4></div>
-        <div id="det-payasos" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="PAYASOS4.jpg"><h4>Payasos</h4></div>
-        <div id="det-ternurin" class="project-detail"><span onclick="closeAllDetails()" style="cursor:pointer; align-self:flex-end">✕</span><img src="SUPERTERNURIIN.png"><h4>Ternurín</h4></div>
     </main>
 
     <section class="skills-section">
         <h2 class="subtitulo">Habilidades</h2>
         <div class="skills-grid">
-            <div class="skill-card"><h3>Industrial</h3><p>SolidWorks, Rhino, KeyShot</p></div>
-            <div class="skill-card"><h3>UX/UI</h3><p>Figma, Adobe XD, Research</p></div>
-            <div class="skill-card"><h3>Artesanal</h3><p>Cerámica, Textiles, Madera</p></div>
+            <div class="skill-card">
+                <h3>Diseño Industrial</h3>
+                <p>Mobiliario, modelado 3D y renderizado profesional.<br><strong>Software:</strong> SolidWorks, Rhinoceros, KeyShot.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Diseño UX/UI</h3>
+                <p>Investigación de usuario, prototipado y diseño de interfaces.<br><strong>Software:</strong> Figma, Adobe XD.</p>
+            </div>
+            <div class="skill-card">
+                <h3>Artesanal</h3>
+                <p>Exploración de técnicas tradicionales y procesos manuales.<br><strong>Materiales:</strong> Cerámica, Textiles, Madera.</p>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <img src="CANARIO2.PNG" alt="Canario" style="width:200px; margin-bottom:20px;">
-        <br>
-        <a href="#" class="cv-button">CV Industrial</a>
-        <a href="#" class="cv-button">CV UX</a>
-        <p style="margin-top:20px; opacity:0.5">© 2026 ANA PAU</p>
+    <footer class="footer-contact">
+        <img src="CANARIO2.PNG" alt="Canario" class="canario-peek canario-dos">
+        <a href="CV_DI_AnaPaulaPérezMuciño_Español.pdf" class="cv-button" target="_blank">CV Industrial</a>
+        <a href="CV_DUX_AnaPaulaPerezMucino_Español.pdf" class="cv-button" target="_blank">CV UX</a>
+        <div class="social-links">
+            <a href="https://wa.me/527228520937" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ana-paula-pm-62a60a283/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.behance.net/anapaulapm" target="_blank"><i class="fab fa-behance"></i></a>
+        </div>
+        <p class="copyright">© 2026 ANA PAU • MÉXICO</p>
     </footer>
 
     <script>
-        // Estrellas
         const starField = document.getElementById('starField');
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 120; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            star.style.width = star.style.height = Math.random() * 3 + 'px';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size; star.style.height = size;
             star.style.top = Math.random() * 100 + '%';
             star.style.left = Math.random() * 100 + '%';
             star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
@@ -272,8 +395,8 @@
             const orb = document.getElementById(id);
             const isActive = orb.classList.contains('active');
             document.querySelectorAll('.orbit').forEach(o => o.classList.remove('active'));
-            if (!isActive) orb.classList.add('active');
             closeAllDetails();
+            if (!isActive) orb.classList.add('active');
         }
 
         function showDetail(id) {
@@ -284,6 +407,15 @@
         function closeAllDetails() {
             document.querySelectorAll('.project-detail').forEach(d => d.classList.remove('active'));
         }
+
+        document.addEventListener('mousemove', (e) => {
+            const systems = document.querySelectorAll('.planet-system');
+            systems.forEach(sys => {
+                const x = (window.innerWidth / 2 - e.clientX) * 0.02;
+                const y = (window.innerHeight / 2 - e.clientY) * 0.02;
+                sys.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
     </script>
 </body>
 </html>
